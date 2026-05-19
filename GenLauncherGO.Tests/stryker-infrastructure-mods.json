@@ -1,0 +1,46 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Mods/Models/LauncherContentVersionState.cs",
+      "Mods/Models/RemoteCatalogModificationReference.cs",
+      "Mods/Models/RemoteLauncherCatalog.cs",
+      "Mods/Services/FileSystemLocalLauncherContentService.cs",
+      "Mods/Services/FileSystemManualModificationImporter.cs",
+      "Mods/Services/FileSystemModificationImageFileService.cs",
+      "Mods/Services/FileSystemModificationThemeCache.cs",
+      "Mods/Services/LauncherCatalogImageCache.cs",
+      "Mods/Services/LauncherContentCatalogService.cs",
+      "Mods/Services/LauncherContentStateMapper.cs",
+      "Mods/Services/LauncherLocalContentReconciler.cs",
+      "Mods/Services/RemoteLauncherCatalogClient.cs",
+      "Mods/Support/ModificationImageCachePath.cs",
+      "Mods/Support/RemoteLauncherCatalogMapper.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 92,
+      "low": 80,
+      "break": 80
+    }
+  }
+}

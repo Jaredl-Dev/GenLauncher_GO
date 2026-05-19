@@ -1,0 +1,274 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Settings.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Settings.Views.LauncherSettingsWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:LauncherSettingsViewModel"
+        Title="{localization:Loc Options}"
+        Width="986"
+        Height="762"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource GenLauncherBackGroundImage}">
+    <Window.Resources>
+        <ControlTheme x:Key="SquareToggleTheme"
+                      TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent" />
+            <!-- The shell outlines the box in its accent whether or not it is ticked. -->
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="18,*"
+                          Background="{TemplateBinding Background}">
+                        <Border x:Name="PART_Outer"
+                                Width="18"
+                                Height="18"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource GenLauncherDarkBackGround}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="2">
+                            <!-- The tick contrasts against the outline: rust inside gold, pale inside blue. -->
+                            <Border x:Name="PART_Inner"
+                                    Margin="3"
+                                    Background="{DynamicResource GenLauncherActionTextColor}" />
+                        </Border>
+                        <ContentPresenter Grid.Column="1"
+                                          Margin="7,0,0,0"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^ /template/ Border#PART_Inner">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+            <Style Selector="^:checked /template/ Border#PART_Inner">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <!-- The shell lifts the whole row, label included, to the attention colour on hover. -->
+            <Style Selector="^:pointerover">
+                <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderHighlightColor}" />
+                <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+            </Style>
+            <Style Selector="^:focus-visible">
+                <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderHighlightColor}" />
+            </Style>
+            <Style Selector="^:disabled">
+                <Setter Property="Foreground" Value="{DynamicResource GenLauncherInactiveBorder}" />
+                <Setter Property="Opacity" Value="0.56" />
+            </Style>
+        </ControlTheme>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="CheckBox.square-toggle, RadioButton.square-toggle">
+            <Setter Property="Theme" Value="{StaticResource SquareToggleTheme}" />
+        </Style>
+    </Window.Styles>
+
+    <Border Classes="dialog-frame"
+            Margin="31,38,31,36">
+        <Grid RowDefinitions="56,*,64">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="dialog-title"
+                               Text="{localization:Loc Options}" />
+                    <StackPanel Grid.Column="1"
+                                Margin="21,0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock FontSize="18"
+                                   FontWeight="Bold"
+                                   Text="{localization:Loc ActiveGameLabel}" />
+                        <TextBlock FontSize="18"
+                                   FontWeight="Bold"
+                                   Text=": " />
+                        <TextBlock FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource GenLauncherActiveColor}"
+                                   Text="{Binding ActiveGameName}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <ScrollViewer Grid.Row="1"
+                          Margin="20,18,8,14"
+                          Padding="0,0,12,0"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="16">
+                    <Border x:Name="GameManagementSection"
+                            Classes="dialog-panel">
+                        <StackPanel>
+                            <TextBlock Classes="section-title"
+                                       Text="{localization:Loc GameManagement}" />
+                            <Grid ColumnDefinitions="*,18,*">
+                                <Button Grid.Column="0"
+                                        Classes="dialog-action"
+                                        Height="44"
+                                        Content="{localization:Loc InstallationPaths}"
+                                        Click="ManageInstallations_ClickAsync" />
+                                <Button x:Name="SwitchGameButton"
+                                        Grid.Column="2"
+                                        Classes="dialog-action"
+                                        Height="44"
+                                        Content="{Binding SwitchGameButtonText}"
+                                        IsEnabled="{Binding CanSwitchGame}"
+                                        Click="SwitchGame_ClickAsync" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="ExecutableManagementSection"
+                            Classes="dialog-panel">
+                        <StackPanel>
+                            <TextBlock Classes="section-title"
+                                       Text="{localization:Loc CustomExecutables}" />
+                            <Grid ColumnDefinitions="*,18,*">
+                                <Button x:Name="ManageGameClientsButton"
+                                        Grid.Column="0"
+                                        Classes="dialog-action"
+                                        Height="44"
+                                        Content="{localization:Loc ManageGameClients}"
+                                        Click="ManageGameClients_ClickAsync" />
+                                <Button x:Name="ManageWorldBuildersButton"
+                                        Grid.Column="2"
+                                        Classes="dialog-action"
+                                        Height="44"
+                                        Content="{localization:Loc ManageWorldBuilders}"
+                                        Click="ManageWorldBuilders_ClickAsync" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="dialog-panel">
+                        <Grid ColumnDefinitions="*,18,*">
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Classes="section-title"
+                                           Text="{localization:Loc LaunchArguments}" />
+                                <TextBlock Classes="field-label"
+                                           Text="{localization:Loc GameExecutableArguments}"
+                                           ToolTip.Tip="{localization:Loc GameExecutableArgumentsToolTip}" />
+                                <TextBox x:Name="GameArgumentsInput"
+                                         Classes="dialog-input"
+                                         Text="{Binding GameArguments, Mode=TwoWay}"
+                                         ToolTip.Tip="{localization:Loc GameExecutableArgumentsInputToolTip}" />
+                                <TextBlock Classes="field-label"
+                                           Margin="0,14,0,5"
+                                           Text="{localization:Loc WorldBuilderArguments}"
+                                           ToolTip.Tip="{localization:Loc WorldBuilderArgumentsToolTip}" />
+                                <TextBox x:Name="WorldBuilderArgumentsInput"
+                                         Classes="dialog-input"
+                                         Text="{Binding WorldBuilderArguments, Mode=TwoWay}"
+                                         ToolTip.Tip="{localization:Loc WorldBuilderArgumentsInputToolTip}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Classes="section-title"
+                                           Text="{localization:Loc Language}" />
+                                <RadioButton Classes="square-toggle"
+                                             Margin="0,2,0,10"
+                                             GroupName="Language"
+                                             IsChecked="{Binding UseEnglishLanguage, Mode=TwoWay}"
+                                             ToolTip.Tip="{localization:Loc UseEnglishLanguageToolTip}">
+                                    <TextBlock Text="{localization:Loc UseEnglishLanguage}"
+                                               TextWrapping="Wrap" />
+                                </RadioButton>
+                                <RadioButton Classes="square-toggle"
+                                             GroupName="Language"
+                                             IsChecked="{Binding UseSystemLanguage, Mode=TwoWay}"
+                                             ToolTip.Tip="{localization:Loc UseSystemLanguageToolTip}">
+                                    <TextBlock Text="{localization:Loc UseSystemLanguage}"
+                                               TextWrapping="Wrap" />
+                                </RadioButton>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,18,*">
+                        <Border Grid.Column="0"
+                                Classes="dialog-panel"
+                                MinHeight="128">
+                            <StackPanel>
+                                <TextBlock Classes="section-title"
+                                           Text="{localization:Loc Maintenance}" />
+                                <CheckBox Classes="square-toggle"
+                                          IsChecked="{Binding AutoDeleteOldVersions, Mode=TwoWay}"
+                                          ToolTip.Tip="{localization:Loc AutoDeleteToolTip}">
+                                    <TextBlock Text="{localization:Loc AutoDelete}"
+                                               TextWrapping="Wrap" />
+                                </CheckBox>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2"
+                                Classes="dialog-panel"
+                                MinHeight="128">
+                            <StackPanel>
+                                <TextBlock Classes="section-title"
+                                           Text="{localization:Loc WindowBehavior}" />
+                                <CheckBox Classes="square-toggle"
+                                          IsChecked="{Binding HideLauncherAfterGameStart, Mode=TwoWay}"
+                                          ToolTip.Tip="{localization:Loc HideLauncherToolTip}">
+                                    <TextBlock Text="{localization:Loc HideLauncher}"
+                                               TextWrapping="Wrap" />
+                                </CheckBox>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Border Classes="dialog-panel">
+                        <StackPanel>
+                            <TextBlock Classes="section-title"
+                                       Text="{localization:Loc Links}" />
+                            <Grid ColumnDefinitions="*,12,*">
+                                <Button Grid.Column="0"
+                                        Classes="dialog-action"
+                                        Command="{Binding OpenGeneralsOnlineDiscordCommand}"
+                                        Content="{localization:Loc GeneralsOnlineDiscord}"
+                                        ToolTip.Tip="{localization:Loc GeneralsOnlineDiscordToolTip}" />
+                                <Button Grid.Column="2"
+                                        Classes="dialog-action"
+                                        Command="{Binding OpenLogsDirectoryCommand}"
+                                        Content="{localization:Loc OpenLogsFolder}"
+                                        ToolTip.Tip="{localization:Loc OpenLogsFolderToolTip}" />
+                            </Grid>
+                            <Grid Margin="0,12,0,0" ColumnDefinitions="*,12,*">
+                                <Button Grid.Column="0"
+                                        Classes="dialog-action"
+                                        Command="{Binding OpenGitHubRepositoryCommand}"
+                                        Content="{localization:Loc GitHubRepository}"
+                                        ToolTip.Tip="{localization:Loc GitHubRepositoryToolTip}" />
+                                <Button Grid.Column="2"
+                                        Classes="dialog-action"
+                                        Command="{Binding OpenDonationCommand}"
+                                        Content="{localization:Loc DonateOriginalAuthor}"
+                                        ToolTip.Tip="{localization:Loc DonateOriginalAuthorToolTip}" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Row="2"
+                    Classes="dialog-band footer">
+                <Button Classes="dialog-action primary"
+                        MinWidth="180"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,21,0"
+                        Command="{Binding CloseCommand}"
+                        Content="{localization:Loc Ok}"
+                        IsDefault="True" />
+            </Border>
+        </Grid>
+    </Border>
+</Window>

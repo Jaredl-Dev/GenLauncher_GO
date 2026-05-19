@@ -1,0 +1,141 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Startup.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Startup.Views.LauncherGameSelectionWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:LauncherGameSelectionViewModel"
+        Title="{localization:Loc ChooseYourGame}"
+        Width="780"
+        Height="532"
+        WindowStartupLocation="CenterScreen">
+    <Window.Styles>
+        <Style Selector="Button.game-card">
+            <Setter Property="Padding" Value="17,15" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="Button.game-card:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="Button.game-card:pressed">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+        </Style>
+        <Style Selector="Button.game-card:focus-visible">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="Button.game-card.selected">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+        </Style>
+    </Window.Styles>
+
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="56,*,66">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Text="{localization:Loc ChooseYourGame}" />
+            </Border>
+
+            <ItemsControl Grid.Row="1"
+                          Margin="22,18"
+                          ItemsSource="{Binding Games}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LauncherGameChoiceViewModel">
+                        <Button Classes="game-card"
+                                Classes.selected="{Binding IsSelected}"
+                                Margin="7,0"
+                                Command="{Binding $parent[ItemsControl].((vm:LauncherGameSelectionViewModel)DataContext).SelectGameCommand}"
+                                CommandParameter="{Binding Game}">
+                            <Grid RowDefinitions="36,*,Auto">
+                                <!--
+                                  The card is a button, but its title is a label: state it explicitly so the game
+                                  name reads the same on both cards instead of inheriting each game's action colour.
+                                -->
+                                <TextBlock Text="{Binding DisplayName}"
+                                           Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                                           FontSize="14.5"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap" />
+                                <Border Grid.Row="1"
+                                        Width="188"
+                                        Height="250"
+                                        Margin="0,12,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Background="{DynamicResource GenLauncherDarkBackGround}"
+                                        BorderBrush="{DynamicResource GenLauncherInactiveBorder}"
+                                        BorderThickness="1">
+                                    <Image Source="{Binding CoverImage}" />
+                                </Border>
+                                <StackPanel Grid.Row="2"
+                                            Margin="0,13,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <Border Width="16"
+                                            Height="16"
+                                            Margin="0,0,8,0"
+                                            VerticalAlignment="Center"
+                                            BorderBrush="{DynamicResource GenLauncherInactiveBorder}"
+                                            BorderThickness="1">
+                                        <Border Margin="3"
+                                                Background="{DynamicResource GenLauncherBorderColor}"
+                                                IsVisible="{Binding IsSelected}" />
+                                    </Border>
+                                    <Panel>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Text="{Binding NotSelectedText}"
+                                                   Foreground="{DynamicResource GenLauncherInactiveBorder}"
+                                                   FontSize="13"
+                                                   IsVisible="{Binding !IsSelected}" />
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Text="{Binding SelectedText}"
+                                                   Foreground="{DynamicResource GenLauncherActiveColor}"
+                                                   FontSize="13"
+                                                   FontWeight="SemiBold"
+                                                   IsVisible="{Binding IsSelected}" />
+                                    </Panel>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Border Grid.Row="2"
+                    Classes="dialog-band footer">
+                <StackPanel Margin="21,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="12">
+                    <Button Classes="dialog-action"
+                            Content="{localization:Loc Exit}"
+                            Command="{Binding CancelCommand}"
+                            IsCancel="True" />
+                    <Button Classes="dialog-action primary"
+                            MinWidth="124"
+                            Content="{localization:Loc Continue}"
+                            Command="{Binding ContinueCommand}"
+                            IsDefault="True" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

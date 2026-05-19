@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.ManualAddModificationWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:ManualAddModificationViewModel"
+        Title="{localization:Loc InputModData}"
+        Width="620"
+        Height="370"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Topmost="True">
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="56,*,64">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Text="{localization:Loc InputModData}" />
+            </Border>
+
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto,38,Auto,14,Auto,38,Auto"
+                  Margin="21,18,21,14">
+                <TextBlock Classes="field-label"
+                           Text="{localization:Loc ModificationName}" />
+                <TextBox Grid.Row="1"
+                         Classes="dialog-input"
+                         Text="{Binding ModificationName, Mode=TwoWay}" />
+                <TextBlock Grid.Row="2"
+                           Classes="validation"
+                           Text="{Binding ModificationNameValidationMessage}" />
+
+                <TextBlock Grid.Row="4"
+                           Classes="field-label"
+                           Text="{localization:Loc CurrentVersion}" />
+                <TextBox Grid.Row="5"
+                         Classes="dialog-input"
+                         Text="{Binding Version, Mode=TwoWay}" />
+                <TextBlock Grid.Row="6"
+                           Classes="validation"
+                           Text="{Binding VersionValidationMessage}" />
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Classes="dialog-band footer">
+                <StackPanel Margin="21,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                    <Button Classes="dialog-action"
+                            Command="{Binding CancelCommand}"
+                            Content="{localization:Loc Cancel}"
+                            IsCancel="True" />
+                    <Button Classes="dialog-action primary"
+                            Command="{Binding AcceptCommand}"
+                            Content="{localization:Loc Ok}"
+                            IsDefault="True" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

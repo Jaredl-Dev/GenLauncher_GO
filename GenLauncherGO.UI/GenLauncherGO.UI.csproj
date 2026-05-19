@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>GenLauncherGO</AssemblyName>
+    <StartupObject>GenLauncherGO.UI.Features.Startup.EntryPoint</StartupObject>
+    <ApplicationIcon>Shared\Resources\Icons\GenLauncherGo.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Version>$(VersionPrefix)</Version>
+    <AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).0</FileVersion>
+    <InformationalVersion>$(Version)</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Authors>GenLauncherGO</Authors>
+    <Company>GenLauncherGO</Company>
+    <Product>GenLauncherGO</Product>
+    <Description>Command &amp; Conquer: Generals and Zero Hour mod management utility and launcher for SuperHackers and GeneralsOnline community clients</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>embedded</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <PublishDocumentationFiles>false</PublishDocumentationFiles>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+    <AllowedReferenceRelatedFileExtensions>.pri;.dll.config;.exe.config</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenLauncherGO.Core\GenLauncherGO.Core.csproj"/>
+    <ProjectReference Include="..\GenLauncherGO.Infrastructure\GenLauncherGO.Infrastructure.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia"/>
+    <PackageReference Include="Avalonia.Desktop"/>
+    <PackageReference Include="Avalonia.Themes.Fluent"/>
+    <PackageReference Include="CommunityToolkit.Mvvm"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Shared\Resources\Images\**"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Features\Mods\Resources\UserAddedModBannerGenerals.jpg" LogicalName="GenLauncherGO.UI.Features.Mods.Resources.UserAddedModBannerGenerals.jpg"/>
+    <EmbeddedResource Include="Features\Mods\Resources\UserAddedModBannerZeroHour.jpg" LogicalName="GenLauncherGO.UI.Features.Mods.Resources.UserAddedModBannerZeroHour.jpg"/>
+  </ItemGroup>
+</Project>

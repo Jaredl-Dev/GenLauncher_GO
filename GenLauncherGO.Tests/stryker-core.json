@@ -1,0 +1,53 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Core.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "IO/LexicalPath.cs",
+      "Integrity/Models/ContentIntegrityReport.cs",
+      "Launching/LauncherGameArgumentService.cs",
+      "Mods/Models/LauncherContent.cs",
+      "Mods/Models/LauncherContentInstallation.cs",
+      "Mods/Models/LauncherContentFileTypes.cs",
+      "Mods/Models/LauncherContentKey.cs",
+      "Mods/Models/LauncherContentTheme.cs",
+      "Mods/Models/LauncherContentVersion.cs",
+      "Mods/Models/LauncherContentVersionComparer.cs",
+      "Mods/Models/LauncherData.cs",
+      "Mods/Services/LauncherContentPathResolver.cs",
+      "Settings/Models/LauncherGamePreferencesSet.cs",
+      "Settings/Models/LauncherInstallations.cs",
+      "Startup/Contracts/IGameInstallationService.cs",
+      "Startup/LauncherFileSystemLayout.cs",
+      "Startup/LauncherPaths.cs",
+      "Startup/LauncherRuntimePathContext.cs",
+      "Startup/Models/GameInstallationValidationResult.cs",
+      "Updating/Models/PackageDownloadPauseController.cs",
+      "Updating/Models/PackageDownloadResult.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 95,
+      "low": 85,
+      "break": 85
+    }
+  }
+}

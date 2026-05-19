@@ -1,0 +1,43 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Remote/HttpRemoteAssetDownloader.cs",
+      "Remote/HttpRemoteConnectionProbe.cs",
+      "Remote/HttpRemoteYamlDocumentReader.cs",
+      "Remote/SharedHttpClientFactory.cs",
+      "Settings/Services/PreferencesService.cs",
+      "Settings/Support/LauncherPreferencesDocumentMapper.cs",
+      "Shell/Services/WindowsLauncherShellService.cs",
+      "Startup/FileSystemLauncherPathResolver.cs",
+      "Startup/WindowsGameInstallationRegistry.cs",
+      "Startup/WindowsGameInstallationService.cs",
+      "Startup/WindowsLauncherHostEnvironmentService.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 88,
+      "low": 72,
+      "break": 72
+    }
+  }
+}

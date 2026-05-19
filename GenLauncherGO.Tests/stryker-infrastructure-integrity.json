@@ -1,0 +1,36 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Integrity/Services/FileSystemContentIntegrityService.cs",
+      "Integrity/Support/ContentIntegrityPath.cs",
+      "Integrity/Support/ContentIntegrityScanner.cs",
+      "Integrity/Support/ContentIntegritySnapshotStore.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 92,
+      "low": 80,
+      "break": 80
+    }
+  }
+}

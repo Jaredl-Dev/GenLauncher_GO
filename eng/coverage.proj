@@ -1,0 +1,97 @@
+<Project>
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <RepoRoot>$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '..'))))</RepoRoot>
+    <SolutionPath>$([System.IO.Path]::Combine('$(RepoRoot)', 'GenLauncherGO.sln'))</SolutionPath>
+    <CoverageSettingsPath>$([System.IO.Path]::Combine('$(RepoRoot)', 'coverage.runsettings'))</CoverageSettingsPath>
+    <CoverageResultsDirectory Condition="'$(CoverageResultsDirectory)' == ''">$([System.IO.Path]::Combine('$(RepoRoot)', 'TestResults', 'Coverage'))</CoverageResultsDirectory>
+    <CoverageReportDirectory Condition="'$(CoverageReportDirectory)' == ''">$([System.IO.Path]::Combine('$(RepoRoot)', 'artifacts', 'coverage'))</CoverageReportDirectory>
+    <CoverageReportsPattern>$(CoverageResultsDirectory)/**/coverage.cobertura.xml</CoverageReportsPattern>
+    <CoverageReportPath>$([System.IO.Path]::Combine('$(CoverageReportDirectory)', 'Cobertura.xml'))</CoverageReportPath>
+    <CoverageTestArguments Condition="'$(SkipCoverageBuild)' == 'true'">--no-build --no-restore</CoverageTestArguments>
+    <!-- Coverage is only a missing-execution backstop. Mutation testing is the
+         gate for whether critical behavior is actually asserted. -->
+    <MinimumLineCoverageRate>0.80</MinimumLineCoverageRate>
+    <MinimumBranchCoverageRate>0.65</MinimumBranchCoverageRate>
+    <MinimumCoreLineCoverageRate>0.90</MinimumCoreLineCoverageRate>
+    <MinimumCoreBranchCoverageRate>0.80</MinimumCoreBranchCoverageRate>
+    <MinimumInfrastructureLineCoverageRate>0.85</MinimumInfrastructureLineCoverageRate>
+    <MinimumInfrastructureBranchCoverageRate>0.70</MinimumInfrastructureBranchCoverageRate>
+    <MinimumUiLineCoverageRate>0.75</MinimumUiLineCoverageRate>
+    <MinimumUiBranchCoverageRate>0.60</MinimumUiBranchCoverageRate>
+  </PropertyGroup>
+
+  <Target Name="Coverage">
+    <RemoveDir Directories="$(CoverageResultsDirectory)" />
+    <RemoveDir Directories="$(CoverageReportDirectory)" />
+
+    <Exec Command="dotnet tool restore" WorkingDirectory="$(RepoRoot)" />
+    <Exec
+      Command="dotnet test &quot;$(SolutionPath)&quot; --configuration &quot;$(Configuration)&quot; --settings &quot;$(CoverageSettingsPath)&quot; --collect:&quot;XPlat Code Coverage&quot; --results-directory &quot;$(CoverageResultsDirectory)&quot; $(CoverageTestArguments)"
+      WorkingDirectory="$(RepoRoot)" />
+    <Exec
+      Command="dotnet tool run reportgenerator -reports:&quot;$(CoverageReportsPattern)&quot; -targetdir:&quot;$(CoverageReportDirectory)&quot; -reporttypes:&quot;Html;Cobertura;TextSummary&quot; -assemblyfilters:&quot;+GenLauncherGO*;-GenLauncherGO.Tests&quot;"
+      WorkingDirectory="$(RepoRoot)" />
+
+    <Error Condition="!Exists('$(CoverageReportPath)')"
+           Text="Coverage report was not generated at $(CoverageReportPath)." />
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/@line-rate">
+      <Output TaskParameter="Result" ItemName="_LineCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/@branch-rate">
+      <Output TaskParameter="Result" ItemName="_BranchCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO.Core']/@line-rate">
+      <Output TaskParameter="Result" ItemName="_CoreLineCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO.Core']/@branch-rate">
+      <Output TaskParameter="Result" ItemName="_CoreBranchCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO.Infrastructure']/@line-rate">
+      <Output TaskParameter="Result" ItemName="_InfrastructureLineCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO.Infrastructure']/@branch-rate">
+      <Output TaskParameter="Result" ItemName="_InfrastructureBranchCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO']/@line-rate">
+      <Output TaskParameter="Result" ItemName="_UiLineCoverageRate" />
+    </XmlPeek>
+    <XmlPeek XmlInputPath="$(CoverageReportPath)" Query="/coverage/packages/package[@name='GenLauncherGO']/@branch-rate">
+      <Output TaskParameter="Result" ItemName="_UiBranchCoverageRate" />
+    </XmlPeek>
+    <Message Importance="High" Text="Coverage rates: line @(_LineCoverageRate), branch @(_BranchCoverageRate)." />
+    <Message Importance="High" Text="Core coverage: line @(_CoreLineCoverageRate), branch @(_CoreBranchCoverageRate)." />
+    <Message Importance="High" Text="Infrastructure coverage: line @(_InfrastructureLineCoverageRate), branch @(_InfrastructureBranchCoverageRate)." />
+    <Message Importance="High" Text="UI coverage: line @(_UiLineCoverageRate), branch @(_UiBranchCoverageRate)." />
+    <Error Condition="'@(_CoreLineCoverageRate)' == '' or '@(_CoreBranchCoverageRate)' == ''"
+           Text="Coverage report is missing GenLauncherGO.Core." />
+    <Error Condition="'@(_InfrastructureLineCoverageRate)' == '' or '@(_InfrastructureBranchCoverageRate)' == ''"
+           Text="Coverage report is missing GenLauncherGO.Infrastructure." />
+    <Error Condition="'@(_UiLineCoverageRate)' == '' or '@(_UiBranchCoverageRate)' == ''"
+           Text="Coverage report is missing the GenLauncherGO UI assembly." />
+    <Error
+      Condition="@(_LineCoverageRate) &lt; $(MinimumLineCoverageRate)"
+      Text="Line coverage @(_LineCoverageRate) is below the $(MinimumLineCoverageRate) backstop." />
+    <Error
+      Condition="@(_BranchCoverageRate) &lt; $(MinimumBranchCoverageRate)"
+      Text="Branch coverage @(_BranchCoverageRate) is below the $(MinimumBranchCoverageRate) backstop." />
+    <Error
+      Condition="'@(_CoreLineCoverageRate)' != '' and @(_CoreLineCoverageRate) &lt; $(MinimumCoreLineCoverageRate)"
+      Text="Core line coverage @(_CoreLineCoverageRate) is below the $(MinimumCoreLineCoverageRate) backstop." />
+    <Error
+      Condition="'@(_CoreBranchCoverageRate)' != '' and @(_CoreBranchCoverageRate) &lt; $(MinimumCoreBranchCoverageRate)"
+      Text="Core branch coverage @(_CoreBranchCoverageRate) is below the $(MinimumCoreBranchCoverageRate) backstop." />
+    <Error
+      Condition="'@(_InfrastructureLineCoverageRate)' != '' and @(_InfrastructureLineCoverageRate) &lt; $(MinimumInfrastructureLineCoverageRate)"
+      Text="Infrastructure line coverage @(_InfrastructureLineCoverageRate) is below the $(MinimumInfrastructureLineCoverageRate) backstop." />
+    <Error
+      Condition="'@(_InfrastructureBranchCoverageRate)' != '' and @(_InfrastructureBranchCoverageRate) &lt; $(MinimumInfrastructureBranchCoverageRate)"
+      Text="Infrastructure branch coverage @(_InfrastructureBranchCoverageRate) is below the $(MinimumInfrastructureBranchCoverageRate) backstop." />
+    <Error
+      Condition="'@(_UiLineCoverageRate)' != '' and @(_UiLineCoverageRate) &lt; $(MinimumUiLineCoverageRate)"
+      Text="UI line coverage @(_UiLineCoverageRate) is below the $(MinimumUiLineCoverageRate) backstop." />
+    <Error
+      Condition="'@(_UiBranchCoverageRate)' != '' and @(_UiBranchCoverageRate) &lt; $(MinimumUiBranchCoverageRate)"
+      Text="UI branch coverage @(_UiBranchCoverageRate) is below the $(MinimumUiBranchCoverageRate) backstop." />
+  </Target>
+</Project>

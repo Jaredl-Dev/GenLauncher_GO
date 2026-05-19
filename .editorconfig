@@ -1,0 +1,673 @@
+root = true
+
+###############################################################################
+# GenLauncherGO code style
+#
+# Sources, in precedence order:
+#   1. Microsoft .NET/C# coding conventions and the Framework Design Guidelines
+#      naming rules.
+#   2. The C# formatting options at their documented defaults, which are also
+#      what the wider .NET ecosystem sees.
+#   3. Readability, where the guidelines are silent or explicitly neutral.
+#
+# Enforcement:
+#   Every gated rule below is an `error`, enforced by `dotnet build` through
+#   EnforceCodeStyleInBuild (see Directory.Build.props). Nothing here relies on
+#   a specific IDE, so an outside contributor using any editor gets identical
+#   results from the command line.
+#
+# Convention used in this file:
+#   Option keys carry the *preference* only. Severity lives exclusively in
+#   `dotnet_diagnostic.<id>.severity`, or in the bulk
+#   `dotnet_analyzer_diagnostic.category-<name>.severity` form used by the code
+#   quality section. Do not use the trailing `option = value:severity` form:
+#   where both are present `dotnet_diagnostic` silently wins, which makes rules
+#   look enforced when they are inert.
+#
+# Deliberate opt-outs are grouped at the end of the severity section with the
+# reason recorded. Anything not listed runs at its built-in default.
+###############################################################################
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{csproj,props,targets,slnx}]
+indent_size = 2
+
+[*.{xaml,axaml}]
+indent_size = 4
+
+[*.cs]
+
+#### Using directives ####
+
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+csharp_using_directive_placement = outside_namespace
+
+#### Formatting: new lines ####
+# Allman braces. The documented default and the near-universal .NET style.
+
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+
+#### Formatting: indentation ####
+
+csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = false
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+
+#### Formatting: spacing ####
+
+csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_between_square_brackets = false
+
+#### Formatting: wrapping ####
+# Braces are mandatory (IDE0011), so preserving an author's single-line form is
+# only ever `if (x) { return; }`, which stays readable. Keep the defaults.
+
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
+
+#### Style: this/Me qualification ####
+
+dotnet_style_qualification_for_event = false
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_method = false
+dotnet_style_qualification_for_property = false
+
+#### Style: language keywords over framework types ####
+
+dotnet_style_predefined_type_for_locals_parameters_members = true
+dotnet_style_predefined_type_for_member_access = true
+
+#### Style: var ####
+# Explicit types except where the right-hand side already states the type.
+# This follows the C# coding conventions doc. Note the dotnet/runtime repo uses
+# `var` more liberally; the doc is the better citation and the clearer read.
+
+csharp_style_var_for_built_in_types = false
+csharp_style_var_when_type_is_apparent = true
+csharp_style_var_elsewhere = false
+
+#### Style: expression-bodied members ####
+# Allowed where the body is genuinely an expression, disallowed where it hides
+# a method's shape.
+
+csharp_style_expression_bodied_accessors = true
+csharp_style_expression_bodied_constructors = false
+csharp_style_expression_bodied_indexers = true
+csharp_style_expression_bodied_lambdas = true
+csharp_style_expression_bodied_local_functions = false
+csharp_style_expression_bodied_methods = false
+csharp_style_expression_bodied_operators = false
+csharp_style_expression_bodied_properties = true
+
+#### Style: pattern matching ####
+
+csharp_style_pattern_matching_over_as_with_null_check = true
+csharp_style_pattern_matching_over_is_with_cast_check = true
+csharp_style_prefer_extended_property_pattern = true
+csharp_style_prefer_not_pattern = true
+csharp_style_prefer_pattern_matching = true
+csharp_style_prefer_switch_expression = true
+
+#### Style: null checking ####
+
+csharp_style_conditional_delegate_call = true
+csharp_style_prefer_null_check_over_type_check = true
+csharp_style_throw_expression = true
+dotnet_style_coalesce_expression = true
+dotnet_style_null_propagation = true
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true
+
+#### Style: expression level ####
+
+# Only fires where the target type is already spelled out on the line, so the
+# type still appears exactly once. Consistent with the explicit-type preference.
+csharp_style_implicit_object_creation_when_type_is_apparent = true
+
+dotnet_style_collection_initializer = true
+dotnet_style_object_initializer = true
+dotnet_style_prefer_auto_properties = true
+dotnet_style_prefer_compound_assignment = true
+dotnet_style_prefer_inferred_anonymous_type_member_names = true
+dotnet_style_prefer_inferred_tuple_names = true
+dotnet_style_prefer_simplified_boolean_expressions = true
+dotnet_style_prefer_simplified_interpolation = true
+
+# Ternaries read poorly once the branches are non-trivial, and the analyzer
+# cannot judge that. Prefer an explicit if/else.
+dotnet_style_prefer_conditional_expression_over_assignment = false
+dotnet_style_prefer_conditional_expression_over_return = false
+
+#### Style: collection expressions ####
+# `[]` and `[1, 2, 3]` are strictly clearer than `Array.Empty<T>()` and
+# `new[] { 1, 2, 3 }`. `when_types_exactly_match` keeps the conversion to cases
+# where the target type is unambiguous; see IDE0305 under opt-outs for the
+# fluent form, which is deliberately excluded.
+
+dotnet_style_prefer_collection_expression = when_types_exactly_match
+
+#### Style: modifiers, fields, parameters ####
+
+csharp_prefer_static_local_function = true
+csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
+csharp_style_prefer_readonly_struct = true
+csharp_style_prefer_readonly_struct_member = true
+dotnet_style_readonly_field = true
+dotnet_style_require_accessibility_modifiers = for_non_interface_members
+
+# Unused parameters mislead every future reader, not just external callers.
+dotnet_code_quality_unused_parameters = all
+
+#### Style: code block and namespace shape ####
+
+csharp_prefer_braces = true
+csharp_prefer_simple_using_statement = true
+csharp_style_namespace_declarations = file_scoped
+csharp_style_prefer_method_group_conversion = true
+dotnet_style_namespace_match_folder = true
+
+# Primary constructors on non-record classes hide the field declarations and
+# silently capture parameters for the object's lifetime. Declare fields.
+csharp_style_prefer_primary_constructors = false
+
+###############################################################################
+# Naming
+#
+# Framework Design Guidelines naming conventions. Rules are matched by symbol
+# specificity rather than file order, but they are still listed most-specific
+# first so the intent survives a move to older tooling.
+###############################################################################
+
+#### Styles ####
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+
+dotnet_naming_style.prefix_interface_with_i.required_prefix = I
+dotnet_naming_style.prefix_interface_with_i.capitalization = pascal_case
+
+dotnet_naming_style.prefix_type_parameter_with_t.required_prefix = T
+dotnet_naming_style.prefix_type_parameter_with_t.capitalization = pascal_case
+
+dotnet_naming_style.suffix_async.required_suffix = Async
+dotnet_naming_style.suffix_async.capitalization = pascal_case
+
+#### Rules ####
+
+# Constants, including private ones, are PascalCase rather than _camelCase.
+dotnet_naming_rule.constants_are_pascal_case.symbols = constants
+dotnet_naming_rule.constants_are_pascal_case.style = pascal_case
+dotnet_naming_rule.constants_are_pascal_case.severity = error
+dotnet_naming_symbols.constants.applicable_kinds = field
+dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_rule.local_constants_are_pascal_case.symbols = local_constants
+dotnet_naming_rule.local_constants_are_pascal_case.style = pascal_case
+dotnet_naming_rule.local_constants_are_pascal_case.severity = error
+dotnet_naming_symbols.local_constants.applicable_kinds = local
+dotnet_naming_symbols.local_constants.required_modifiers = const
+
+# Only catches methods declared `async`. A Task-returning method without the
+# keyword cannot be matched by a naming rule, because rules cannot inspect
+# return types. That gap needs CA-family analysis, not this file.
+dotnet_naming_rule.async_methods_end_in_async.symbols = async_methods
+dotnet_naming_rule.async_methods_end_in_async.style = suffix_async
+dotnet_naming_rule.async_methods_end_in_async.severity = error
+dotnet_naming_symbols.async_methods.applicable_kinds = method
+dotnet_naming_symbols.async_methods.required_modifiers = async
+
+dotnet_naming_rule.local_functions_are_pascal_case.symbols = local_functions
+dotnet_naming_rule.local_functions_are_pascal_case.style = pascal_case
+dotnet_naming_rule.local_functions_are_pascal_case.severity = error
+dotnet_naming_symbols.local_functions.applicable_kinds = local_function
+
+dotnet_naming_rule.interfaces_start_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_start_with_i.style = prefix_interface_with_i
+dotnet_naming_rule.interfaces_start_with_i.severity = error
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+
+dotnet_naming_rule.type_parameters_start_with_t.symbols = type_parameters
+dotnet_naming_rule.type_parameters_start_with_t.style = prefix_type_parameter_with_t
+dotnet_naming_rule.type_parameters_start_with_t.severity = error
+dotnet_naming_symbols.type_parameters.applicable_kinds = type_parameter
+
+dotnet_naming_rule.types_are_pascal_case.symbols = types
+dotnet_naming_rule.types_are_pascal_case.style = pascal_case
+dotnet_naming_rule.types_are_pascal_case.severity = error
+dotnet_naming_symbols.types.applicable_kinds = class, struct, enum, delegate
+
+dotnet_naming_rule.members_are_pascal_case.symbols = members
+dotnet_naming_rule.members_are_pascal_case.style = pascal_case
+dotnet_naming_rule.members_are_pascal_case.severity = error
+dotnet_naming_symbols.members.applicable_kinds = property, method, event
+
+dotnet_naming_rule.non_private_fields_are_pascal_case.symbols = non_private_fields
+dotnet_naming_rule.non_private_fields_are_pascal_case.style = pascal_case
+dotnet_naming_rule.non_private_fields_are_pascal_case.severity = error
+dotnet_naming_symbols.non_private_fields.applicable_kinds = field
+dotnet_naming_symbols.non_private_fields.applicable_accessibilities = public, internal, protected, protected_internal, private_protected
+
+dotnet_naming_rule.private_fields_are_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_are_camel_case.style = underscore_camel_case
+dotnet_naming_rule.private_fields_are_camel_case.severity = error
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_rule.parameters_are_camel_case.symbols = parameters
+dotnet_naming_rule.parameters_are_camel_case.style = camel_case
+dotnet_naming_rule.parameters_are_camel_case.severity = error
+dotnet_naming_symbols.parameters.applicable_kinds = parameter
+
+dotnet_naming_rule.locals_are_camel_case.symbols = locals
+dotnet_naming_rule.locals_are_camel_case.style = camel_case
+dotnet_naming_rule.locals_are_camel_case.severity = error
+dotnet_naming_symbols.locals.applicable_kinds = local
+
+###############################################################################
+# Severities
+#
+# Everything here is an error so that a violation fails `dotnet build` for
+# every contributor and every agent, with no IDE and no extra tooling.
+###############################################################################
+
+#### Formatting ####
+# IDE0055 is the umbrella for every csharp_space_*/new_line_*/indent_* option
+# above, which is what makes formatting a build error rather than something
+# only `dotnet format` would notice.
+dotnet_diagnostic.IDE0055.severity = error
+
+#### Naming ####
+dotnet_diagnostic.IDE1006.severity = error
+
+#### Unnecessary code ####
+dotnet_diagnostic.IDE0005.severity = error
+dotnet_diagnostic.IDE0035.severity = error
+dotnet_diagnostic.IDE0051.severity = error
+dotnet_diagnostic.IDE0052.severity = error
+dotnet_diagnostic.IDE0059.severity = error
+dotnet_diagnostic.IDE0060.severity = error
+dotnet_diagnostic.IDE0080.severity = error
+dotnet_diagnostic.IDE0100.severity = error
+dotnet_diagnostic.IDE0110.severity = error
+
+#### Code block and namespace shape ####
+dotnet_diagnostic.IDE0011.severity = error
+dotnet_diagnostic.IDE0040.severity = error
+dotnet_diagnostic.IDE0044.severity = error
+dotnet_diagnostic.IDE0063.severity = error
+dotnet_diagnostic.IDE0065.severity = error
+dotnet_diagnostic.IDE0130.severity = error
+dotnet_diagnostic.IDE0161.severity = error
+
+#### this/Me qualification and type references ####
+dotnet_diagnostic.IDE0003.severity = error
+dotnet_diagnostic.IDE0009.severity = error
+dotnet_diagnostic.IDE0049.severity = error
+
+#### var ####
+dotnet_diagnostic.IDE0007.severity = error
+dotnet_diagnostic.IDE0008.severity = error
+
+#### Expression-bodied members ####
+dotnet_diagnostic.IDE0021.severity = error
+dotnet_diagnostic.IDE0022.severity = error
+dotnet_diagnostic.IDE0023.severity = error
+dotnet_diagnostic.IDE0024.severity = error
+dotnet_diagnostic.IDE0025.severity = error
+dotnet_diagnostic.IDE0026.severity = error
+dotnet_diagnostic.IDE0027.severity = error
+dotnet_diagnostic.IDE0053.severity = error
+dotnet_diagnostic.IDE0061.severity = error
+
+#### Pattern matching ####
+dotnet_diagnostic.IDE0019.severity = error
+dotnet_diagnostic.IDE0020.severity = error
+dotnet_diagnostic.IDE0038.severity = error
+dotnet_diagnostic.IDE0066.severity = error
+dotnet_diagnostic.IDE0078.severity = error
+dotnet_diagnostic.IDE0083.severity = error
+dotnet_diagnostic.IDE0170.severity = error
+
+#### Null checking ####
+dotnet_diagnostic.IDE0016.severity = error
+dotnet_diagnostic.IDE0029.severity = error
+dotnet_diagnostic.IDE0030.severity = error
+dotnet_diagnostic.IDE0031.severity = error
+dotnet_diagnostic.IDE0041.severity = error
+dotnet_diagnostic.IDE0150.severity = error
+dotnet_diagnostic.IDE0270.severity = error
+dotnet_diagnostic.IDE1005.severity = error
+
+#### Expression level ####
+dotnet_diagnostic.IDE0017.severity = error
+dotnet_diagnostic.IDE0018.severity = error
+dotnet_diagnostic.IDE0032.severity = error
+dotnet_diagnostic.IDE0033.severity = error
+dotnet_diagnostic.IDE0034.severity = error
+dotnet_diagnostic.IDE0037.severity = error
+dotnet_diagnostic.IDE0039.severity = error
+dotnet_diagnostic.IDE0054.severity = error
+dotnet_diagnostic.IDE0056.severity = error
+dotnet_diagnostic.IDE0057.severity = error
+dotnet_diagnostic.IDE0071.severity = error
+dotnet_diagnostic.IDE0074.severity = error
+dotnet_diagnostic.IDE0075.severity = error
+dotnet_diagnostic.IDE0082.severity = error
+dotnet_diagnostic.IDE0090.severity = error
+dotnet_diagnostic.IDE0180.severity = error
+dotnet_diagnostic.IDE0200.severity = error
+dotnet_diagnostic.IDE0330.severity = error
+
+#### Collection expressions ####
+dotnet_diagnostic.IDE0028.severity = error
+dotnet_diagnostic.IDE0300.severity = error
+dotnet_diagnostic.IDE0301.severity = error
+dotnet_diagnostic.IDE0302.severity = error
+dotnet_diagnostic.IDE0303.severity = error
+dotnet_diagnostic.IDE0304.severity = error
+dotnet_diagnostic.IDE0306.severity = error
+
+#### Modifiers ####
+dotnet_diagnostic.IDE0036.severity = error
+dotnet_diagnostic.IDE0062.severity = error
+dotnet_diagnostic.IDE0064.severity = error
+dotnet_diagnostic.IDE0250.severity = error
+dotnet_diagnostic.IDE0251.severity = error
+
+#### XML documentation ####
+# Documentation is required for cross-project contracts and non-obvious
+# behavior, not for every member, but what exists must be valid.
+dotnet_diagnostic.CS1570.severity = error
+dotnet_diagnostic.CS1571.severity = error
+dotnet_diagnostic.CS1572.severity = error
+dotnet_diagnostic.CS1573.severity = error
+dotnet_diagnostic.CS1574.severity = error
+
+#### Deliberate opt-outs ####
+
+# IDE0305 rewrites `source.ToArray()` as `[.. source]`. The spread form is
+# harder to read than the call it replaces, which loses on the readability
+# tiebreaker even though the sibling collection-expression rules win on it.
+dotnet_diagnostic.IDE0305.severity = none
+
+# IDE0042 pushes `var (name, value) = pair`, which hides both types and
+# contradicts the explicit-type preference set above.
+dotnet_diagnostic.IDE0042.severity = none
+
+# IDE0058 flags every ignored return value, including the fluent builder and
+# TryAdd patterns where discarding is intended. Too noisy to gate on.
+dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0046/IDE0045 are the diagnostics behind the two
+# prefer_conditional_expression preferences disabled above.
+dotnet_diagnostic.IDE0045.severity = none
+dotnet_diagnostic.IDE0046.severity = none
+
+# IDE0290 is the primary-constructor suggestion, disabled by preference above.
+dotnet_diagnostic.IDE0290.severity = none
+
+###############################################################################
+# Code quality
+#
+# Which categories run is selected in Directory.Build.props. The bulk
+# `dotnet_analyzer_diagnostic.category-*` entries here raise every rule in those
+# categories to `error`: enabling a category leaves each rule at its own default
+# severity, and several default to a suggestion, which would be enabled but not
+# gating.
+#
+# Design and Naming deliberately keep their default rule sets instead. Several
+# of their rules are written for reusable libraries and contradict this
+# repository's own gates: CA1032 and CA1064 require members nothing calls, which
+# the unused-public-API rule forbids; CA1014 is meaningless without external
+# consumers; CA1062 is redundant under `Nullable=enable`; CA1031 and CA1060
+# would force 95 boundary catches and four P/Invoke files to be restructured for
+# a legacy convention. The rules worth having are opted into individually.
+###############################################################################
+
+#### Enabled categories ####
+dotnet_analyzer_diagnostic.category-Documentation.severity = error
+dotnet_analyzer_diagnostic.category-Globalization.severity = error
+dotnet_analyzer_diagnostic.category-Interoperability.severity = error
+dotnet_analyzer_diagnostic.category-Maintainability.severity = error
+dotnet_analyzer_diagnostic.category-Reliability.severity = error
+dotnet_analyzer_diagnostic.category-Security.severity = error
+dotnet_analyzer_diagnostic.category-SingleFile.severity = error
+dotnet_analyzer_diagnostic.category-Usage.severity = error
+
+#### Design opt-ins ####
+dotnet_diagnostic.CA1052.severity = error
+dotnet_diagnostic.CA1058.severity = error
+dotnet_diagnostic.CA1061.severity = error
+dotnet_diagnostic.CA1063.severity = error
+dotnet_diagnostic.CA1065.severity = error
+dotnet_diagnostic.CA1068.severity = error
+dotnet_diagnostic.CA1069.severity = error
+
+#### Naming opt-ins ####
+# IDE1006 already covers casing and prefixes. These add what a naming style
+# cannot express: underscores and enum member prefixes.
+dotnet_diagnostic.CA1707.severity = error
+dotnet_diagnostic.CA1712.severity = error
+
+#### Performance opt-ins ####
+# The full Performance set is mostly micro-optimization that a launcher cannot
+# measure — char overloads of string methods and similar — where each rule buys a
+# build break for a stylistic preference. These two are different: both describe
+# defects rather than inefficiencies.
+#
+# CA1851 catches enumerating a lazy sequence more than once, which changes results
+# as well as cost. CA1862 catches case-insensitive comparison written without a
+# StringComparison, the classic source of Windows path and culture bugs.
+dotnet_diagnostic.CA1851.severity = error
+dotnet_diagnostic.CA1862.severity = error
+
+#### Deliberate opt-outs ####
+
+# CA1848 (LoggerMessage delegates) and CA1873 (guard log calls with IsEnabled)
+# are throughput rules for high-volume server logging. This launcher writes a
+# handful of lines per user action, so both trade readable diagnostics for an
+# unmeasurable gain: CA1873 alone would wrap 100 call sites in IsEnabled checks
+# to avoid a Path.GetFileName.
+dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA1873.severity = none
+
+# CA1859 asks for concrete types in place of interfaces for speed. The gain is
+# unmeasurable in a launcher and the change widens coupling to implementations,
+# against the interface-boundary rule in AGENTS.md.
+dotnet_diagnostic.CA1859.severity = none
+
+# The rules below cannot see enough to judge the code they flag, so they bill
+# their cost as a growing list of per-site exceptions. A rule that has to be
+# argued with at each call site is not a gate, so they are off rather than
+# carried with carve-outs.
+#
+# CA1812 reports types that nothing constructs in source. The YAML and JSON
+# readers construct their bound types through reflection, which it cannot see,
+# so it reports live binding fixtures as dead code.
+dotnet_diagnostic.CA1812.severity = none
+
+# CA2000 cannot follow dispose ownership once it leaves the creating method, and
+# its own message documents the workarounds that fact requires. It reported the
+# deliberately long-lived shared HttpClient and cached theme bitmap alongside a
+# genuine leak, at a roughly even rate. The real leaks it found were fixed; the
+# rule is off because sorting its output is a per-site argument, not a gate.
+# CA2025, which is precise about a narrower hazard, stays on.
+dotnet_diagnostic.CA2000.severity = none
+
+# CA2213 shares that blind spot for fields. Its only finding here was the logger
+# factory resolved from the service provider, which the provider disposes; doing
+# it again in the holding type would be a double dispose asserting an ownership
+# the type does not have.
+dotnet_diagnostic.CA2213.severity = none
+
+# The rules below ask for changes that cost more than the finding is worth here.
+# Each was measured against this codebase rather than judged on reputation, and
+# each would trade a real guarantee for a benefit this project does not collect.
+#
+# CA1849 wants FileStream.Flush(true) replaced with FlushAsync(). They are not
+# equivalent: Flush(true) forces the operating system buffer to disk, which is
+# the durability step the atomic writer exists to provide, and FlushAsync() does
+# not. The sync-over-async calls it correctly identified elsewhere were fixed
+# before switching it off.
+dotnet_diagnostic.CA1849.severity = none
+
+# SYSLIB1054 and SYSLIB1096 convert DllImport and ComImport to the source
+# generated forms. Both change marshalling behavior, and the code they land on is
+# the hard-link, process-launch, and shell interop that AGENTS.md calls out as
+# safety critical. Their payoff is trimming and AOT compatibility, which this
+# launcher does not use: the supported publish sets PublishTrimmed=false.
+dotnet_diagnostic.SYSLIB1054.severity = none
+dotnet_diagnostic.SYSLIB1096.severity = none
+
+# CA1515 would make Avalonia controls, a XAML markup extension, and the generated
+# Strings.cs internal. That risks breaking XAML type resolution and test
+# discovery, and editing a generated designer file is forbidden by the UI
+# guidance in any case.
+dotnet_diagnostic.CA1515.severity = none
+
+# CA2007 breaks `dotnet format`. Its code fix appends .ConfigureAwait(false) to
+# the initializer of an `await using` declaration, where the diagnostic is really
+# about the disposal; that loses the target type of `new(...)` and changes the
+# variable's type, so a plain `dotnet format` run left seven files uncompilable.
+# A rule whose own fixer corrupts the source on a standard command is a trap for
+# anyone contributing, whatever its merits. The ConfigureAwait calls it correctly
+# prompted in Core and Infrastructure were kept.
+dotnet_diagnostic.CA2007.severity = none
+
+# CA2016 breaks `dotnet format` the same way. Asked to forward a cancellation
+# token into `Task.Run(() => ...)` inside a test that has no token in scope, its
+# fixer writes `_` as the argument, which is not an identifier that exists there,
+# and the file stops compiling.
+dotnet_diagnostic.CA2016.severity = none
+
+# CA1826 replaces `list.FirstOrDefault()` with a `Count > 0 ? list[0] : null`
+# conditional to save an enumerator allocation. Across the twelve call sites here
+# that is a plainly worse read for a cost this launcher cannot measure, and most
+# of them continue into `?.Something`, which the rewrite makes harder to follow.
+dotnet_diagnostic.CA1826.severity = none
+
+# CA1806 reports an ignored return value for `Action act = () => new Thing(...)`,
+# the standard way to assert that a constructor rejects its arguments. The value
+# is meant to be discarded; the throw is the subject of the test.
+dotnet_diagnostic.CA1806.severity = none
+
+# CA1838 wants the StringBuilder out of the GetFinalPathNameByHandle signature for
+# cheaper marshalling. That buffer backs the path-safety primitives, and the same
+# reasoning as SYSLIB1054 applies: a marshalling change to containment interop for
+# a cost this launcher never pays.
+dotnet_diagnostic.CA1838.severity = none
+
+# CA1822 is the most expensive rule measured here, and none of the cost is in the
+# code it flags. Marking a member static breaks every instance-qualified call
+# site, including ones in other projects, and the analyzer reports none of them:
+# adopting it produced four rounds of CS0176 across the solution, one of which hid
+# every diagnostic in two projects until it was cleared. A launcher collects
+# nothing measurable in return. Held off rather than paid for repeatedly.
+dotnet_diagnostic.CA1822.severity = none
+
+# CA1725 requires a parameter name to match the base declaration, which means
+# adopting whatever the framework chose even when it reads worse. It renamed
+# `eventArgs` to `e` on an override, and consistency with a single-letter name is
+# not worth a less descriptive signature.
+dotnet_diagnostic.CA1725.severity = none
+
+
+# CA1308 prefers uppercase normalization for round-trip safety. It cannot tell
+# that LauncherContentKey.ToStableString formats an identity already persisted
+# in launcher-owned integrity records, where changing case invalidates every
+# existing record.
+dotnet_diagnostic.CA1308.severity = none
+
+# CA5394 reports every use of Random. It cannot tell that the only use here
+# picks which advertising banner a mod tile shows.
+dotnet_diagnostic.CA5394.severity = none
+
+# CA5351 reports every use of MD5. The one use here is fixed by the remote
+# manifest contract, because S3 ETags are MD5, and detects an incomplete or
+# corrupted download rather than guarding a security boundary. Everything else
+# hashes with SHA-256. Note the cost of switching this off: a genuine MD5
+# misuse added later is no longer caught, so this is the one exclusion worth
+# revisiting if the launcher ever hashes for authentication.
+dotnet_diagnostic.CA5351.severity = none
+
+###############################################################################
+# Project-scoped exceptions
+#
+# These draw a boundary between projects, which is a fact about the architecture
+# rather than a per-site argument with the rule. A contributor reads them once.
+###############################################################################
+
+[GenLauncherGO.Tests/**.cs]
+
+# These xUnit rules define whether a test is discoverable and distinct. Most are
+# warnings already promoted by TreatWarningsAsErrors; listing them explicitly
+# keeps the test contract stable if an analyzer changes its default severity.
+dotnet_diagnostic.xUnit1004.severity = error
+dotnet_diagnostic.xUnit1013.severity = error
+dotnet_diagnostic.xUnit1025.severity = error
+dotnet_diagnostic.xUnit1026.severity = error
+
+# GLT001 requires `MemberOrBehavior_ExpectedOutcome` or
+# `MemberOrBehavior_Scenario_ExpectedOutcome` for every xUnit test method.
+dotnet_diagnostic.GLT001.severity = error
+
+# Behavior-oriented test names use underscores to separate their semantic parts.
+dotnet_diagnostic.CA1707.severity = none
+
+# CA1861 hoists inline arrays into `static readonly` fields to avoid reallocating
+# them, which it qualifies with "if the called method is called repeatedly". A
+# test method runs once, so the trade is all cost: the expected values move away
+# from the assertion that reads them.
+dotnet_diagnostic.CA1861.severity = none
+
+###############################################################################
+# File-scoped exceptions
+###############################################################################
+
+# This transport type mirrors the legacy backend's YAML keys character for
+# character, so its members cannot follow the naming rules. Scoped here rather
+# than with a #pragma because Rider honors an .editorconfig severity but not the
+# pragma, which otherwise leaves the rule looking violated in the IDE while the
+# build is clean.
+[GenLauncherGO.Infrastructure/Mods/Models/LegacyLauncherCatalogDocument.cs]
+dotnet_diagnostic.IDE1006.severity = none

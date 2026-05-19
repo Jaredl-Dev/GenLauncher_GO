@@ -1,0 +1,204 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # Weekly, so the advisory check runs without waiting for a code change.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  # Normalizes source paths in the produced assemblies, which is what makes the
+  # Deterministic setting in Directory.Build.props reproducible off this machine.
+  ContinuousIntegrationBuild: true
+
+jobs:
+  build-and-test:
+    name: Build and test (${{ matrix.configuration }})
+    runs-on: windows-2025
+    timeout-minutes: 20
+    strategy:
+      # Report both configurations rather than hiding one behind the other.
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+    env:
+      GENLAUNCHERGO_REQUIRE_SYMBOLIC_LINK_TESTS: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Verify .NET SDK
+        shell: pwsh
+        run: |
+          $sdkVersion = dotnet --version
+          if (-not $sdkVersion.StartsWith("10.")) {
+            throw "Expected a .NET 10 SDK, but dotnet selected $sdkVersion."
+          }
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      # Style, naming, and code quality rules are `error` in .editorconfig and
+      # run through EnforceCodeStyleInBuild, so the build itself is the primary
+      # gate. Debug is built as well as Release because the two configurations
+      # differ in DefineConstants, so code behind `#if DEBUG` is only ever
+      # compiled here.
+      - name: Build
+        run: dotnet build .\GenLauncherGO.sln --configuration ${{ matrix.configuration }} --no-restore
+
+      # Runs the whitespace, style, and analyzer formatters. Not redundant with
+      # the build: whitespace and end-of-line violations are reported here only,
+      # as are style fixers that have no build-time implementation. Configuration
+      # independent, so once is enough.
+      - name: Verify formatting
+        if: matrix.configuration == 'Release'
+        run: dotnet format .\GenLauncherGO.sln --verify-no-changes --no-restore
+
+      - name: Test with coverage backstop
+        if: matrix.configuration == 'Debug'
+        run: dotnet msbuild .\eng\coverage.proj -target:Coverage -property:Configuration=Debug -property:SkipCoverageBuild=true
+
+      - name: Test
+        if: matrix.configuration == 'Release'
+        run: dotnet test .\GenLauncherGO.sln --configuration Release --no-build --no-restore
+
+  # Mutation testing is the gate for whether behavior is actually asserted; the coverage
+  # backstop above only proves a line executed. One job per production area: fanning them out
+  # keeps each area's break threshold enforceable on its own and keeps wall-clock bounded, and
+  # fail-fast is off so a regression in one area does not hide the state of the others.
+  #
+  # GenLauncherGO.UI is absent by necessity, not oversight. Avalonia emits InitializeComponent
+  # and the x:Name backing fields from a Roslyn source generator; Stryker recompiles from
+  # parsed syntax trees without running generators, so every .axaml.cs fails to compile and the
+  # run aborts. See eng/mutation.proj.
+  mutation-quality:
+    name: Mutation quality (${{ matrix.area }})
+    runs-on: windows-2025
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        area:
+          - core
+          - infrastructure-common
+          - infrastructure-integrity
+          - infrastructure-launching
+          - infrastructure-mods
+          - infrastructure-platform
+          - infrastructure-updating
+    env:
+      GENLAUNCHERGO_REQUIRE_SYMBOLIC_LINK_TESTS: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      - name: Test mutations
+        run: dotnet msbuild .\eng\mutation.proj -target:Mutation -property:MutationConfiguration=${{ matrix.area }}
+
+  publish-smoke-test:
+    name: Publish smoke test
+    runs-on: windows-2025
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Verify .NET SDK
+        shell: pwsh
+        run: |
+          $sdkVersion = dotnet --version
+          if (-not $sdkVersion.StartsWith("10.")) {
+            throw "Expected a .NET 10 SDK, but dotnet selected $sdkVersion."
+          }
+
+      - name: Publish supported single-file executable
+        shell: pwsh
+        run: |
+          $publishDirectory = Join-Path $env:RUNNER_TEMP "GenLauncherGO-publish"
+          dotnet publish .\GenLauncherGO.UI\GenLauncherGO.UI.csproj -p:PublishProfile=WinX64SelfContained --output $publishDirectory
+          $launcherPath = Join-Path $publishDirectory "GenLauncherGO.exe"
+          if (-not (Test-Path -LiteralPath $launcherPath -PathType Leaf)) {
+            throw "Expected the supported launcher executable at $launcherPath."
+          }
+          $looseLibraries = @(Get-ChildItem -LiteralPath $publishDirectory -Filter "*.dll" -File -Recurse)
+          if ($looseLibraries.Count -ne 0) {
+            throw "The supported single-file publish unexpectedly produced loose DLL files."
+          }
+
+  # NU1901-NU1904 are downgraded to warnings in Directory.Build.props so that a
+  # newly published advisory cannot fail an unrelated pull request. This job is
+  # the other half of that decision: it fails loudly, on a schedule, so the
+  # findings are acted on rather than merely visible.
+  dependency-audit:
+    name: Dependency audit
+    runs-on: windows-2025
+    timeout-minutes: 15
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      - name: Fail on vulnerable packages
+        shell: pwsh
+        run: |
+          $report = dotnet list .\GenLauncherGO.sln package --vulnerable --include-transitive | Out-String
+          Write-Host $report
+          if ($report -match "has the following vulnerable packages") {
+            throw "Vulnerable packages detected. See the report above."
+          }
+
+      - name: Report deprecated packages
+        shell: pwsh
+        run: |
+          $report = dotnet list .\GenLauncherGO.sln package --deprecated | Out-String
+          Write-Host $report
+          if ($report -match "has the following deprecated packages") {
+            throw "Deprecated packages detected. See the report above."
+          }

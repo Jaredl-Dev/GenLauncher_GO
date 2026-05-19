@@ -1,0 +1,147 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Integrity.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Integrity.IntegrityReviewDialog"
+        x:ClassModifier="internal"
+        x:DataType="vm:IntegrityReviewViewModel"
+        Title="{Binding Title}"
+        Width="820"
+        Height="620"
+        MinWidth="640"
+        MinHeight="440"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ControlTheme x:Key="IntegrityReviewListBoxItemTheme"
+                      TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter>
+        </ControlTheme>
+    </Window.Resources>
+
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="Auto,Auto,*,Auto"
+              Margin="18">
+            <Border Classes="dialog-band header"
+                    Margin="-18,-18,-18,14"
+                    MinHeight="56"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Text="{Binding Title}" />
+            </Border>
+
+            <TextBlock Grid.Row="1"
+                       Margin="0,0,0,14"
+                       Text="{Binding Description}"
+                       FontSize="15"
+                       TextWrapping="Wrap" />
+
+            <Border Grid.Row="2"
+                    Background="{DynamicResource GenLauncherLightBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="1">
+                <ListBox ItemsSource="{Binding IssueGroups}"
+                         ItemContainerTheme="{StaticResource IntegrityReviewListBoxItemTheme}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="vm:IntegrityReviewGroup">
+                            <Border Background="{DynamicResource GenLauncherLightBackGround}"
+                                    BorderBrush="{DynamicResource GenLauncherDarkFillColor}"
+                                    BorderThickness="0,0,0,1">
+                                <Grid RowDefinitions="Auto,Auto">
+                                    <Grid Grid.Row="0"
+                                          ColumnDefinitions="260,*"
+                                          MinHeight="36"
+                                          Margin="10,8,10,7"
+                                          Background="{DynamicResource GenLauncherDarkBackGround}">
+                                        <TextBlock Grid.Column="0"
+                                                   Margin="0,0,16,0"
+                                                   Text="{Binding TargetDisplayName}"
+                                                   FontWeight="Bold"
+                                                   Foreground="{DynamicResource GenLauncherActiveColor}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Summary}"
+                                                   Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </Grid>
+
+                                    <ItemsControl Grid.Row="1"
+                                                  ItemsSource="{Binding Entries}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:IntegrityReviewEntry">
+                                                <Grid ColumnDefinitions="118,*,Auto"
+                                                      MinHeight="31"
+                                                      Margin="40,6,10,6">
+                                                    <TextBlock Grid.Column="0"
+                                                               Margin="0,0,14,0"
+                                                               Text="{Binding IssueKindLabel}"
+                                                               FontSize="14"
+                                                               FontWeight="Bold"
+                                                               Foreground="{DynamicResource GenLauncherActiveColor}"
+                                                               TextTrimming="CharacterEllipsis" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Margin="0,0,16,0"
+                                                               Text="{Binding RelativePath}"
+                                                               FontSize="14"
+                                                               Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                                                               TextWrapping="Wrap" />
+                                                    <Border Grid.Column="2"
+                                                            MinWidth="72"
+                                                            Padding="8,2"
+                                                            HorizontalAlignment="Right"
+                                                            VerticalAlignment="Center"
+                                                            Background="{DynamicResource GenLauncherDarkFillColor}"
+                                                            BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                                                            BorderThickness="1">
+                                                        <TextBlock Text="{Binding ActionLabel}"
+                                                                   FontSize="12"
+                                                                   FontWeight="Bold"
+                                                                   Foreground="{DynamicResource GenLauncherActiveColor}"
+                                                                   TextAlignment="Center" />
+                                                    </Border>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <StackPanel Grid.Row="3"
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Spacing="12">
+                <Button Classes="dialog-action"
+                        MinWidth="150"
+                        Command="{Binding CancelCommand}"
+                        Content="{Binding CancelActionText}"
+                        IsCancel="True" />
+                <Button Classes="dialog-action primary"
+                        MinWidth="230"
+                        Command="{Binding ConfirmResolutionCommand}"
+                        Content="{Binding PrimaryActionText}"
+                        IsVisible="{Binding IsPrimaryActionVisible}"
+                        IsDefault="True" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

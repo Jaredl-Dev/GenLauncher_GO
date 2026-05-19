@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenLauncherGO.Core\GenLauncherGO.Core.csproj"/>
+    <ProjectReference Include="..\GenLauncherGO.Infrastructure\GenLauncherGO.Infrastructure.csproj"/>
+    <ProjectReference Include="..\GenLauncherGO.TestAnalyzers\GenLauncherGO.TestAnalyzers.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\GenLauncherGO.UI\GenLauncherGO.UI.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\GenLauncherGO.TestAnalyzers\TestMethodNameConvention.cs"
+             Link="Conventions\TestMethodNameConvention.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\GenLauncherGO.UI\Resources\Strings*.resx"
+          Link="LocalizationResources\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\GenLauncherGO.UI\app.manifest"
+          Link="StartupAssets\app.manifest"
+          CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\GenLauncherGO.UI\GenLauncherGO.UI.csproj"
+          Link="StartupAssets\GenLauncherGO.UI.csproj"
+          CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="Avalonia.Headless"/>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+    <PackageReference Include="Microsoft.Extensions.Logging"/>
+    <PackageReference Include="xunit"/>
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions"/>
+    <PackageReference Include="FluentAssertions.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSubstitute"/>
+    <PackageReference Include="NSubstitute.Analyzers.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,63 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Pinned rather than `latest`: with warnings as errors, `latest` lets an
+         SDK update fail the build on rules nobody opted into. Bump this
+         deliberately. -->
+    <AnalysisLevel>10.0</AnalysisLevel>
+
+    <!-- Runs the .editorconfig style and naming rules as part of `dotnet build`,
+         so enforcement needs no IDE and no separate tool. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!-- IDE0005 (unused using directives) is silently skipped in command-line
+         builds unless the documentation file is generated. CS1591 is suppressed
+         because documentation is required for contracts and non-obvious
+         behavior, not for every member. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <!-- Code quality (CA) analysis is scoped per category rather than by one
+         global AnalysisMode. Design, Naming, and Performance stay at their
+         default rule sets: their full sets are written for reusable libraries or
+         for hot paths a launcher does not have, so most of what they add is
+         ceremony. The worthwhile rules from those three are opted into
+         individually in .editorconfig, where exclusions also live with their
+         reason. Every other category runs its full set. -->
+    <AnalysisModeDocumentation>All</AnalysisModeDocumentation>
+    <AnalysisModeGlobalization>All</AnalysisModeGlobalization>
+    <AnalysisModeInteroperability>All</AnalysisModeInteroperability>
+    <AnalysisModeMaintainability>All</AnalysisModeMaintainability>
+    <AnalysisModeReliability>All</AnalysisModeReliability>
+    <AnalysisModeSecurity>All</AnalysisModeSecurity>
+    <AnalysisModeSingleFile>All</AnalysisModeSingleFile>
+    <AnalysisModeUsage>All</AnalysisModeUsage>
+
+    <!-- MSBuild's own MSB#### warnings are not covered by TreatWarningsAsErrors,
+         which applies to the compiler and analyzers only. -->
+    <MSBuildTreatWarningsAsErrors>true</MSBuildTreatWarningsAsErrors>
+
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- NuGet audit findings come from external advisories and can appear
+         without any code change. Keep them visible without breaking the build
+         on someone else's disclosure timeline. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1900;NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildProjectName)' != 'GenLauncherGO.Tests'">
+    <!-- The supported publish is single-file self-contained (see
+         WinX64SelfContained.pubxml), which bundles all three production
+         assemblies. Enabling the analyzer here reports IL3000/IL3001 during
+         `dotnet build` rather than only at publish time, where a broken
+         assumption about assembly locations would otherwise ship. Tests are
+         excluded because they are never published this way. -->
+    <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+  </PropertyGroup>
+</Project>

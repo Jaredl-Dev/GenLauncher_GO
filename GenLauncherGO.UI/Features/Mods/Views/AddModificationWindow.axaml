@@ -1,0 +1,100 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.AddModificationWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:AddModificationViewModel"
+        Title="{localization:Loc SelectMod}"
+        Width="440"
+        Height="520"
+        WindowStartupLocation="CenterOwner"
+        Topmost="True">
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="56,44,*,64">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Margin="12,0"
+                           Text="{localization:Loc SelectMod}" />
+            </Border>
+
+            <TextBox x:Name="SearchBox"
+                     Grid.Row="1"
+                     Classes="dialog-input"
+                     Height="32"
+                     MinHeight="0"
+                     Margin="12,0,12,10"
+                     Text="{Binding SearchText, Mode=TwoWay}"
+                     PlaceholderText="{localization:Loc SearchMods}"
+                     BorderThickness="1" />
+
+            <Grid Grid.Row="2"
+                  Margin="12,0,12,8">
+                <ListBox x:Name="ModificationsList"
+                         ItemContainerTheme="{StaticResource GenLauncherDialogListBoxItemTheme}"
+                         ItemsSource="{Binding VisibleModifications}"
+                         SelectedItem="{Binding SelectedModification, Mode=TwoWay}"
+                         Background="{DynamicResource GenLauncherDarkBackGround}"
+                         BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                         BorderThickness="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="vm:AddModificationItemViewModel">
+                            <Grid MinHeight="52"
+                                  Margin="6,2"
+                                  ColumnDefinitions="*,Auto">
+                                <StackPanel Margin="2,2,8,2"
+                                            VerticalAlignment="Center"
+                                            Spacing="1">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="16"
+                                               TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding VersionText}"
+                                               FontSize="14"
+                                               Foreground="{DynamicResource GenLauncherInactiveBorder}"
+                                               TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="1"
+                                           MinWidth="96"
+                                           Margin="8,0,4,0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding PackageSizeText}"
+                                           TextAlignment="Right"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource GenLauncherInactiveBorder}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           IsVisible="{Binding HasNoVisibleModifications}"
+                           Text="{localization:Loc NoModsMatchSearch}"
+                           FontSize="15"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+            </Grid>
+
+            <Border Grid.Row="3"
+                    Classes="dialog-band footer">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="28">
+                    <Button Classes="dialog-action primary"
+                            Content="{localization:Loc Add}"
+                            Command="{Binding AcceptCommand}"
+                            IsDefault="True" />
+                    <Button Classes="dialog-action"
+                            Content="{localization:Loc Cancel}"
+                            Command="{Binding CancelCommand}"
+                            IsCancel="True" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

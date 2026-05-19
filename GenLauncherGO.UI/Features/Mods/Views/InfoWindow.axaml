@@ -1,0 +1,172 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.InfoWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:InfoDialogViewModel"
+        Title="{localization:Loc Info}"
+        Width="640"
+        MinHeight="284"
+        MaxHeight="520"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
+    <Window.Styles>
+        <Style Selector="Border.icon-badge">
+            <Setter Property="Width" Value="52" />
+            <Setter Property="Height" Value="52" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+    </Window.Styles>
+
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="56,*,68">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Text="{Binding MainMessage}" />
+            </Border>
+
+            <ScrollViewer Grid.Row="1"
+                          MaxHeight="330"
+                          Margin="21,20"
+                          VerticalScrollBarVisibility="Auto">
+                <Border Padding="20,18"
+                        Background="{DynamicResource GenLauncherLightBackGround}"
+                        BorderBrush="{DynamicResource GenLauncherDarkFillColor}"
+                        BorderThickness="1">
+                    <Grid ColumnDefinitions="52,*">
+                        <Panel HorizontalAlignment="Left"
+                               VerticalAlignment="Center">
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                                    IsVisible="{Binding IsInfoIconVisible}">
+                                <Panel>
+                                    <Ellipse Width="34"
+                                             Height="34"
+                                             Stroke="{DynamicResource GenLauncherBorderColor}"
+                                             StrokeThickness="2" />
+                                    <Ellipse Width="5"
+                                             Height="5"
+                                             Margin="0,11,0,0"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Fill="{DynamicResource GenLauncherBorderColor}" />
+                                    <Rectangle Width="5"
+                                               Height="15"
+                                               Margin="0,0,0,10"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{DynamicResource GenLauncherBorderColor}" />
+                                </Panel>
+                            </Border>
+
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{DynamicResource GenLauncherActiveColor}"
+                                    IsVisible="{Binding IsWarningIconVisible}">
+                                <Panel>
+                                    <Polygon Points="26,6 47,44 5,44"
+                                             Fill="{DynamicResource GenLauncherDarkBackGround}"
+                                             Stroke="{DynamicResource GenLauncherActiveColor}"
+                                             StrokeThickness="2"
+                                             StrokeJoin="Round" />
+                                    <Rectangle Width="4"
+                                               Height="16"
+                                               Margin="0,4,0,0"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{DynamicResource GenLauncherActiveColor}" />
+                                    <Ellipse Width="5"
+                                             Height="5"
+                                             Margin="0,0,0,9"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Bottom"
+                                             Fill="{DynamicResource GenLauncherActiveColor}" />
+                                </Panel>
+                            </Border>
+
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{DynamicResource GenLauncherErrorColor}"
+                                    IsVisible="{Binding IsErrorIconVisible}">
+                                <Panel>
+                                    <Path Data="M16,5 L36,5 L47,16 L47,36 L36,47 L16,47 L5,36 L5,16 Z"
+                                          Fill="{DynamicResource GenLauncherDarkBackGround}"
+                                          Stroke="{DynamicResource GenLauncherErrorColor}"
+                                          StrokeThickness="2"
+                                          StrokeJoin="Round" />
+                                    <Rectangle Width="5"
+                                               Height="19"
+                                               Margin="0,0,0,9"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{DynamicResource GenLauncherErrorColor}" />
+                                    <Ellipse Width="6"
+                                             Height="6"
+                                             Margin="0,0,0,9"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Bottom"
+                                             Fill="{DynamicResource GenLauncherErrorColor}" />
+                                </Panel>
+                            </Border>
+                        </Panel>
+
+                        <TextBlock x:Name="DetailMessageText"
+                                   Grid.Column="1"
+                                   Margin="20,2,4,2"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding DetailMessage}"
+                                   FontSize="{Binding DetailFontSize}"
+                                   TextWrapping="Wrap" />
+                    </Grid>
+                </Border>
+            </ScrollViewer>
+
+            <Border Grid.Row="2"
+                    Classes="dialog-band footer">
+                <StackPanel Margin="21,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                    <Button x:Name="CancelButton"
+                            Classes="dialog-action"
+                            Content="{Binding CancelText}"
+                            IsVisible="{Binding IsCancelVisible}"
+                            IsCancel="True"
+                            Command="{Binding CancelCommand}" />
+                    <Button x:Name="ContinueButton"
+                            Classes="dialog-action primary"
+                            Content="{Binding ContinueText}"
+                            IsVisible="{Binding IsContinueVisible}"
+                            IsDefault="True"
+                            Command="{Binding ContinueCommand}" />
+                    <Button x:Name="InfoActionButton"
+                            Classes="dialog-action primary"
+                            Content="{Binding ActionText}"
+                            IsVisible="{Binding IsActionVisible}"
+                            IsDefault="True"
+                            Command="{Binding ActionCommand}" />
+                    <Button Classes="dialog-action"
+                            Content="{localization:Loc Ok}"
+                            IsVisible="{Binding IsActionVisible}"
+                            IsCancel="True"
+                            Command="{Binding OkCommand}" />
+                    <Button Classes="dialog-action primary"
+                            Content="{localization:Loc Ok}"
+                            IsVisible="{Binding IsOkVisible}"
+                            IsDefault="True"
+                            Command="{Binding OkCommand}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

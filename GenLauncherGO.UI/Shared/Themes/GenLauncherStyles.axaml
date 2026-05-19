@@ -1,0 +1,211 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <!--
+    Every launcher window is a fixed-size, undecorated panel painted from the active theme. Declaring that once
+    here keeps the windows themselves free of chrome attributes; a window that needs something else, such as the
+    main window's real title bar or the settings window's artwork background, states it locally and wins.
+  -->
+    <Style Selector="Window">
+        <Setter Property="CanResize" Value="False" />
+        <Setter Property="WindowDecorations" Value="None" />
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    </Style>
+
+    <!--
+    Shared dialog chrome. Nine windows previously repeated this frame/band/title/action structure with values
+    that had drifted apart; they now differ only where a difference is meaningful.
+  -->
+    <Style Selector="Border.dialog-frame">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderThickness" Value="4" />
+    </Style>
+    <Style Selector="Border.dialog-band">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherChromeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    </Style>
+    <Style Selector="Border.dialog-band.header">
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+    </Style>
+    <Style Selector="Border.dialog-band.footer">
+        <Setter Property="BorderThickness" Value="0,2,0,0" />
+    </Style>
+    <Style Selector="Border.dialog-panel">
+        <Setter Property="Padding" Value="18" />
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+    <Style Selector="TextBlock.dialog-title">
+        <Setter Property="Margin" Value="21,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="21" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherHeadingTextColor}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style Selector="TextBlock.section-title">
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherHeadingTextColor}" />
+    </Style>
+    <Style Selector="TextBlock.field-label">
+        <Setter Property="Margin" Value="0,0,0,5" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.validation">
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherErrorColor}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Button.dialog-action">
+        <Setter Property="MinWidth" Value="112" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="14,5" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <!-- The default action of a dialog carries a heavier border and weight so it reads first. -->
+    <Style Selector="Button.dialog-action.primary">
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBox.dialog-input">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="8,3" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="SelectionForegroundBrush" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    </Style>
+    <!--
+    Hovering brightens the accent border and lifts the text to the palette's attention colour. Focus matches
+    hover exactly, so clicking into a hovered field never shifts its border colour.
+  -->
+    <Style Selector="TextBox:pointerover, TextBox:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderHighlightColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource GenLauncherActiveColor}" />
+    </Style>
+    <Style Selector="TextBox:disabled">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        <Setter Property="Opacity" Value="0.56" />
+    </Style>
+    <!-- Fluent paints TextBox states on its inner border, so keep that part on the launcher palette too. -->
+    <Style Selector="TextBox /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style
+        Selector="TextBox:pointerover /template/ Border#PART_BorderElement, TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderHighlightColor}" />
+    </Style>
+    <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    </Style>
+    <Style Selector="ComboBox:pointerover, ComboBox:pressed, ComboBox:dropdownopen">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    </Style>
+    <Style Selector="ComboBox:dropdownopen /template/ Border#PopupBorder">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="ComboBox:focus-visible">
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    </Style>
+    <Style Selector="ComboBox:disabled">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDisabledTextColor}" />
+    </Style>
+    <Style
+        Selector="ComboBox /template/ Border#Background, ComboBox:pointerover /template/ Border#Background, ComboBox:pressed /template/ Border#Background, ComboBox:dropdownopen /template/ Border#Background">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="ComboBox:disabled /template/ Border#Background">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="ComboBox:focus-visible /template/ Border#HighlightBackground">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="ComboBox /template/ ContentControl#ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    </Style>
+    <Style Selector="ComboBox:disabled /template/ ContentControl#ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDisabledTextColor}" />
+    </Style>
+    <Style Selector="ComboBox /template/ PathIcon#DropDownGlyph">
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+    </Style>
+    <Style Selector="ComboBox:disabled /template/ PathIcon#DropDownGlyph">
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDisabledTextColor}" />
+    </Style>
+
+    <!--
+    Dropdown item colours live in the default ComboBoxItem control theme rather than in styles, because a Style
+    outranks a ControlTheme: as styles these silently overrode the per-instance item themes that the tile version
+    and game client selectors set through ItemContainerTheme.
+  -->
+    <Style Selector="ComboBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="2" />
+    </Style>
+
+    <Style Selector="ToolTip">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style Selector="ProgressBar">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+    </Style>
+
+    <Style Selector="ScrollViewer">
+        <Setter Property="AllowAutoHide" Value="False" />
+    </Style>
+</Styles>

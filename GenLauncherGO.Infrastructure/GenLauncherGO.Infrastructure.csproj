@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenLauncherGO.Core\GenLauncherGO.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+    <PackageReference Include="Microsoft.Extensions.Logging"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    <PackageReference Include="Minio"/>
+    <PackageReference Include="Serilog"/>
+    <PackageReference Include="Serilog.Extensions.Logging"/>
+    <PackageReference Include="Serilog.Sinks.File"/>
+    <PackageReference Include="SharpCompress"/>
+    <PackageReference Include="YamlDotNet"/>
+  </ItemGroup>
+</Project>

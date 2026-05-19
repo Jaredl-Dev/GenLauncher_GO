@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--
+        Microsoft ResX Schema
+
+        Version 2.0
+
+        The primary goals of this format is to allow a simple XML format
+        that is mostly human readable. The generation and parsing of the
+        various data types are done through the TypeConverter classes
+        associated with the data types.
+
+        Example:
+
+        ... ado.net/XML headers & schema ...
+        <resheader name="resmimetype">text/microsoft-resx</resheader>
+        <resheader name="version">2.0</resheader>
+        <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+        <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+        <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+        <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+        <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+            <value>[base64 mime encoded serialized .NET Framework object]</value>
+        </data>
+        <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+            <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+            <comment>This is a comment</comment>
+        </data>
+
+        There are any number of "resheader" rows that contain simple
+        name/value pairs.
+
+        Each data row contains a name, and value. The row also contains a
+        type or mimetype. Type corresponds to a .NET class that support
+        text/value conversion through the TypeConverter architecture.
+        Classes that don't support this are serialized and stored with the
+        mimetype set.
+
+        The mimetype is used for serialized objects, and tells the
+        ResXResourceReader how to depersist the object. This is currently not
+        extensible. For a given mimetype the value must be set accordingly:
+
+        Note - application/x-microsoft.net.object.binary.base64 is the format
+        that the ResXResourceWriter will generate, however the reader can
+        read any of the formats listed below.
+
+        mimetype: application/x-microsoft.net.object.binary.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.soap.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.bytearray.base64
+        value   : The object must be serialized into a byte array
+                : using a System.ComponentModel.TypeConverter
+                : and then encoded with base64 encoding.
+        -->
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
+                xmlns="">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Add" xml:space="preserve">
+    <value>Ekle!</value>
+  </data>
+    <data name="AddAddonFromFiles" xml:space="preserve">
+    <value>{0} için dosyalardan eklenti ekle</value>
+  </data>
+    <data name="AddMod" xml:space="preserve">
+    <value>MOD EKLE!</value>
+  </data>
+    <data name="Addons" xml:space="preserve">
+    <value>Eklentiler: </value>
+  </data>
+    <data name="AddPatchFromFiles" xml:space="preserve">
+    <value>{0} için dosyalardan yama ekle</value>
+  </data>
+    <data name="AutoDelete" xml:space="preserve">
+    <value>Güncellemelerden sonra eski mod sürümlerini sil</value>
+  </data>
+    <data name="Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+    <data name="CancelDownloadAction" xml:space="preserve">
+    <value>İndirmeyi iptal et</value>
+  </data>
+    <data name="Pause" xml:space="preserve">
+    <value>Duraklat</value>
+  </data>
+    <data name="Paused" xml:space="preserve">
+    <value>Duraklatıldı - sürdürmek için devam et</value>
+  </data>
+    <data name="Resume" xml:space="preserve">
+    <value>Devam et</value>
+  </data>
+    <data name="Canceled" xml:space="preserve">
+    <value>İndirme iptal edildi</value>
+  </data>
+    <data name="CancelDownload" xml:space="preserve">
+    <value>İndirme iptal edilsin mi?</value>
+  </data>
+    <data name="CancelDownloadDetails" xml:space="preserve">
+    <value>{0} indirmesi durdurulacak ve bu sürüm için indirilen dosyalar silinecek.</value>
+  </data>
+    <data name="CannotConnect" xml:space="preserve">
+    <value>GitHub'a bağlanılamıyor. İnternetten modifikasyon yükleme kullanılamıyor.</value>
+  </data>
+    <data name="DeploymentRecoveryFailed" xml:space="preserve">
+    <value>GenLauncherGO önceki dağıtımı geri yükleyemedi. Oyunu veya çalışan herhangi bir istemciyi kapatın, ardından Yeniden Dene'yi seçin. Başlatıcıyı kapatmak ve oyun klasörünü güvenli olmayan bir durumda bırakmamak için İptal'i seçin.</value>
+  </data>
+    <data name="ChangelogOnly" xml:space="preserve">
+    <value>Değişiklik günlüğü</value>
+  </data>
+    <data name="ChangeToFullScreen" xml:space="preserve">
+    <value>Tam ekrana geç</value>
+  </data>
+    <data name="ChangeToWindowed" xml:space="preserve">
+    <value>Pencereli moda geç</value>
+  </data>
+    <data name="ChangeToNormalStart" xml:space="preserve">
+    <value>Normal başlatmaya geç</value>
+  </data>
+    <data name="ChangeToQuickStart" xml:space="preserve">
+    <value>Hızlı başlatmaya geç</value>
+  </data>
+    <data name="Compatibility" xml:space="preserve">
+    <value>Mod ile uyumluluk garanti edilemez!</value>
+  </data>
+    <data name="Continue" xml:space="preserve">
+    <value>Devam et</value>
+  </data>
+    <data name="CurrentVersion" xml:space="preserve">
+    <value>Geçerli sürüm: </value>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+    <data name="Remove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+    <data name="RemoveFromList" xml:space="preserve">
+    <value>Listeden kaldır</value>
+  </data>
+    <data name="RemoveFromListConfirmation" xml:space="preserve">
+    <value>Listeden kaldırılsın mı?</value>
+  </data>
+    <data name="RemoveFromListDetails" xml:space="preserve">
+    <value>{0} içeriğini listeden kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+    <data name="RemoveContent" xml:space="preserve">
+    <value>İçerik kaldırılsın mı?</value>
+  </data>
+    <data name="RemoveContentDetails" xml:space="preserve">
+    <value>{0} içeriğini kaldırmak istediğinizden emin misiniz? Bu sürüm için yüklenen tüm dosyalar silinecek.</value>
+  </data>
+    <data name="Deprecated" xml:space="preserve">
+    <value>{0} kullanımdan kaldırıldı</value>
+  </data>
+    <data name="Discord" xml:space="preserve">
+    <value>Discord sunucusuna katıl</value>
+  </data>
+    <data name="ModDb" xml:space="preserve">
+    <value>ModDB</value>
+  </data>
+    <data name="Donate" xml:space="preserve">
+    <value>Bağış yap</value>
+  </data>
+    <data name="Download" xml:space="preserve">
+    <value>{0} indiriliyor: {1} MB / {2} MB</value>
+  </data>
+    <data name="DownloadInProgress" xml:space="preserve">
+    <value>İndirme sürüyor: {0} / {1}</value>
+  </data>
+    <data name="EstimatedTimeRemaining" xml:space="preserve">
+    <value>Kalan süre {0}</value>
+  </data>
+    <data name="EnterModName" xml:space="preserve">
+    <value>Mod ismini girin</value>
+  </data>
+    <data name="EnterModVersion" xml:space="preserve">
+    <value>Mod sürümünü girin</value>
+  </data>
+    <data name="Error" xml:space="preserve">
+    <value>Hata: </value>
+  </data>
+    <data name="ErrorMsg" xml:space="preserve">
+    <value>GenLauncherGO sürümü: {2} \r\nDiscord'da GenLauncherGO teknik desteği: {3} \r\nHata: {0} \r\nYığın izlemesi: {1}</value>
+  </data>
+    <data name="Exit" xml:space="preserve">
+    <value>ÇIKIŞ</value>
+  </data>
+    <data name="FilesCorrupted" xml:space="preserve">
+    <value>Bazı mod dosyaları eksik veya bozuk!</value>
+  </data>
+    <data name="GameIsStillRunning" xml:space="preserve">
+    <value>Oyun hala çalışıyor!</value>
+  </data>
+    <data name="GameRunning" xml:space="preserve">
+    <value>Generals oyunu zaten çalışıyor!</value>
+  </data>
+    <data name="LaunchVerificationRunning" xml:space="preserve">
+    <value>Doğrulama içeriği onarıyor.</value>
+  </data>
+    <data name="PackageActivityInProgress" xml:space="preserve">
+    <value>İçerik işlemi devam ediyor</value>
+  </data>
+    <data name="PackageActivityInProgressDetails" xml:space="preserve">
+    <value>Daha fazla içerik yüklemeden, içe aktarmadan veya eklemeden önce mevcut indirme ya da onarımın bitmesini bekleyin.</value>
+  </data>
+    <data name="HideLauncher" xml:space="preserve">
+    <value>Oyun çalışırken GenLauncherGO'yu gizle</value>
+  </data>
+    <data name="Image" xml:space="preserve">
+    <value>Görüntü</value>
+  </data>
+    <data name="InputModData" xml:space="preserve">
+    <value>Modifikasyon verisini girin</value>
+  </data>
+    <data name="Install" xml:space="preserve">
+    <value>KUR!</value>
+  </data>
+    <data name="InstallInProgress" xml:space="preserve">
+    <value>{0} başlatılamıyor: kurulum sürüyor!</value>
+  </data>
+    <data name="LatestVersion" xml:space="preserve">
+    <value>En güncel sürüm: </value>
+  </data>
+    <data name="Launch" xml:space="preserve">
+    <value>Oyunu başlat</value>
+  </data>
+    <data name="LaunchAborted" xml:space="preserve">
+    <value>Başlatma durduruldu</value>
+  </data>
+    <data name="AdvertisingCannotLaunch" xml:space="preserve">
+    <value>Reklamlar başlatılamaz.</value>
+  </data>
+    <data name="ModificationName" xml:space="preserve">
+    <value>Modifikasyon ismi: </value>
+  </data>
+    <data name="ModificationsWithUpdate" xml:space="preserve">
+    <value>Güncellenebilecek modifikasyonlar var:</value>
+  </data>
+    <data name="Mods" xml:space="preserve">
+    <value>Modlar</value>
+  </data>
+    <data name="NameAndVersionValidSymbols" xml:space="preserve">
+    <value>Mod adı ve sürümü yalnızca geçerli karakterler içermelidir.</value>
+  </data>
+    <data name="No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+    <data name="Yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+    <data name="NotInstalled" xml:space="preserve">
+    <value>{0} seçildi ancak yüklenmedi. Başlatma iptal edildi!</value>
+  </data>
+    <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+    <data name="OperationAborted" xml:space="preserve">
+    <value>İşlem iptal edildi</value>
+  </data>
+    <data name="Options" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+    <data name="Patches" xml:space="preserve">
+    <value>Yamalar: </value>
+  </data>
+    <data name="PlayOnline" xml:space="preserve">
+    <value>Çevrimiçi nasıl oynanır?</value>
+  </data>
+    <data name="Preparing" xml:space="preserve">
+    <value>Hazırlanıyor, lütfen bekleyin...</value>
+  </data>
+    <data name="Reinstall" xml:space="preserve">
+    <value> Modu yeniden yüklemeniz önerilir. \r Bu ayarı seçeneklerden kapatabilirsiniz</value>
+  </data>
+    <data name="SearchMods" xml:space="preserve"><value>Modlarda ara...</value></data>
+    <data name="NoModsMatchSearch" xml:space="preserve"><value>Aramanızla eşleşen mod yok.</value></data>
+    <data name="CalculatingPackageSize" xml:space="preserve"><value>Hesaplanıyor...</value></data>
+    <data name="PackageSizeUnavailable" xml:space="preserve"><value>Kullanılamıyor</value></data>
+    <data name="SelectMod" xml:space="preserve">
+    <value>Eklenecek modu seçin</value>
+  </data>
+    <data name="SetImage" xml:space="preserve">
+    <value>Resmi ayarla (500x100)</value>
+  </data>
+    <data name="Stop" xml:space="preserve">
+    <value>DUR</value>
+  </data>
+    <data name="ThankYou" xml:space="preserve">
+    <value>Teşekkürler!</value>
+  </data>
+    <data name="UninstalledUpdate" xml:space="preserve">
+    <value>{0} için yüklenmemiş bir güncelleme var </value>
+  </data>
+    <data name="UnpackingPreparing" xml:space="preserve">
+    <value>Paket açılıyor/hazırlanıyor...</value>
+  </data>
+    <data name="Update" xml:space="preserve">
+    <value>Güncelle!</value>
+  </data>
+    <data name="UpToDate" xml:space="preserve">
+    <value>Güncel</value>
+  </data>
+    <data name="VersionMustContainNumbers" xml:space="preserve">
+    <value>Sürüm sayı içermelidir.</value>
+  </data>
+    <data name="WorldBuilder" xml:space="preserve">
+    <value>World Builder</value>
+  </data>
+    <data name="WorldBuilderRunning" xml:space="preserve">
+    <value>World Builder zaten çalışıyor!</value>
+  </data>
+    <data name="AutoDeleteToolTip" xml:space="preserve">
+    <value>Daha yeni bir sürüm yüklendikten sonra eski yüklü mod sürümlerini otomatik olarak kaldırır.</value>
+  </data>
+    <data name="SettingsSaveFailedTitle" xml:space="preserve">
+    <value>Ayarlar kaydedilmedi</value>
+  </data>
+    <data name="SettingsSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO ayarlarınızı kaydedemedi. Önceki ayarlarınız etkin kalır. Launcher veri klasörünün yazılabilir olduğunu denetleyip yeniden deneyin.</value>
+  </data>
+    <data name="CloseAnyway" xml:space="preserve">
+    <value>Yine de kapat</value>
+  </data>
+    <data name="ClosePackageActivityDetails" xml:space="preserve">
+    <value>{0} hâlâ çalışıyor. GenLauncherGO kapatılırsa geçerli işlem durdurulur.</value>
+  </data>
+    <data name="DonateOriginalAuthor" xml:space="preserve">
+    <value>GenLauncher yazarına bağış yap</value>
+  </data>
+    <data name="DonateOriginalAuthorToolTip" xml:space="preserve">
+    <value>GenLauncher'ın özgün yazarı için bağış sayfasını açar.</value>
+  </data>
+    <data name="GameExecutableArguments" xml:space="preserve">
+    <value>Oyun yürütülebilir dosyası argümanları</value>
+  </data>
+    <data name="GameExecutableArgumentsInputToolTip" xml:space="preserve">
+    <value>Seçili oyun yürütülebilir dosyası için isteğe bağlı komut satırı argümanları. Normal başlatmak için boş bırakın.</value>
+  </data>
+    <data name="GameExecutableArgumentsToolTip" xml:space="preserve">
+    <value>Seçili oyun yürütülebilir dosyasına iletilen argümanlar. Bunlar GeneralsOnline'a iletilmez.</value>
+  </data>
+    <data name="GeneralsOnlineGameClientDisplayName" xml:space="preserve">
+    <value>GeneralsOnline</value>
+  </data>
+    <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+    <data name="LaunchArguments" xml:space="preserve">
+    <value>Başlatma argümanları</value>
+  </data>
+    <data name="Links" xml:space="preserve">
+    <value>Bağlantılar</value>
+  </data>
+    <data name="Maintenance" xml:space="preserve">
+    <value>Bakım</value>
+  </data>
+    <data name="SelectedGameClient" xml:space="preserve">
+    <value>Seçili oyun istemcisi</value>
+  </data>
+    <data name="SelectedWorldBuilder" xml:space="preserve">
+    <value>Seçili World Builder</value>
+  </data>
+    <data name="CommunityGameClientDisplayName" xml:space="preserve">
+    <value>TheSuperHackers</value>
+  </data>
+    <data name="SuperHackersWorldBuilder" xml:space="preserve">
+    <value>TheSuperHackers</value>
+  </data>
+    <data name="UseEnglishLanguage" xml:space="preserve">
+    <value>İngilizce kullan</value>
+  </data>
+    <data name="UseEnglishLanguageToolTip" xml:space="preserve">
+    <value>Launcher arayüzünü İngilizce kullanmaya zorlar.</value>
+  </data>
+    <data name="UseSystemLanguage" xml:space="preserve">
+    <value>Sistem dilini kullan</value>
+  </data>
+    <data name="UseSystemLanguageToolTip" xml:space="preserve">
+    <value>Uygun bir launcher çevirisi varsa Windows görüntüleme dilinizi kullanır.</value>
+  </data>
+    <data name="RetailWorldBuilder" xml:space="preserve">
+    <value>Perakende</value>
+  </data>
+    <data name="RetailGameClientDisplayName" xml:space="preserve">
+    <value>Perakende</value>
+  </data>
+    <data name="GenPatcherRecommendationTitle" xml:space="preserve">
+    <value>GenPatcher önerisi</value>
+  </data>
+    <data name="GenPatcherRecommendationMessage" xml:space="preserve">
+    <value>Perakende sürümü oynarken GenPatcher kullanmanız kesinlikle önerilir.</value>
+  </data>
+    <data name="VisitGenPatcherDownloadPage" xml:space="preserve">
+    <value>GenPatcher indirme sayfasını ziyaret et</value>
+  </data>
+    <data name="WindowBehavior" xml:space="preserve">
+    <value>Pencere davranışı</value>
+  </data>
+    <data name="WorldBuilderArguments" xml:space="preserve">
+    <value>World Builder argümanları</value>
+  </data>
+    <data name="WorldBuilderArgumentsInputToolTip" xml:space="preserve">
+    <value>Seçili World Builder yürütülebilir dosyası için isteğe bağlı komut satırı argümanları. Normal başlatmak için boş bırakın.</value>
+  </data>
+    <data name="WorldBuilderArgumentsToolTip" xml:space="preserve">
+    <value>Seçili World Builder yürütülebilir dosyasına iletilen argümanlar.</value>
+  </data>
+    <data name="HideLauncherToolTip" xml:space="preserve">
+    <value>Oyun veya World Builder çalışırken launcher penceresini gizler, işlem kapandığında tekrar gösterir.</value>
+  </data>
+    <data name="AddModFromFiles" xml:space="preserve">
+    <value>Dosyalardan mod ekle</value>
+  </data>
+    <data name="FinishProcess" xml:space="preserve">
+    <value>Seçenekleri açmadan önce oyunu kapatın.</value>
+  </data>
+    <data name="Info" xml:space="preserve">
+    <value>Bilgi</value>
+  </data>
+    <data name="Retry" xml:space="preserve">
+    <value>Yeniden dene</value>
+  </data>
+    <data name="Downloading" xml:space="preserve">
+    <value>İndiriliyor</value>
+  </data>
+    <data name="IntegrityRepeatedFailure" xml:space="preserve"><value>Birden fazla çözüm denemesinden sonra içerik tutarsız kaldı. Oyun başlatılmadı.</value></data>
+    <data name="IntegrityCacheSuffix" xml:space="preserve"><value>önbellek</value></data>
+    <data name="IntegrityBlockedDescription" xml:space="preserve"><value>Seçili içerikte otomatik olarak çözülemeyen doğrulama sorunları var. Engellenen girdileri kaldırın veya içeriği geri yükleyin, sonra başlatmayı tekrar deneyin.</value></data>
+    <data name="CancelLaunch" xml:space="preserve"><value>Başlatmayı iptal et</value></data>
+    <data name="IntegrityMixedDescription" xml:space="preserve"><value>Seçili uzak ve el ile eklenen içerik değiştiği için başlatma duraklatıldı. Onarılacak uzak içerik: {0}. Mevcut değişiklikleri kabul edilecek el ile eklenen içerik: {1}. Uzak değişiklikler kabul edilemez ve el ile yapılan değişiklikler onarılmaz.</value></data>
+    <data name="FixAbsorbAndLaunch" xml:space="preserve"><value>Onar, kabul et ve başlat</value></data>
+    <data name="IntegrityManagedDescription" xml:space="preserve"><value>Seçili uzak yönetilen içerik güvenilir kaynağından farklı: {0}. Onar yalnızca listelenen yönetilen girdileri düzeltir, yeniden indirir veya siler ve tekrar doğrular.</value></data>
+    <data name="FixAndLaunch" xml:space="preserve"><value>Onar ve başlat</value></data>
+    <data name="IntegrityManualDescription" xml:space="preserve"><value>Seçili el ile içe aktarılan içerik değişti: {0}. Kabul et, mevcut dosyaları onarmadan veya silmeden güvenilir sayar ve tekrar doğrular.</value></data>
+    <data name="AbsorbAndLaunch" xml:space="preserve"><value>Değişiklikleri kabul et ve başlat</value></data>
+    <data name="IntegrityLegacyDescription" xml:space="preserve"><value>{0} için yetkili bir onarım kaynağı yok. Güvenmek, bu tam sürümleri kalıcı olarak el ile eklenmiş olarak sınıflandırır ve mevcut durumlarını kaydeder.</value></data>
+    <data name="TrustAsManual" xml:space="preserve"><value>El ile eklenmiş olarak güven</value></data>
+    <data name="IntegrityDialogTitle" xml:space="preserve"><value>Başlatma içeriği doğrulaması</value></data>
+    <data name="IntegrityBlockGroup" xml:space="preserve"><value>Engellendi</value></data>
+    <data name="IntegrityDeleteGroup" xml:space="preserve"><value>Sil</value></data>
+    <data name="IntegrityRepairGroup" xml:space="preserve"><value>Onar</value></data>
+    <data name="IntegrityRedownloadGroup" xml:space="preserve"><value>Yeniden indir</value></data>
+    <data name="IntegrityAbsorbGroup" xml:space="preserve"><value>Kabul et</value></data>
+    <data name="IntegrityTrustGroup" xml:space="preserve"><value>Güven</value></data>
+    <data name="IntegrityIssueGroupSummarySingle" xml:space="preserve"><value>{0} değişiklik</value></data>
+    <data name="IntegrityIssueGroupSummaryMultiple" xml:space="preserve"><value>{0} değişiklik</value></data>
+    <data name="IntegrityIssueUntrackedLabel" xml:space="preserve"><value>İzlenmiyor</value></data>
+    <data name="IntegrityIssueMissingFileLabel" xml:space="preserve"><value>Eksik</value></data>
+    <data name="IntegrityIssueModifiedFileLabel" xml:space="preserve"><value>Değiştirildi</value></data>
+    <data name="IntegrityIssueUnexpectedFileLabel" xml:space="preserve"><value>Eklendi</value></data>
+    <data name="IntegrityIssueEmptyDirectoryLabel" xml:space="preserve"><value>Boş klasör</value></data>
+    <data name="IntegrityIssueUnsafeLinkLabel" xml:space="preserve"><value>Güvensiz bağlantı</value></data>
+    <data name="IntegrityIssueVerificationErrorLabel" xml:space="preserve"><value>Doğrulama hatası</value></data>
+    <data name="GeneralsOnlineDiscord" xml:space="preserve">
+    <value>Generals Online Discord</value>
+  </data>
+    <data name="GeneralsOnlineDiscordToolTip" xml:space="preserve">
+    <value>Generals Online Discord sunucusunu açar.</value>
+  </data>
+    <data name="OpenLogsFolder" xml:space="preserve">
+    <value>Günlük klasörünü aç</value>
+  </data>
+    <data name="OpenLogsFolderToolTip" xml:space="preserve">
+    <value>GenLauncherGO günlük dosyalarının bulunduğu klasörü açar.</value>
+  </data>
+    <data name="GitHubRepository" xml:space="preserve">
+    <value>GitHub deposu</value>
+  </data>
+    <data name="GitHubRepositoryToolTip" xml:space="preserve">
+    <value>GenLauncherGO GitHub deposunu açar.</value>
+  </data>
+    <data name="AdvertisingDonationAlerts" xml:space="preserve">
+    <value>Donation Alerts</value>
+  </data>
+    <data name="AdvertisingBoostyLink" xml:space="preserve">
+    <value>Boosty.to</value>
+  </data>
+    <data name="AdvertisingYouTubeRuLink" xml:space="preserve">
+    <value>My Youtube (Ru)</value>
+  </data>
+    <data name="RunningProcessOverlayTitle" xml:space="preserve">
+    <value>Çalışan işlem</value>
+  </data>
+    <data name="RunningProcessStatus" xml:space="preserve">
+    <value>Çalışan işlem: {0}</value>
+  </data>
+    <data name="RunningProcessUnknown" xml:space="preserve">
+    <value>Bilinmeyen işlem</value>
+  </data>
+    <data name="ForceQuitRunningProcess" xml:space="preserve">
+    <value>Zorla kapat</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationTitle" xml:space="preserve">
+    <value>İşlem zorla kapatılsın mı?</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationDetails" xml:space="preserve">
+    <value>Bu, {0} ve izlenen tüm alt işlemleri hemen kapatır. Kaydedilmemiş ilerleme kaybolabilir.</value>
+  </data>
+    <data name="RunningProcessCloseBlockedTitle" xml:space="preserve">
+    <value>İşlem hâlâ çalışıyor</value>
+  </data>
+    <data name="RunningProcessCloseBlockedDetails" xml:space="preserve">
+    <value>GenLauncherGO'yu kapatmadan önce çalışan işlemi kapatın veya "Zorla kapat"ı kullanın.</value>
+  </data>
+    <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Bir şeyler ters gitti</value>
+  </data>
+    <data name="UnexpectedErrorDetails" xml:space="preserve">
+    <value>Beklenmeyen bir hata oluştu. Yeniden deneyin. Sorun sürerse başlatıcı günlüklerini kontrol edin.</value>
+  </data>
+    <data name="LanguageRestartPromptTitle" xml:space="preserve">
+    <value>Yeniden başlatma gerekli</value>
+  </data>
+    <data name="LanguageRestartPromptDetails" xml:space="preserve">
+    <value>Dil değişikliği kaydedildi ve GenLauncherGO bir sonraki başlatıldığında uygulanacak.</value>
+  </data>
+    <data name="RestartNow" xml:space="preserve">
+    <value>Şimdi yeniden başlat</value>
+  </data>
+    <data name="RestartLater" xml:space="preserve">
+    <value>Daha sonra</value>
+  </data>
+    <data name="RestartBlockedTitle" xml:space="preserve">
+    <value>Yeniden başlatma kullanılamıyor</value>
+  </data>
+    <data name="RestartBlockedActiveOperation" xml:space="preserve">
+    <value>GenLauncherGO'yu yeniden başlatmadan önce “{0}” işlemini bitirin veya iptal edin.</value>
+  </data>
+    <data name="GameInstallationSetupTitle" xml:space="preserve">
+    <value>Oyun klasörlerini seçin</value>
+  </data>
+    <data name="InstallationNotConfigured" xml:space="preserve">
+    <value>Yapılandırılmadı</value>
+  </data>
+    <data name="ValidGeneralsInstallation" xml:space="preserve">
+    <value>Generals klasörü seçildi</value>
+  </data>
+    <data name="ValidZeroHourInstallation" xml:space="preserve">
+    <value>Zero Hour klasörü seçildi</value>
+  </data>
+    <data name="GameInstallationFilesNotFound" xml:space="preserve">
+    <value>Bunlardan biri gerekli: {0}.</value>
+  </data>
+    <data name="InstallationPathUnavailable" xml:space="preserve">
+    <value>Bu kurulum klasörü kullanılamaz.</value>
+  </data>
+    <data name="DuplicateGameInstallation" xml:space="preserve">
+    <value>Her oyun için farklı bir klasör seçin.</value>
+  </data>
+    <data name="GeneralsShortName" xml:space="preserve">
+    <value>Generals</value>
+  </data>
+    <data name="ZeroHourShortName" xml:space="preserve">
+    <value>Zero Hour</value>
+  </data>
+    <data name="GeneralsFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals</value>
+  </data>
+    <data name="ZeroHourFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals – Zero Hour</value>
+  </data>
+    <data name="InstallationFolder" xml:space="preserve">
+    <value>Kurulum klasörü</value>
+  </data>
+    <data name="Browse" xml:space="preserve">
+    <value>Gözat</value>
+  </data>
+    <data name="DetectViaRegistry" xml:space="preserve">
+    <value>Kayıt defterinden algıla</value>
+  </data>
+    <data name="GameFirstRunRegistryNotice" xml:space="preserve">
+    <value>Kurulum yolunun kayıt defterine yazılmasını sağlamak için yüklü her oyunu en az bir kez çalıştırın.</value>
+  </data>
+    <data name="RegistryInstallationNotFound" xml:space="preserve">
+    <value>Kayıt defteri aracılığıyla mevcut bir oyun klasörü bulunamadı. Yolunu kaydetmek için oyunu bir kez çalıştırın veya klasörü elle seçin.</value>
+  </data>
+    <data name="RegistryDetectionFailedTitle" xml:space="preserve">
+    <value>Kurulum algılanamadı</value>
+  </data>
+    <data name="ProgramFilesModToolsWarning" xml:space="preserve">
+    <value>Program Files, mod araçlarını etkileyebilir.</value>
+  </data>
+    <data name="SameDriveRecommendation" xml:space="preserve">
+    <value>Önerilen: GenLauncherGO'yu oyunlarınızla aynı sürücüde tutun.</value>
+  </data>
+    <data name="AtLeastOneInstallationRequired" xml:space="preserve">
+    <value>Devam etmek için en az bir oyun klasörü seçin.</value>
+  </data>
+    <data name="ChooseYourGame" xml:space="preserve">
+    <value>Yönetilecek oyunu seçin</value>
+  </data>
+    <data name="NotSelected" xml:space="preserve">
+    <value>Seçilmedi</value>
+  </data>
+    <data name="Selected" xml:space="preserve">
+    <value>Seçildi</value>
+  </data>
+    <data name="StandaloneLocationRequired" xml:space="preserve">
+    <value>GenLauncherGO'yu taşıyın</value>
+  </data>
+    <data name="StandaloneLocationBlockingDescription" xml:space="preserve">
+    <value>GenLauncherGO bir oyun kurulum klasörünün içinden çalıştırılamaz.</value>
+  </data>
+    <data name="CurrentLauncherLocation" xml:space="preserve">
+    <value>Başlatıcının geçerli konumu</value>
+  </data>
+    <data name="ContainingGameInstallation" xml:space="preserve">
+    <value>Başlatıcıyı içeren oyun kurulumu</value>
+  </data>
+    <data name="MoveLauncherOutsideGames" xml:space="preserve">
+    <value>GenLauncherGO klasörünü oyun kurulumlarının dışında herhangi bir yere taşıyıp yeniden başlatın.</value>
+  </data>
+    <data name="StandaloneLocationExample" xml:space="preserve">
+    <value>Örnek: C:\Tools\GenLauncherGO</value>
+  </data>
+    <data name="AdministratorPermissionRequired" xml:space="preserve">
+    <value>GenLauncherGO'nun çalışması için yönetici izni gerekir.</value>
+  </data>
+    <data name="ActiveGameLabel" xml:space="preserve">
+    <value>Etkin oyun</value>
+  </data>
+    <data name="GameManagement" xml:space="preserve">
+    <value>Oyun yönetimi</value>
+  </data>
+    <data name="InstallationPaths" xml:space="preserve">
+    <value>Kurulum yolları</value>
+  </data>
+    <data name="SwitchToGame" xml:space="preserve">
+    <value>{0} oyununa geç</value>
+  </data>
+    <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+    <data name="GameSwitchBlockedTitle" xml:space="preserve">
+    <value>Oyun değişikliği kullanılamıyor</value>
+  </data>
+    <data name="GameSwitchBlockedDetails" xml:space="preserve">
+    <value>Oyunu değiştirmeden önce etkin başlatmayı, oyunu, indirmeyi veya güncellemeyi tamamlayın ya da iptal edin.</value>
+  </data>
+    <data name="GameSwitchFailedTitle" xml:space="preserve">
+    <value>Oyun değiştirilemedi</value>
+  </data>
+    <data name="GameSwitchFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO etkin oyunu değiştiremedi. {0}</value>
+  </data>
+    <data name="Back" xml:space="preserve">
+    <value>Geri</value>
+  </data>
+    <data name="LaunchCloseBlockedTitle" xml:space="preserve">
+    <value>Başlatma devam ediyor</value>
+  </data>
+    <data name="LaunchCloseBlockedDetails" xml:space="preserve">
+    <value>GenLauncherGO'yu kapatmadan önce etkin başlatmanın tamamlanmasını bekleyin veya iptal edin.</value>
+  </data>
+    <data name="BuiltIn" xml:space="preserve"><value>Yerleşik</value></data>
+    <data name="Close" xml:space="preserve"><value>Kapat</value></data>
+    <data name="DisplayName" xml:space="preserve"><value>Görünen ad</value></data>
+    <data name="ExecutableDisplayNameWatermark" xml:space="preserve"><value>Başlatıcıda gösterilen ad</value></data>
+    <data name="ExecutableFile" xml:space="preserve"><value>Çalıştırılabilir dosya</value></data>
+    <data name="NoExecutableSelected" xml:space="preserve"><value>Çalıştırılabilir dosya seçilmedi</value></data>
+    <data name="CustomExecutables" xml:space="preserve"><value>Özel çalıştırılabilir dosyalar</value></data>
+    <data name="ManageGameClients" xml:space="preserve"><value>Oyun istemcilerini yönet</value></data>
+    <data name="ManageWorldBuilders" xml:space="preserve"><value>World Builder'ları yönet</value></data>
+    <data name="ExecutableMustBeInGameRoot" xml:space="preserve"><value>Etkin oyun klasörünün doğrudan içindeki bir .exe dosyasını seçin.</value></data>
+    <data name="ExecutableUnavailable" xml:space="preserve"><value>Seçilen dosya eksik veya kullanılamıyor.</value></data>
+    <data name="ExecutableDetailsRequired" xml:space="preserve"><value>Bir görünen ad girin ve çalıştırılabilir dosya seçin.</value></data>
+    <data name="ExecutableNameAlreadyExists" xml:space="preserve"><value>Bu görünen ada sahip bir kayıt zaten var.</value></data>
+    <data name="ExecutableFileAlreadyExists" xml:space="preserve"><value>Bu çalıştırılabilir dosya zaten kayıtlı.</value></data>
+    <data name="RemoveCustomExecutable" xml:space="preserve"><value>Özel çalıştırılabilir dosya kaldırılsın mı?</value></data>
+    <data name="RemoveCustomExecutableDetails" xml:space="preserve"><value>Bu işlem yalnızca “{0}” girdisini başlatıcıdan kaldırır. Dosya sisteminde hiçbir şey silinmez veya değiştirilmez.</value></data>
+    <data name="ChooseExecutable" xml:space="preserve"><value>Çalıştırılabilir dosya seç</value></data>
+    <data name="Executables" xml:space="preserve"><value>Çalıştırılabilir dosyalar</value></data>
+    <data name="AddExecutable" xml:space="preserve"><value>Çalıştırılabilir dosya ekle</value></data>
+    <data name="EditExecutable" xml:space="preserve"><value>Çalıştırılabilir dosyayı düzenle</value></data>
+    <data name="SearchExecutables" xml:space="preserve"><value>Ad veya dosya adına göre ara</value></data>
+    <data name="BuiltInExecutables" xml:space="preserve"><value>Yerleşik çalıştırılabilir dosyalar</value></data>
+</root>

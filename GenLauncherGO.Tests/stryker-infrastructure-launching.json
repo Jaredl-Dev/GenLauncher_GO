@@ -1,0 +1,43 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Launching/Services/DeploymentLaunchPreparationService.cs",
+      "Launching/Services/FileSystemDeploymentService.cs",
+      "Launching/Services/FileSystemLaunchContentIntegrityResolutionService.cs",
+      "Launching/Services/FileSystemLaunchContentIntegrityTargetBuilder.cs",
+      "Launching/Services/WindowsGameExecutableDiscoveryService.cs",
+      "Launching/Services/WindowsGameProcessLauncher.cs",
+      "Launching/Services/WindowsProcessFamilyLauncher.cs",
+      "Launching/Support/DeploymentFilePlanner.cs",
+      "Launching/Support/DeploymentPathResolver.cs",
+      "Launching/Support/DeploymentStateStore.cs",
+      "Launching/Support/WindowsHardLinkCreator.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 85,
+      "low": 65,
+      "break": 65
+    }
+  }
+}

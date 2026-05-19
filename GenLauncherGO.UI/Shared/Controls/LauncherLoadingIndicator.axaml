@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="GenLauncherGO.UI.Shared.Controls.LauncherLoadingIndicator">
+    <Viewbox Stretch="Uniform">
+        <Grid Width="180" Height="180">
+            <Image Source="avares://GenLauncherGO/Shared/Resources/Images/LauncherEmblemFramed.png"
+                   Stretch="Uniform"
+                   RenderTransformOrigin="50%,50%">
+                <Image.RenderTransform>
+                    <RotateTransform />
+                </Image.RenderTransform>
+                <Image.Styles>
+                    <Style Selector="Image">
+                        <Style.Animations>
+                            <Animation Duration="0:0:5" IterationCount="Infinite">
+                                <KeyFrame Cue="0%">
+                                    <Setter Property="RotateTransform.Angle" Value="0" />
+                                </KeyFrame>
+                                <KeyFrame Cue="100%">
+                                    <Setter Property="RotateTransform.Angle" Value="360" />
+                                </KeyFrame>
+                            </Animation>
+                        </Style.Animations>
+                    </Style>
+                </Image.Styles>
+            </Image>
+            <Image Source="avares://GenLauncherGO/Shared/Resources/Images/LauncherEmblemCompact.png"
+                   Width="139"
+                   Height="139"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Stretch="Uniform" />
+        </Grid>
+    </Viewbox>
+</UserControl>

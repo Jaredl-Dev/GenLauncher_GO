@@ -1,0 +1,51 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Updating/Clients/HttpDownloadFileMetadataReader.cs",
+      "Updating/Clients/MinioClientFactory.cs",
+      "Updating/Clients/MinioS3ObjectManifestReader.cs",
+      "Updating/Clients/ResumableHttpFileDownloader.cs",
+      "Updating/Models/PackageUpdatePathSet.cs",
+      "Updating/Models/S3ObjectManifestRequest.cs",
+      "Updating/Services/Md5FileHashService.cs",
+      "Updating/Services/PackageDownloadService.cs",
+      "Updating/Services/RemotePackageSizeResolver.cs",
+      "Updating/Services/S3PackageUpdater.cs",
+      "Updating/Services/SingleFilePackageUpdater.cs",
+      "Updating/Support/DownloadLinkResolver.cs",
+      "Updating/Support/MonotonicPackageProgress.cs",
+      "Updating/Support/PackageInstallFolderReplacer.cs",
+      "Updating/Support/PackageProgressTracker.cs",
+      "Updating/Support/PackageStagingFolderCleaner.cs",
+      "Updating/Support/S3CatalogDefaults.cs",
+      "Updating/Support/S3HashValidationPolicy.cs",
+      "Updating/Support/S3ReusablePackageFileCopier.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 90,
+      "low": 75,
+      "break": 75
+    }
+  }
+}

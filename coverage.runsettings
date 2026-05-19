@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <ResultsDirectory>TestResults</ResultsDirectory>
+    <TreatNoTestsAsError>true</TreatNoTestsAsError>
+  </RunConfiguration>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura,lcov</Format>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+          <SkipAutoProps>true</SkipAutoProps>
+          <SingleHit>false</SingleHit>
+          <UseSourceLink>false</UseSourceLink>
+          <Include>[GenLauncherGO*]*</Include>
+          <Exclude>[GenLauncherGO.Tests]*</Exclude>
+          <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute,ExcludeFromCodeCoverageAttribute</ExcludeByAttribute>
+          <ExcludeByFile>**/bin/**,**/obj/**,**/*.g.cs,**/*.g.i.cs,**/*.Designer.cs,**/Resources/Strings.cs,**/Properties/AssemblyInfo.cs</ExcludeByFile>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

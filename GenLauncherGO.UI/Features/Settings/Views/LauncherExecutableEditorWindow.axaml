@@ -1,0 +1,77 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Settings.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Settings.Views.LauncherExecutableEditorWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:LauncherExecutableManagementViewModel"
+        Title="{Binding EditorTitle}"
+        Width="620"
+        Height="390"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
+    <Border Classes="dialog-frame">
+        <Grid RowDefinitions="56,*,62">
+            <Border Classes="dialog-band header"
+                    controls:LauncherWindowDragHandle.IsEnabled="True">
+                <TextBlock Classes="dialog-title"
+                           Text="{Binding EditorTitle}" />
+            </Border>
+
+            <Grid Grid.Row="1"
+                  Margin="21,18,21,13"
+                  RowDefinitions="Auto,37,16,Auto,37,Auto"
+                  ColumnDefinitions="*,12,Auto">
+                <TextBlock Grid.ColumnSpan="3"
+                           Classes="field-label"
+                           Text="{localization:Loc ExecutableFile}" />
+                <TextBox x:Name="ExecutableFileInput"
+                         Grid.Row="1"
+                         Classes="dialog-input"
+                         Text="{Binding ExecutableName}"
+                         IsReadOnly="True"
+                         PlaceholderText="{localization:Loc NoExecutableSelected}" />
+                <Button Grid.Row="1"
+                        Grid.Column="2"
+                        Classes="dialog-action"
+                        MinWidth="104"
+                        Content="{localization:Loc Browse}"
+                        Click="Browse_ClickAsync" />
+
+                <TextBlock Grid.Row="3"
+                           Grid.ColumnSpan="3"
+                           Classes="field-label"
+                           Text="{localization:Loc DisplayName}" />
+                <TextBox Grid.Row="4"
+                         Grid.ColumnSpan="3"
+                         Classes="dialog-input"
+                         Text="{Binding DisplayName, Mode=TwoWay}"
+                         PlaceholderText="{localization:Loc ExecutableDisplayNameWatermark}" />
+                <TextBlock Grid.Row="5"
+                           Grid.ColumnSpan="3"
+                           Classes="validation"
+                           Text="{Binding ValidationMessage}" />
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Classes="dialog-band footer">
+                <StackPanel Margin="21,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                    <Button Classes="dialog-action"
+                            Content="{localization:Loc Cancel}"
+                            IsCancel="True"
+                            Click="Cancel_Click" />
+                    <Button Classes="dialog-action primary"
+                            Content="{localization:Loc Save}"
+                            IsDefault="True"
+                            IsEnabled="{Binding CanSave}"
+                            Click="Save_ClickAsync" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

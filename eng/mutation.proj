@@ -1,0 +1,41 @@
+﻿<Project>
+  <PropertyGroup>
+    <RepoRoot>$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '..'))))</RepoRoot>
+    <TestProjectDirectory>$([System.IO.Path]::Combine('$(RepoRoot)', 'GenLauncherGO.Tests'))</TestProjectDirectory>
+  </PropertyGroup>
+
+  <!-- One configuration per production area. Splitting them keeps a single area's break
+       threshold meaningful: a weakly covered area cannot hide behind a strong one, and CI
+       can fan the areas out across jobs instead of serialising every mutant.
+
+       There is deliberately no UI configuration. Avalonia generates InitializeComponent and
+       the x:Name backing fields through a Roslyn source generator, and Stryker rebuilds the
+       project from parsed syntax trees without running generators, so every .axaml.cs fails
+       with CS0103 and the run aborts before testing anything. GenLauncherGO.UI is gated by
+       the coverage backstop in coverage.proj instead. -->
+  <ItemGroup>
+    <MutationConfiguration Include="core" />
+    <MutationConfiguration Include="infrastructure-common" />
+    <MutationConfiguration Include="infrastructure-integrity" />
+    <MutationConfiguration Include="infrastructure-launching" />
+    <MutationConfiguration Include="infrastructure-mods" />
+    <MutationConfiguration Include="infrastructure-platform" />
+    <MutationConfiguration Include="infrastructure-updating" />
+  </ItemGroup>
+
+  <!-- Runs every area. Pass -property:MutationConfiguration=<name> to run one, which is what
+       the CI matrix does. -->
+  <Target Name="Mutation">
+    <ItemGroup Condition="'$(MutationConfiguration)' != ''">
+      <MutationConfiguration Remove="@(MutationConfiguration)" />
+      <MutationConfiguration Include="$(MutationConfiguration)" />
+    </ItemGroup>
+
+    <Error Condition="'@(MutationConfiguration)' == ''"
+           Text="No mutation configuration selected." />
+
+    <Exec Command="dotnet tool restore" WorkingDirectory="$(RepoRoot)" />
+    <Exec Command="dotnet tool run dotnet-stryker -- --config-file stryker-%(MutationConfiguration.Identity).json"
+          WorkingDirectory="$(TestProjectDirectory)" />
+  </Target>
+</Project>

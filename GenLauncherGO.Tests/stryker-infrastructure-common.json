@@ -1,0 +1,42 @@
+{
+  "stryker-config": {
+    "solution": "../GenLauncherGO.sln",
+    "project": "GenLauncherGO.Infrastructure.csproj",
+    "configuration": "Release",
+    "mutate": [
+      "Archives/ArchiveExtractor.cs",
+      "Common/BigFileVariantPath.cs",
+      "Common/FileSystemPathSafety.cs",
+      "Common/ManifestPathResolver.cs",
+      "Common/OwnedDirectoryTree.cs",
+      "Common/PhysicalDirectoryPath.cs",
+      "Logging/LoggingServiceCollectionExtensions.cs",
+      "Logging/SensitiveDataRedactingTextFormatter.cs",
+      "Persistence/Services/AtomicFileWriter.cs",
+      "Persistence/Services/YamlDocumentStore.cs"
+    ],
+    "ignore-methods": [
+      "*LogCritical",
+      "*LogDebug",
+      "*LogError",
+      "*LogInformation",
+      "*LogTrace",
+      "*LogWarning",
+      "ArgumentException.ThrowIfNullOrEmpty",
+      "ArgumentException.ThrowIfNullOrWhiteSpace",
+      "ArgumentNullException.ThrowIfNull",
+      "ConfigureAwait",
+      "ObjectDisposedException.ThrowIf"
+    ],
+    "reporters": [
+      "html",
+      "json",
+      "progress"
+    ],
+    "thresholds": {
+      "high": 85,
+      "low": 68,
+      "break": 68
+    }
+  }
+}

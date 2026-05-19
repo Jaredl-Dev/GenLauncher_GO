@@ -1,0 +1,100 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        x:Class="GenLauncherGO.UI.Features.Startup.Views.LauncherLocationWarningWindow"
+        x:ClassModifier="internal"
+        Title="{localization:Loc StandaloneLocationRequired}"
+        Width="760"
+        Height="520"
+        WindowStartupLocation="CenterScreen">
+    <Border Classes="dialog-frame"
+            Margin="38"
+            Padding="25"
+            Background="{DynamicResource GenLauncherLightBackGround}">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+            <DockPanel>
+                <Border DockPanel.Dock="Left"
+                        Width="48"
+                        Height="48"
+                        Margin="0,0,16,0"
+                        Background="{DynamicResource GenLauncherDarkBackGround}"
+                        BorderBrush="{DynamicResource GenLauncherErrorColor}"
+                        BorderThickness="2">
+                    <TextBlock Text="!"
+                               Foreground="{DynamicResource GenLauncherErrorColor}"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+                <StackPanel>
+                    <TextBlock Text="{localization:Loc StandaloneLocationRequired}"
+                               FontSize="25"
+                               Foreground="{DynamicResource GenLauncherHeadingTextColor}"
+                               FontWeight="Bold" />
+                    <TextBlock Margin="0,5,0,0"
+                               Text="{localization:Loc StandaloneLocationBlockingDescription}"
+                               Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                               TextWrapping="Wrap"
+                               FontSize="14" />
+                </StackPanel>
+            </DockPanel>
+
+            <TextBlock Grid.Row="1"
+                       Margin="0,24,0,6"
+                       Text="{localization:Loc CurrentLauncherLocation}"
+                       Foreground="{DynamicResource GenLauncherActiveColor}"
+                       FontWeight="Bold" />
+            <Border Grid.Row="2"
+                    Padding="10,8"
+                    Background="{DynamicResource GenLauncherDarkBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherInactiveBorder}"
+                    BorderThickness="1">
+                <TextBlock x:Name="LauncherLocationText"
+                           FontFamily="Consolas"
+                           TextWrapping="Wrap" />
+            </Border>
+
+            <StackPanel Grid.Row="3" Margin="0,16,0,0">
+                <TextBlock Text="{localization:Loc ContainingGameInstallation}"
+                           Foreground="{DynamicResource GenLauncherActiveColor}"
+                           FontWeight="Bold"
+                           Margin="0,0,0,6" />
+                <Border Padding="10,8"
+                        Background="{DynamicResource GenLauncherDarkBackGround}"
+                        BorderBrush="{DynamicResource GenLauncherInactiveBorder}"
+                        BorderThickness="1">
+                    <TextBlock x:Name="GameLocationText"
+                               FontFamily="Consolas"
+                               TextWrapping="Wrap" />
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Row="4"
+                    Margin="0,17,0,0"
+                    Padding="12,10"
+                    Background="{DynamicResource GenLauncherLightBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="{localization:Loc MoveLauncherOutsideGames}"
+                               Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                               TextWrapping="Wrap" />
+                    <TextBlock Margin="0,7,0,0"
+                               Text="{localization:Loc StandaloneLocationExample}"
+                               Foreground="{DynamicResource GenLauncherInactiveBorder}"
+                               FontStyle="Italic" />
+                </StackPanel>
+            </Border>
+
+            <Button Grid.Row="5"
+                    Margin="0,20,0,0"
+                    Width="150"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    Content="{localization:Loc Exit}"
+                    IsCancel="True"
+                    Click="Exit_Click" />
+        </Grid>
+    </Border>
+</Window>

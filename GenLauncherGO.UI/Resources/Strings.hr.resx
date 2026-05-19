@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--
+        Microsoft ResX Schema
+
+        Version 2.0
+
+        The primary goals of this format is to allow a simple XML format
+        that is mostly human readable. The generation and parsing of the
+        various data types are done through the TypeConverter classes
+        associated with the data types.
+
+        Example:
+
+        ... ado.net/XML headers & schema ...
+        <resheader name="resmimetype">text/microsoft-resx</resheader>
+        <resheader name="version">2.0</resheader>
+        <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+        <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+        <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+        <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+        <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+            <value>[base64 mime encoded serialized .NET Framework object]</value>
+        </data>
+        <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+            <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+            <comment>This is a comment</comment>
+        </data>
+
+        There are any number of "resheader" rows that contain simple
+        name/value pairs.
+
+        Each data row contains a name, and value. The row also contains a
+        type or mimetype. Type corresponds to a .NET class that support
+        text/value conversion through the TypeConverter architecture.
+        Classes that don't support this are serialized and stored with the
+        mimetype set.
+
+        The mimetype is used for serialized objects, and tells the
+        ResXResourceReader how to depersist the object. This is currently not
+        extensible. For a given mimetype the value must be set accordingly:
+
+        Note - application/x-microsoft.net.object.binary.base64 is the format
+        that the ResXResourceWriter will generate, however the reader can
+        read any of the formats listed below.
+
+        mimetype: application/x-microsoft.net.object.binary.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.soap.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.bytearray.base64
+        value   : The object must be serialized into a byte array
+                : using a System.ComponentModel.TypeConverter
+                : and then encoded with base64 encoding.
+        -->
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
+                xmlns="">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Add" xml:space="preserve">
+    <value>Dodaj!</value>
+  </data>
+    <data name="AddAddonFromFiles" xml:space="preserve">
+    <value>Dodaj dodatak za {0} iz datoteka</value>
+  </data>
+    <data name="AddMod" xml:space="preserve">
+    <value>Dodaj mod</value>
+  </data>
+    <data name="Addons" xml:space="preserve">
+    <value>Dodaci za </value>
+  </data>
+    <data name="AddPatchFromFiles" xml:space="preserve">
+    <value>Dodaj patch za {0} iz datoteka</value>
+  </data>
+    <data name="AutoDelete" xml:space="preserve">
+    <value>Automatski izbriši stare verzije modifikacija</value>
+  </data>
+    <data name="Cancel" xml:space="preserve">
+    <value>Otkaži</value>
+  </data>
+    <data name="CancelDownloadAction" xml:space="preserve">
+    <value>Otkaži preuzimanje</value>
+  </data>
+    <data name="Pause" xml:space="preserve">
+    <value>Pauziraj</value>
+  </data>
+    <data name="Paused" xml:space="preserve">
+    <value>Pauzirano - nastavi za nastavak</value>
+  </data>
+    <data name="Resume" xml:space="preserve">
+    <value>Nastavi</value>
+  </data>
+    <data name="Canceled" xml:space="preserve">
+    <value>Preuzimanje otkazano</value>
+  </data>
+    <data name="CancelDownload" xml:space="preserve">
+    <value>Otkazati preuzimanje?</value>
+  </data>
+    <data name="CancelDownloadDetails" xml:space="preserve">
+    <value>Preuzimanje za {0} bit će zaustavljeno, a preuzete datoteke za ovu verziju bit će izbrisane.</value>
+  </data>
+    <data name="DeploymentRecoveryFailed" xml:space="preserve">
+    <value>GenLauncherGO nije uspio vratiti prethodnu implementaciju. Zatvorite igru ili bilo koji pokrenuti klijent, a zatim odaberite Pokušaj ponovno. Odaberite Odustani za zatvaranje pokretača kako mapa igre ne bi ostala u nesigurnom stanju.</value>
+  </data>
+    <data name="ChangelogOnly" xml:space="preserve">
+    <value>Dnevnik Promjena</value>
+  </data>
+    <data name="ChangeToFullScreen" xml:space="preserve">
+    <value>Promijeni na puni zaslon</value>
+  </data>
+    <data name="ChangeToWindowed" xml:space="preserve">
+    <value>Promijeni u prozorski način</value>
+  </data>
+    <data name="ChangeToNormalStart" xml:space="preserve">
+    <value>Promijeni na normalno pokretanje</value>
+  </data>
+    <data name="ChangeToQuickStart" xml:space="preserve">
+    <value>Promijeni na brzo pokretanje</value>
+  </data>
+    <data name="Compatibility" xml:space="preserve">
+    <value>Kompatibilnost sa modifikacijom nije garantirana!</value>
+  </data>
+    <data name="Continue" xml:space="preserve">
+    <value>Nastavi</value>
+  </data>
+    <data name="CurrentVersion" xml:space="preserve">
+    <value>Verzija: </value>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Izbriši</value>
+  </data>
+    <data name="Remove" xml:space="preserve">
+    <value>Ukloni</value>
+  </data>
+    <data name="RemoveFromList" xml:space="preserve">
+    <value>Ukloni s popisa</value>
+  </data>
+    <data name="RemoveFromListConfirmation" xml:space="preserve">
+    <value>Ukloniti s popisa?</value>
+  </data>
+    <data name="RemoveFromListDetails" xml:space="preserve">
+    <value>Jeste li sigurni da želite ukloniti {0} s popisa?</value>
+  </data>
+    <data name="RemoveContent" xml:space="preserve">
+    <value>Ukloniti sadržaj?</value>
+  </data>
+    <data name="RemoveContentDetails" xml:space="preserve">
+    <value>Jeste li sigurni da želite ukloniti {0}? Sve datoteke instalirane za ovu verziju bit će izbrisane.</value>
+  </data>
+    <data name="Deprecated" xml:space="preserve">
+    <value>{0} je zastario</value>
+  </data>
+    <data name="Discord" xml:space="preserve">
+    <value>Pridruži se Serveru na Discordu</value>
+  </data>
+    <data name="ModDb" xml:space="preserve">
+    <value>ModDB</value>
+  </data>
+    <data name="Donate" xml:space="preserve">
+    <value>Doniraj</value>
+  </data>
+    <data name="Download" xml:space="preserve">
+    <value>Preuzmi {0}: {1}MB / {2}MB</value>
+  </data>
+    <data name="DownloadInProgress" xml:space="preserve">
+    <value>Preuzima se {0} / {1}</value>
+  </data>
+    <data name="EstimatedTimeRemaining" xml:space="preserve">
+    <value>Preostalo vrijeme {0}</value>
+  </data>
+    <data name="EnterModName" xml:space="preserve">
+    <value>Unesi Ime Modifikacije</value>
+  </data>
+    <data name="EnterModVersion" xml:space="preserve">
+    <value>Unesi Verziju Modifikacije</value>
+  </data>
+    <data name="Error" xml:space="preserve">
+    <value>GREŠKA: </value>
+  </data>
+    <data name="ErrorMsg" xml:space="preserve">
+    <value>Verzija GenLauncherGO: {2} \r\nTehnička podrška za GenLauncherGO na Discordu: {3} \r\nGreška: {0} \r\nPraćenje stoga: {1}</value>
+  </data>
+    <data name="Exit" xml:space="preserve">
+    <value>IZLAZ</value>
+  </data>
+    <data name="FilesCorrupted" xml:space="preserve">
+    <value>Neke datoteke modifikacije nedostaju ili su oštećene!</value>
+  </data>
+    <data name="GameIsStillRunning" xml:space="preserve">
+    <value>Igra još radi!</value>
+  </data>
+    <data name="GameRunning" xml:space="preserve">
+    <value>Igra Generals već radi!</value>
+  </data>
+    <data name="LaunchVerificationRunning" xml:space="preserve">
+    <value>Provjera popravlja sadržaj.</value>
+  </data>
+    <data name="PackageActivityInProgress" xml:space="preserve">
+    <value>Operacija sadržaja je u tijeku</value>
+  </data>
+    <data name="PackageActivityInProgressDetails" xml:space="preserve">
+    <value>Pričekajte da se trenutno preuzimanje ili popravak završi prije instaliranja, uvoza ili dodavanja dodatnog sadržaja.</value>
+  </data>
+    <data name="HideLauncher" xml:space="preserve">
+    <value>Sakrijte GenLauncherGO dok igra radi</value>
+  </data>
+    <data name="Image" xml:space="preserve">
+    <value>Slika</value>
+  </data>
+    <data name="InputModData" xml:space="preserve">
+    <value>Unesi podatke modifikacije</value>
+  </data>
+    <data name="Install" xml:space="preserve">
+    <value>INSTALIRAJ!</value>
+  </data>
+    <data name="InstallInProgress" xml:space="preserve">
+    <value>Nije moguće pokrenuti {0}: instalacija je u tijeku!</value>
+  </data>
+    <data name="LatestVersion" xml:space="preserve">
+    <value>Najnovija verzija: </value>
+  </data>
+    <data name="Launch" xml:space="preserve">
+    <value>POKRENI IGRU</value>
+  </data>
+    <data name="LaunchAborted" xml:space="preserve">
+    <value>Pokretanje otkazano</value>
+  </data>
+    <data name="AdvertisingCannotLaunch" xml:space="preserve">
+    <value>Oglasi se ne mogu pokrenuti.</value>
+  </data>
+    <data name="ModificationName" xml:space="preserve">
+    <value>Ime modifikacije: </value>
+  </data>
+    <data name="ModificationsWithUpdate" xml:space="preserve">
+    <value>Ima modifikacija koje se mogu ažurirati:</value>
+  </data>
+    <data name="Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+    <data name="NameAndVersionValidSymbols" xml:space="preserve">
+    <value>Ime i verzija modifikacije moraju sadržavati samo valjane znakove.</value>
+  </data>
+    <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+    <data name="Yes" xml:space="preserve">
+    <value>Da</value>
+  </data>
+    <data name="NotInstalled" xml:space="preserve">
+    <value>{0} je odabran ali ne instaliran -  pokretanje otkazano!</value>
+  </data>
+    <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+    <data name="OperationAborted" xml:space="preserve">
+    <value>Operacija otkazana</value>
+  </data>
+    <data name="Options" xml:space="preserve">
+    <value>OPCIJE</value>
+  </data>
+    <data name="Patches" xml:space="preserve">
+    <value>Patchevi za </value>
+  </data>
+    <data name="PlayOnline" xml:space="preserve">
+    <value>Kako igrati online?</value>
+  </data>
+    <data name="Preparing" xml:space="preserve">
+    <value>Priprema se, pričekajte...</value>
+  </data>
+    <data name="Reinstall" xml:space="preserve">
+    <value> Preporuča se da ponovo instalirate modifikaciju. \r U postavkama možete isključiti ovu provjeru.</value>
+  </data>
+    <data name="SearchMods" xml:space="preserve"><value>Pretraži modifikacije...</value></data>
+    <data name="NoModsMatchSearch" xml:space="preserve"><value>Nijedna modifikacija ne odgovara pretraživanju.</value></data>
+    <data name="CalculatingPackageSize" xml:space="preserve"><value>Izračunavanje...</value></data>
+    <data name="PackageSizeUnavailable" xml:space="preserve"><value>Nedostupno</value></data>
+    <data name="SelectMod" xml:space="preserve">
+    <value>Odaberite koju modifikaciju treba dodati</value>
+  </data>
+    <data name="SetImage" xml:space="preserve">
+    <value>Postavi sliku (500x100)</value>
+  </data>
+    <data name="Stop" xml:space="preserve">
+    <value>STANI</value>
+  </data>
+    <data name="ThankYou" xml:space="preserve">
+    <value>Hvala vam!</value>
+  </data>
+    <data name="UninstalledUpdate" xml:space="preserve">
+    <value>Postoji neinstalirano ažuriranje za {0} </value>
+  </data>
+    <data name="UnpackingPreparing" xml:space="preserve">
+    <value>Izdvajanje/Priprema...</value>
+  </data>
+    <data name="Update" xml:space="preserve">
+    <value>Ažuriraj!</value>
+  </data>
+    <data name="UpToDate" xml:space="preserve">
+    <value>Ažurno</value>
+  </data>
+    <data name="VersionMustContainNumbers" xml:space="preserve">
+    <value>Verzija mora sadržavati brojeve</value>
+  </data>
+    <data name="WorldBuilder" xml:space="preserve">
+    <value>World Builder</value>
+  </data>
+    <data name="WorldBuilderRunning" xml:space="preserve">
+    <value>World Builder već radi!</value>
+  </data>
+    <data name="AutoDeleteToolTip" xml:space="preserve">
+    <value>Automatski uklanja starije instalirane verzije moda nakon instalacije novije verzije.</value>
+  </data>
+    <data name="SettingsSaveFailedTitle" xml:space="preserve">
+    <value>Postavke nisu spremljene</value>
+  </data>
+    <data name="SettingsSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO nije mogao spremiti vaše postavke. Prethodne postavke i dalje su aktivne. Provjerite može li se pisati u podatkovnu mapu launchera, a zatim pokušajte ponovno.</value>
+  </data>
+    <data name="CloseAnyway" xml:space="preserve">
+    <value>Svejedno zatvori</value>
+  </data>
+    <data name="ClosePackageActivityDetails" xml:space="preserve">
+    <value>{0} je još u tijeku. Zatvaranje GenLauncherGO zaustavit će trenutnu operaciju.</value>
+  </data>
+    <data name="DonateOriginalAuthor" xml:space="preserve">
+    <value>Doniraj autoru GenLaunchera</value>
+  </data>
+    <data name="DonateOriginalAuthorToolTip" xml:space="preserve">
+    <value>Otvara stranicu za donacije izvornog autora GenLaunchera.</value>
+  </data>
+    <data name="GameExecutableArguments" xml:space="preserve">
+    <value>Argumenti izvršne datoteke igre</value>
+  </data>
+    <data name="GameExecutableArgumentsInputToolTip" xml:space="preserve">
+    <value>Neobavezni argumenti naredbenog retka za odabranu izvršnu datoteku igre. Ostavite prazno za normalno pokretanje.</value>
+  </data>
+    <data name="GameExecutableArgumentsToolTip" xml:space="preserve">
+    <value>Argumenti proslijeđeni odabranoj izvršnoj datoteci igre. Ne prosljeđuju se GeneralsOnlineu.</value>
+  </data>
+    <data name="GeneralsOnlineGameClientDisplayName" xml:space="preserve">
+    <value>GeneralsOnline</value>
+  </data>
+    <data name="Language" xml:space="preserve">
+    <value>Jezik</value>
+  </data>
+    <data name="LaunchArguments" xml:space="preserve">
+    <value>Argumenti pokretanja</value>
+  </data>
+    <data name="Links" xml:space="preserve">
+    <value>Poveznice</value>
+  </data>
+    <data name="Maintenance" xml:space="preserve">
+    <value>Održavanje</value>
+  </data>
+    <data name="SelectedGameClient" xml:space="preserve">
+    <value>Odabrani klijent igre</value>
+  </data>
+    <data name="SelectedWorldBuilder" xml:space="preserve">
+    <value>Odabrani World Builder</value>
+  </data>
+    <data name="CommunityGameClientDisplayName" xml:space="preserve">
+    <value>TheSuperHackers</value>
+  </data>
+    <data name="SuperHackersWorldBuilder" xml:space="preserve">
+    <value>TheSuperHackers</value>
+  </data>
+    <data name="UseEnglishLanguage" xml:space="preserve">
+    <value>Koristi engleski</value>
+  </data>
+    <data name="UseEnglishLanguageToolTip" xml:space="preserve">
+    <value>Prisiljava sučelje launchera na engleski jezik.</value>
+  </data>
+    <data name="UseSystemLanguage" xml:space="preserve">
+    <value>Koristi jezik sustava</value>
+  </data>
+    <data name="UseSystemLanguageToolTip" xml:space="preserve">
+    <value>Koristi Windows jezik prikaza kada je dostupna odgovarajuća lokalizacija launchera.</value>
+  </data>
+    <data name="RetailWorldBuilder" xml:space="preserve">
+    <value>Maloprodajna verzija</value>
+  </data>
+    <data name="RetailGameClientDisplayName" xml:space="preserve">
+    <value>Maloprodajna verzija</value>
+  </data>
+    <data name="GenPatcherRecommendationTitle" xml:space="preserve">
+    <value>Preporuka za GenPatcher</value>
+  </data>
+    <data name="GenPatcherRecommendationMessage" xml:space="preserve">
+    <value>Preporučuje se korištenje GenPatchera pri igranju maloprodajne verzije igre.</value>
+  </data>
+    <data name="VisitGenPatcherDownloadPage" xml:space="preserve">
+    <value>Posjeti stranicu za preuzimanje GenPatchera</value>
+  </data>
+    <data name="WindowBehavior" xml:space="preserve">
+    <value>Ponašanje prozora</value>
+  </data>
+    <data name="WorldBuilderArguments" xml:space="preserve">
+    <value>Argumenti za World Builder</value>
+  </data>
+    <data name="WorldBuilderArgumentsInputToolTip" xml:space="preserve">
+    <value>Neobavezni argumenti naredbenog retka za odabranu izvršnu datoteku World Buildera. Ostavite prazno za normalno pokretanje.</value>
+  </data>
+    <data name="WorldBuilderArgumentsToolTip" xml:space="preserve">
+    <value>Argumenti proslijeđeni odabranoj izvršnoj datoteci World Buildera.</value>
+  </data>
+    <data name="HideLauncherToolTip" xml:space="preserve">
+    <value>Skriva prozor launchera dok igra ili World Builder radi, a zatim ga ponovno prikazuje kada proces završi.</value>
+  </data>
+    <data name="AddModFromFiles" xml:space="preserve">
+    <value>Dodaj mod iz datoteka</value>
+  </data>
+    <data name="FinishProcess" xml:space="preserve">
+    <value>Zatvorite igru prije otvaranja postavki.</value>
+  </data>
+    <data name="Info" xml:space="preserve">
+    <value>Informacije</value>
+  </data>
+    <data name="Retry" xml:space="preserve">
+    <value>Pokušaj ponovno</value>
+  </data>
+    <data name="Downloading" xml:space="preserve">
+    <value>Preuzimanje</value>
+  </data>
+    <data name="CannotConnect" xml:space="preserve">
+    <value>Nije se moguće povezati s GitHubom. Instalacija modifikacija s interneta nije dostupna.</value>
+  </data>
+    <data name="IntegrityRepeatedFailure" xml:space="preserve"><value>Sadržaj je ostao nedosljedan nakon više pokušaja rješavanja. Igra nije pokrenuta.</value></data>
+    <data name="IntegrityCacheSuffix" xml:space="preserve"><value>predmemorija</value></data>
+    <data name="IntegrityBlockedDescription" xml:space="preserve"><value>Odabrani sadržaj ima probleme provjere koji se ne mogu automatski riješiti. Uklonite blokirane stavke ili vratite sadržaj, zatim pokušajte ponovno pokrenuti.</value></data>
+    <data name="CancelLaunch" xml:space="preserve"><value>Otkaži pokretanje</value></data>
+    <data name="IntegrityMixedDescription" xml:space="preserve"><value>Pokretanje je zaustavljeno jer se promijenio odabrani udaljeni i ručni sadržaj. Udaljeni sadržaj za popravak: {0}. Ručni sadržaj čije će se trenutačne promjene prihvatiti: {1}. Udaljene promjene ne mogu se prihvatiti, a ručne promjene neće se popravljati.</value></data>
+    <data name="FixAbsorbAndLaunch" xml:space="preserve"><value>Popravi, prihvati i pokreni</value></data>
+    <data name="IntegrityManagedDescription" xml:space="preserve"><value>Odabrani udaljeno upravljani sadržaj razlikuje se od pouzdanog izvora: {0}. Popravak će obnoviti, ponovno preuzeti ili izbrisati samo navedene upravljane stavke te ponovno provjeriti.</value></data>
+    <data name="FixAndLaunch" xml:space="preserve"><value>Popravi i pokreni</value></data>
+    <data name="IntegrityManualDescription" xml:space="preserve"><value>Odabrani ručno uvezeni sadržaj se promijenio: {0}. Prihvaćanje će vjerovati trenutačnim datotekama bez popravka ili brisanja te ponovno provjeriti.</value></data>
+    <data name="AbsorbAndLaunch" xml:space="preserve"><value>Prihvati promjene i pokreni</value></data>
+    <data name="IntegrityLegacyDescription" xml:space="preserve"><value>Ne postoji mjerodavan izvor popravka za: {0}. Povjerenje će trajno klasificirati te točne verzije kao ručne i spremiti njihovo trenutačno stanje.</value></data>
+    <data name="TrustAsManual" xml:space="preserve"><value>Vjeruj kao ručnom</value></data>
+    <data name="IntegrityDialogTitle" xml:space="preserve"><value>Provjera sadržaja pokretanja</value></data>
+    <data name="IntegrityBlockGroup" xml:space="preserve"><value>Blokirano</value></data>
+    <data name="IntegrityDeleteGroup" xml:space="preserve"><value>Izbrisati</value></data>
+    <data name="IntegrityRepairGroup" xml:space="preserve"><value>Popravi</value></data>
+    <data name="IntegrityRedownloadGroup" xml:space="preserve"><value>Ponovno preuzmi</value></data>
+    <data name="IntegrityAbsorbGroup" xml:space="preserve"><value>Prihvati</value></data>
+    <data name="IntegrityTrustGroup" xml:space="preserve"><value>Vjeruj</value></data>
+    <data name="IntegrityIssueGroupSummarySingle" xml:space="preserve"><value>{0} promjena</value></data>
+    <data name="IntegrityIssueGroupSummaryMultiple" xml:space="preserve"><value>{0} promjena</value></data>
+    <data name="IntegrityIssueUntrackedLabel" xml:space="preserve"><value>Ne prati se</value></data>
+    <data name="IntegrityIssueMissingFileLabel" xml:space="preserve"><value>Nedostaje</value></data>
+    <data name="IntegrityIssueModifiedFileLabel" xml:space="preserve"><value>Izmijenjeno</value></data>
+    <data name="IntegrityIssueUnexpectedFileLabel" xml:space="preserve"><value>Dodano</value></data>
+    <data name="IntegrityIssueEmptyDirectoryLabel" xml:space="preserve"><value>Prazna mapa</value></data>
+    <data name="IntegrityIssueUnsafeLinkLabel" xml:space="preserve"><value>Nesigurna veza</value></data>
+    <data name="IntegrityIssueVerificationErrorLabel" xml:space="preserve"><value>Pogreška provjere</value></data>
+    <data name="GeneralsOnlineDiscord" xml:space="preserve">
+    <value>Discord Generals Online</value>
+  </data>
+    <data name="GeneralsOnlineDiscordToolTip" xml:space="preserve">
+    <value>Otvara Discord poslužitelj Generals Online.</value>
+  </data>
+    <data name="OpenLogsFolder" xml:space="preserve">
+    <value>Otvori mapu zapisnika</value>
+  </data>
+    <data name="OpenLogsFolderToolTip" xml:space="preserve">
+    <value>Otvara mapu s datotekama zapisnika GenLauncherGO.</value>
+  </data>
+    <data name="GitHubRepository" xml:space="preserve">
+    <value>GitHub repozitorij</value>
+  </data>
+    <data name="GitHubRepositoryToolTip" xml:space="preserve">
+    <value>Otvara GitHub repozitorij GenLauncherGO.</value>
+  </data>
+    <data name="AdvertisingDonationAlerts" xml:space="preserve">
+    <value>Donation Alerts</value>
+  </data>
+    <data name="AdvertisingBoostyLink" xml:space="preserve">
+    <value>Boosty.to</value>
+  </data>
+    <data name="AdvertisingYouTubeRuLink" xml:space="preserve">
+    <value>My Youtube (Ru)</value>
+  </data>
+    <data name="RunningProcessOverlayTitle" xml:space="preserve">
+    <value>Pokrenuti proces</value>
+  </data>
+    <data name="RunningProcessStatus" xml:space="preserve">
+    <value>Pokrenuti proces: {0}</value>
+  </data>
+    <data name="RunningProcessUnknown" xml:space="preserve">
+    <value>Nepoznati proces</value>
+  </data>
+    <data name="ForceQuitRunningProcess" xml:space="preserve">
+    <value>Prisilno zatvori</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationTitle" xml:space="preserve">
+    <value>Prisilno zatvoriti proces?</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationDetails" xml:space="preserve">
+    <value>To će odmah zatvoriti {0} i sve praćene podređene procese. Nespremljeni napredak može biti izgubljen.</value>
+  </data>
+    <data name="RunningProcessCloseBlockedTitle" xml:space="preserve">
+    <value>Proces je još pokrenut</value>
+  </data>
+    <data name="RunningProcessCloseBlockedDetails" xml:space="preserve">
+    <value>Zatvorite pokrenuti proces ili upotrijebite „Prisilno zatvori” prije zatvaranja GenLauncherGO-a.</value>
+  </data>
+    <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Nešto je pošlo po zlu</value>
+  </data>
+    <data name="UnexpectedErrorDetails" xml:space="preserve">
+    <value>Dogodila se neočekivana pogreška. Pokušajte ponovno. Ako se nastavi, provjerite zapise pokretača.</value>
+  </data>
+    <data name="LanguageRestartPromptTitle" xml:space="preserve">
+    <value>Potrebno je ponovno pokretanje</value>
+  </data>
+    <data name="LanguageRestartPromptDetails" xml:space="preserve">
+    <value>Promjena jezika je spremljena i primijenit će se pri sljedećem pokretanju GenLauncherGO-a.</value>
+  </data>
+    <data name="RestartNow" xml:space="preserve">
+    <value>Ponovno pokreni sada</value>
+  </data>
+    <data name="RestartLater" xml:space="preserve">
+    <value>Kasnije</value>
+  </data>
+    <data name="RestartBlockedTitle" xml:space="preserve">
+    <value>Ponovno pokretanje nije dostupno</value>
+  </data>
+    <data name="RestartBlockedActiveOperation" xml:space="preserve">
+    <value>Dovršite ili otkažite „{0}” prije ponovnog pokretanja GenLauncherGO-a.</value>
+  </data>
+    <data name="GameInstallationSetupTitle" xml:space="preserve">
+    <value>Odaberite mape igara</value>
+  </data>
+    <data name="InstallationNotConfigured" xml:space="preserve">
+    <value>Nije postavljeno</value>
+  </data>
+    <data name="ValidGeneralsInstallation" xml:space="preserve">
+    <value>Odabrana je mapa igre Generals</value>
+  </data>
+    <data name="ValidZeroHourInstallation" xml:space="preserve">
+    <value>Odabrana je mapa igre Zero Hour</value>
+  </data>
+    <data name="GameInstallationFilesNotFound" xml:space="preserve">
+    <value>Potrebna je jedna od ovih datoteka: {0}.</value>
+  </data>
+    <data name="InstallationPathUnavailable" xml:space="preserve">
+    <value>Ova se mapa instalacije ne može koristiti.</value>
+  </data>
+    <data name="DuplicateGameInstallation" xml:space="preserve">
+    <value>Odaberite drugu mapu za svaku igru.</value>
+  </data>
+    <data name="GeneralsShortName" xml:space="preserve">
+    <value>Generals</value>
+  </data>
+    <data name="ZeroHourShortName" xml:space="preserve">
+    <value>Zero Hour</value>
+  </data>
+    <data name="GeneralsFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals</value>
+  </data>
+    <data name="ZeroHourFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals – Zero Hour</value>
+  </data>
+    <data name="InstallationFolder" xml:space="preserve">
+    <value>Mapa instalacije</value>
+  </data>
+    <data name="Browse" xml:space="preserve">
+    <value>Pregledaj</value>
+  </data>
+    <data name="DetectViaRegistry" xml:space="preserve">
+    <value>Otkrij iz registra</value>
+  </data>
+    <data name="GameFirstRunRegistryNotice" xml:space="preserve">
+    <value>Pokrenite svaku instaliranu igru barem jednom kako biste osigurali da se njezin put instalacije zapiše u registar.</value>
+  </data>
+    <data name="RegistryInstallationNotFound" xml:space="preserve">
+    <value>U registru nije pronađena postojeća mapa igre. Pokrenite igru jednom kako bi se njezina putanja zapisala u registar ili ručno odaberite mapu.</value>
+  </data>
+    <data name="RegistryDetectionFailedTitle" xml:space="preserve">
+    <value>Instalacija nije otkrivena</value>
+  </data>
+    <data name="ProgramFilesModToolsWarning" xml:space="preserve">
+    <value>Program Files može ometati alate za modove.</value>
+  </data>
+    <data name="SameDriveRecommendation" xml:space="preserve">
+    <value>Preporuka: Držite GenLauncherGO na istom pogonu kao i igre.</value>
+  </data>
+    <data name="AtLeastOneInstallationRequired" xml:space="preserve">
+    <value>Odaberite barem jednu mapu igre za nastavak.</value>
+  </data>
+    <data name="ChooseYourGame" xml:space="preserve">
+    <value>Odaberite igru za upravljanje</value>
+  </data>
+    <data name="NotSelected" xml:space="preserve">
+    <value>Nije odabrano</value>
+  </data>
+    <data name="Selected" xml:space="preserve">
+    <value>Odabrano</value>
+  </data>
+    <data name="StandaloneLocationRequired" xml:space="preserve">
+    <value>Premjestite GenLauncherGO</value>
+  </data>
+    <data name="StandaloneLocationBlockingDescription" xml:space="preserve">
+    <value>GenLauncherGO se ne može pokretati iz mape instalacije igre.</value>
+  </data>
+    <data name="CurrentLauncherLocation" xml:space="preserve">
+    <value>Trenutačna lokacija pokretača</value>
+  </data>
+    <data name="ContainingGameInstallation" xml:space="preserve">
+    <value>Instalacija igre koja sadrži pokretač</value>
+  </data>
+    <data name="MoveLauncherOutsideGames" xml:space="preserve">
+    <value>Premjestite mapu GenLauncherGO bilo kamo izvan instalacija igara, a zatim ga ponovno pokrenite.</value>
+  </data>
+    <data name="StandaloneLocationExample" xml:space="preserve">
+    <value>Primjer: C:\Tools\GenLauncherGO</value>
+  </data>
+    <data name="AdministratorPermissionRequired" xml:space="preserve">
+    <value>GenLauncherGO za rad zahtijeva administratorske ovlasti.</value>
+  </data>
+    <data name="ActiveGameLabel" xml:space="preserve">
+    <value>Aktivna igra</value>
+  </data>
+    <data name="GameManagement" xml:space="preserve">
+    <value>Upravljanje igrama</value>
+  </data>
+    <data name="InstallationPaths" xml:space="preserve">
+    <value>Putanje instalacija</value>
+  </data>
+    <data name="SwitchToGame" xml:space="preserve">
+    <value>Prebaci na {0}</value>
+  </data>
+    <data name="Save" xml:space="preserve">
+    <value>Spremi</value>
+  </data>
+    <data name="GameSwitchBlockedTitle" xml:space="preserve">
+    <value>Promjena igre nije dostupna</value>
+  </data>
+    <data name="GameSwitchBlockedDetails" xml:space="preserve">
+    <value>Dovršite ili otkažite aktivno pokretanje, igru, preuzimanje ili ažuriranje prije promjene igre.</value>
+  </data>
+    <data name="GameSwitchFailedTitle" xml:space="preserve">
+    <value>Nije moguće promijeniti igru</value>
+  </data>
+    <data name="GameSwitchFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO nije mogao promijeniti aktivnu igru. {0}</value>
+  </data>
+    <data name="Back" xml:space="preserve">
+    <value>Natrag</value>
+  </data>
+    <data name="LaunchCloseBlockedTitle" xml:space="preserve">
+    <value>Pokretanje je u tijeku</value>
+  </data>
+    <data name="LaunchCloseBlockedDetails" xml:space="preserve">
+    <value>Pričekajte da aktivno pokretanje završi ili ga otkažite prije zatvaranja programa GenLauncherGO.</value>
+  </data>
+    <data name="BuiltIn" xml:space="preserve"><value>Ugrađeno</value></data>
+    <data name="Close" xml:space="preserve"><value>Zatvori</value></data>
+    <data name="DisplayName" xml:space="preserve"><value>Naziv za prikaz</value></data>
+    <data name="ExecutableDisplayNameWatermark" xml:space="preserve"><value>Naziv prikazan u pokretaču</value></data>
+    <data name="ExecutableFile" xml:space="preserve"><value>Izvršna datoteka</value></data>
+    <data name="NoExecutableSelected" xml:space="preserve"><value>Nije odabrana izvršna datoteka</value></data>
+    <data name="CustomExecutables" xml:space="preserve"><value>Prilagođene izvršne datoteke</value></data>
+    <data name="ManageGameClients" xml:space="preserve"><value>Upravljaj klijentima igre</value></data>
+    <data name="ManageWorldBuilders" xml:space="preserve"><value>Upravljaj World Builderima</value></data>
+    <data name="ExecutableMustBeInGameRoot" xml:space="preserve"><value>Odaberite .exe izravno u mapi aktivne igre.</value></data>
+    <data name="ExecutableUnavailable" xml:space="preserve"><value>Odabrana izvršna datoteka nedostaje ili se ne može koristiti.</value></data>
+    <data name="ExecutableDetailsRequired" xml:space="preserve"><value>Unesite naziv i odaberite izvršnu datoteku.</value></data>
+    <data name="ExecutableNameAlreadyExists" xml:space="preserve"><value>Unos s ovim nazivom već postoji.</value></data>
+    <data name="ExecutableFileAlreadyExists" xml:space="preserve"><value>Ova izvršna datoteka već je registrirana.</value></data>
+    <data name="RemoveCustomExecutable" xml:space="preserve"><value>Ukloniti prilagođenu izvršnu datoteku?</value></data>
+    <data name="RemoveCustomExecutableDetails" xml:space="preserve"><value>Time se „{0}” samo uklanja iz pokretača. Ništa u datotečnom sustavu neće biti izbrisano ni izmijenjeno.</value></data>
+    <data name="ChooseExecutable" xml:space="preserve"><value>Odaberi izvršnu datoteku</value></data>
+    <data name="Executables" xml:space="preserve"><value>Izvršne datoteke</value></data>
+    <data name="AddExecutable" xml:space="preserve"><value>Dodaj izvršnu datoteku</value></data>
+    <data name="EditExecutable" xml:space="preserve"><value>Uredi izvršnu datoteku</value></data>
+    <data name="SearchExecutables" xml:space="preserve"><value>Traži po nazivu ili datoteci</value></data>
+    <data name="BuiltInExecutables" xml:space="preserve"><value>Ugrađene izvršne datoteke</value></data>
+</root>
