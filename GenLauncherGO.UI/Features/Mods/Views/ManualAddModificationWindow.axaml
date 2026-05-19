@@ -1,0 +1,118 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.ManualAddModificationWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:ManualAddModificationViewModel"
+        x:CompileBindings="True"
+        Title="{localization:Loc InputModData}"
+        Width="620"
+        Height="370"
+        CanResize="False"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterOwner"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ManualDialogValidationBrush"
+                         Color="#FF4E58" />
+    </Window.Resources>
+    <Window.Styles>
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="TextBlock.validation">
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="{StaticResource ManualDialogValidationBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBox.dialog-input">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="9,3" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="Button.dialog-action">
+            <Setter Property="MinWidth" Value="118" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="14,5" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource GenLauncherDarkBackGround}"
+            BorderBrush="{DynamicResource GenLauncherDarkFillColor}"
+            BorderThickness="4">
+        <Grid RowDefinitions="58,*,64">
+            <Border Grid.Row="0"
+                    Background="{DynamicResource GenLauncherLightBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,0,0,2">
+                <TextBlock Margin="22,0"
+                           VerticalAlignment="Center"
+                           Text="{localization:Loc InputModData}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                           TextTrimming="CharacterEllipsis" />
+            </Border>
+
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto,38,Auto,14,Auto,38,Auto"
+                  Margin="22,18,22,14">
+                <TextBlock Grid.Row="0"
+                           Classes="field-label"
+                           Text="{localization:Loc ModificationName}" />
+                <TextBox x:Name="ModificationName"
+                         Grid.Row="1"
+                         Classes="dialog-input"
+                         Text="{Binding ModificationName, Mode=TwoWay}" />
+                <TextBlock Grid.Row="2"
+                           Classes="validation"
+                           Text="{Binding ModificationNameValidationMessage}" />
+
+                <TextBlock Grid.Row="4"
+                           Classes="field-label"
+                           Text="{localization:Loc CurrentVersion}" />
+                <TextBox x:Name="Version"
+                         Grid.Row="5"
+                         Classes="dialog-input"
+                         Text="{Binding Version, Mode=TwoWay}" />
+                <TextBlock Grid.Row="6"
+                           Classes="validation"
+                           Text="{Binding VersionValidationMessage}" />
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Background="{DynamicResource GenLauncherLightBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherDarkFillColor}"
+                    BorderThickness="0,2,0,0">
+                <StackPanel Margin="22,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                    <Button Classes="dialog-action"
+                            Command="{Binding CancelCommand}"
+                            Content="{localization:Loc Cancel}"
+                            IsCancel="True" />
+                    <Button Classes="dialog-action"
+                            Command="{Binding AcceptCommand}"
+                            Content="{localization:Loc Ok}"
+                            IsDefault="True" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

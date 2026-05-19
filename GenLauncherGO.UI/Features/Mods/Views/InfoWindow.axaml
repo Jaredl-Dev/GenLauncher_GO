@@ -1,0 +1,203 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.InfoWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:InfoDialogViewModel"
+        x:CompileBindings="True"
+        Title="{localization:Loc Info}"
+        Width="640"
+        MinHeight="284"
+        MaxHeight="520"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowDecorations="None"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+    <Window.Resources>
+        <SolidColorBrush x:Key="DialogErrorBrush" Color="#FFFF5F68" />
+        <SolidColorBrush x:Key="DialogWarningBrush" Color="#FFFFC241" />
+        <LinearGradientBrush x:Key="DialogSurfaceBrush"
+                             StartPoint="0%,0%"
+                             EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#F4111921" />
+            <GradientStop Offset="1" Color="#F2070B0F" />
+        </LinearGradientBrush>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button.dialog-action">
+            <Setter Property="MinWidth" Value="116" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="14,5" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="Button.dialog-action.primary">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="Border.icon-badge">
+            <Setter Property="Width" Value="52" />
+            <Setter Property="Height" Value="52" />
+            <Setter Property="Background" Value="#FF080C11" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource GenLauncherDarkBackGround}"
+            BorderBrush="{DynamicResource GenLauncherBorderColor}"
+            BorderThickness="2">
+        <Grid RowDefinitions="60,*,68">
+            <Border Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,0,0,2">
+                <TextBlock Margin="24,0"
+                           VerticalAlignment="Center"
+                           Text="{Binding MainMessage}"
+                           FontSize="21"
+                           FontWeight="Bold"
+                           TextTrimming="CharacterEllipsis" />
+            </Border>
+
+            <ScrollViewer Grid.Row="1"
+                          MaxHeight="330"
+                          Margin="24,20"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <Border Padding="20,18"
+                        Background="{StaticResource DialogSurfaceBrush}"
+                        BorderBrush="#FF3D5968"
+                        BorderThickness="1">
+                    <Grid ColumnDefinitions="52,*">
+                        <Grid Width="52"
+                              Height="52"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center">
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                                    IsVisible="{Binding IsInfoIconVisible}">
+                                <Grid>
+                                    <Ellipse Width="34"
+                                             Height="34"
+                                             Stroke="{DynamicResource GenLauncherBorderColor}"
+                                             StrokeThickness="2" />
+                                    <Ellipse Width="5"
+                                             Height="5"
+                                             Margin="0,11,0,0"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Fill="{DynamicResource GenLauncherBorderColor}" />
+                                    <Rectangle Width="5"
+                                               Height="15"
+                                               Margin="0,0,0,10"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{DynamicResource GenLauncherBorderColor}" />
+                                </Grid>
+                            </Border>
+
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{StaticResource DialogWarningBrush}"
+                                    IsVisible="{Binding IsWarningIconVisible}">
+                                <Grid>
+                                    <Polygon Points="26,6 47,44 5,44"
+                                             Fill="#FF2C2410"
+                                             Stroke="{StaticResource DialogWarningBrush}"
+                                             StrokeThickness="2"
+                                             StrokeJoin="Round" />
+                                    <Rectangle Width="4"
+                                               Height="16"
+                                               Margin="0,4,0,0"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{StaticResource DialogWarningBrush}" />
+                                    <Ellipse Width="5"
+                                             Height="5"
+                                             Margin="0,0,0,9"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Bottom"
+                                             Fill="{StaticResource DialogWarningBrush}" />
+                                </Grid>
+                            </Border>
+
+                            <Border Classes="icon-badge"
+                                    BorderBrush="{StaticResource DialogErrorBrush}"
+                                    IsVisible="{Binding IsErrorIconVisible}">
+                                <Grid>
+                                    <Path Data="M16,5 L36,5 L47,16 L47,36 L36,47 L16,47 L5,36 L5,16 Z"
+                                          Fill="#FF2E1115"
+                                          Stroke="{StaticResource DialogErrorBrush}"
+                                          StrokeThickness="2"
+                                          StrokeJoin="Round" />
+                                    <Rectangle Width="5"
+                                               Height="19"
+                                               Margin="0,0,0,9"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               RadiusX="2"
+                                               RadiusY="2"
+                                               Fill="{StaticResource DialogErrorBrush}" />
+                                    <Ellipse Width="6"
+                                             Height="6"
+                                             Margin="0,0,0,9"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Bottom"
+                                             Fill="{StaticResource DialogErrorBrush}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <TextBlock x:Name="DetailMessageText"
+                                   Grid.Column="1"
+                                   Margin="20,2,4,2"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding DetailMessage}"
+                                   FontSize="{Binding DetailFontSize}"
+                                   Foreground="#FFD7E0EA"
+                                   TextWrapping="Wrap" />
+                    </Grid>
+                </Border>
+            </ScrollViewer>
+
+            <Border Grid.Row="2"
+                    Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,2,0,0">
+                <StackPanel Margin="0,0,22,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="12">
+                    <Button x:Name="CancelButton"
+                            Classes="dialog-action"
+                            Content="{Binding CancelText}"
+                            IsVisible="{Binding IsCancelVisible}"
+                            IsCancel="True"
+                            Command="{Binding CancelCommand}" />
+                    <Button x:Name="ContinueButton"
+                            Classes="dialog-action primary"
+                            Content="{Binding ContinueText}"
+                            IsVisible="{Binding IsContinueVisible}"
+                            IsDefault="True"
+                            Command="{Binding ContinueCommand}" />
+                    <Button x:Name="OkButton"
+                            Classes="dialog-action primary"
+                            Content="{localization:Loc Ok}"
+                            IsVisible="{Binding IsOkVisible}"
+                            IsDefault="True"
+                            Command="{Binding OkCommand}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

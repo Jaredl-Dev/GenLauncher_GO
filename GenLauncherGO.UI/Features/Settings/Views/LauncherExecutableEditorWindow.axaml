@@ -1,0 +1,124 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Settings.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Settings.Views.LauncherExecutableEditorWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:LauncherExecutableManagementViewModel"
+        x:CompileBindings="True"
+        Title="{Binding EditorTitle}"
+        Width="620"
+        Height="390"
+        CanResize="False"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+    <Window.Styles>
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="TextBox.editor-input">
+            <Setter Property="Height" Value="37" />
+            <Setter Property="Padding" Value="8,3" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Button.editor-action">
+            <Setter Property="MinWidth" Value="112" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="14,5" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Styles>
+
+    <Border x:Name="EditorFrame"
+            Background="{DynamicResource GenLauncherDarkBackGround}"
+            BorderBrush="{DynamicResource GenLauncherBorderColor}"
+            BorderThickness="4">
+        <Grid RowDefinitions="56,*,62">
+            <Border x:Name="EditorHeader"
+                    Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,0,0,2">
+                <TextBlock Margin="21,0"
+                           VerticalAlignment="Center"
+                           FontSize="21"
+                           FontWeight="Bold"
+                           Text="{Binding EditorTitle}"
+                           TextTrimming="CharacterEllipsis" />
+            </Border>
+
+            <Grid Grid.Row="1"
+                  Margin="21,18,21,13"
+                  RowDefinitions="Auto,37,16,Auto,37,Auto,*"
+                  ColumnDefinitions="*,12,Auto">
+                <TextBlock Grid.Row="0"
+                           Grid.ColumnSpan="3"
+                           Classes="field-label"
+                           Text="{localization:Loc ExecutableFile}" />
+                <TextBox x:Name="ExecutableFileInput"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         Classes="editor-input"
+                         Text="{Binding ExecutableName}"
+                         IsReadOnly="True"
+                         PlaceholderText="{localization:Loc NoExecutableSelected}" />
+                <Button x:Name="ExecutableBrowseButton"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Classes="editor-action"
+                        MinWidth="104"
+                        Content="{localization:Loc Browse}"
+                        Click="Browse_ClickAsync" />
+
+                <TextBlock Grid.Row="3"
+                           Grid.ColumnSpan="3"
+                           Classes="field-label"
+                           Text="{localization:Loc DisplayName}" />
+                <TextBox x:Name="ExecutableDisplayNameInput"
+                         Grid.Row="4"
+                         Grid.ColumnSpan="3"
+                         Classes="editor-input"
+                         Text="{Binding DisplayName, Mode=TwoWay}"
+                         PlaceholderText="{localization:Loc ExecutableDisplayNameWatermark}" />
+                <TextBlock Grid.Row="5"
+                           Grid.ColumnSpan="3"
+                           MinHeight="20"
+                           Margin="0,7,0,0"
+                           FontSize="12"
+                           Foreground="#FFFF4E58"
+                           Text="{Binding ValidationMessage}"
+                           TextWrapping="Wrap" />
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,2,0,0">
+                <StackPanel Margin="21,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                    <Button x:Name="CancelExecutableButton"
+                            Classes="editor-action"
+                            Content="{localization:Loc Cancel}"
+                            IsCancel="True"
+                            Click="Cancel_Click" />
+                    <Button x:Name="SaveExecutableButton"
+                            Classes="editor-action"
+                            Content="{localization:Loc Save}"
+                            IsDefault="True"
+                            IsEnabled="{Binding CanSave}"
+                            Click="Save_ClickAsync" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

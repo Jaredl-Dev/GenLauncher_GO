@@ -1,0 +1,128 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Mods.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Mods.Views.AddModificationWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:AddModificationViewModel"
+        x:CompileBindings="True"
+        Title="{localization:Loc SelectMod}"
+        Width="440"
+        Height="520"
+        CanResize="False"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterOwner"
+        Topmost="True"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+  <Border Background="{DynamicResource GenLauncherDarkBackGround}"
+          BorderBrush="{DynamicResource GenLauncherBorderColor}"
+          BorderThickness="4">
+    <Grid RowDefinitions="48,44,*,50">
+      <Border Grid.Row="0"
+              Background="{DynamicResource GenLauncherLightBackGround}"
+              BorderBrush="{DynamicResource GenLauncherBorderColor}"
+              BorderThickness="0,0,0,1">
+        <Label Margin="12,0,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Content="{localization:Loc SelectMod}"
+               FontSize="19"
+               FontWeight="Bold"
+               Foreground="{DynamicResource GenLauncherDefaultTextColor}" />
+      </Border>
+
+      <TextBox x:Name="SearchBox"
+               Grid.Row="1"
+               Height="32"
+               Margin="12,0,12,10"
+               Padding="8,3"
+               VerticalContentAlignment="Center"
+               Text="{Binding SearchText, Mode=TwoWay}"
+               PlaceholderText="{localization:Loc SearchMods}"
+               FontSize="15"
+               Background="{DynamicResource GenLauncherDarkBackGround}"
+               BorderBrush="{DynamicResource GenLauncherBorderColor}"
+               BorderThickness="1" />
+
+      <Grid Grid.Row="2"
+            Margin="12,0,12,8">
+        <ListBox x:Name="ModificationsList"
+                 ItemContainerTheme="{StaticResource GenLauncherDialogListBoxItemTheme}"
+                 ItemsSource="{Binding VisibleModifications}"
+                 SelectedItem="{Binding SelectedModification, Mode=TwoWay}"
+                 Background="{DynamicResource GenLauncherDarkBackGround}"
+                 BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                 BorderThickness="1"
+                 Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:AddModificationItemViewModel">
+              <Grid MinHeight="52"
+                    Margin="6,2"
+                    ColumnDefinitions="*,Auto">
+                <StackPanel Grid.Column="0"
+                            Margin="2,2,8,2"
+                            VerticalAlignment="Center"
+                            Spacing="1">
+                  <TextBlock Text="{Binding Name}"
+                             FontSize="16"
+                             Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                             TextTrimming="CharacterEllipsis"
+                             TextWrapping="NoWrap" />
+                  <TextBlock Text="{Binding VersionText}"
+                             FontSize="14"
+                             Foreground="{DynamicResource GenLauncherBorderColor}"
+                             TextTrimming="CharacterEllipsis"
+                             TextWrapping="NoWrap" />
+                </StackPanel>
+                <TextBlock Grid.Column="1"
+                           MinWidth="96"
+                           Margin="8,0,4,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Text="{Binding PackageSizeText}"
+                           TextAlignment="Right"
+                           FontSize="14"
+                           Foreground="{DynamicResource GenLauncherBorderColor}"
+                           TextWrapping="NoWrap" />
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"
+                   IsVisible="{Binding HasNoVisibleModifications}"
+                   Text="{localization:Loc NoModsMatchSearch}"
+                   FontSize="15"
+                   Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+      </Grid>
+
+      <Border Grid.Row="3"
+              Background="{DynamicResource GenLauncherLightBackGround}"
+              BorderBrush="{DynamicResource GenLauncherBorderColor}"
+              BorderThickness="0,2,0,0">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="28">
+          <Button Width="116"
+                  Height="32"
+                  Content="{localization:Loc Add}"
+                  Command="{Binding AcceptCommand}"
+                  Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                  IsDefault="True" />
+          <Button Width="116"
+                  Height="32"
+                  Content="{localization:Loc Cancel}"
+                  Command="{Binding CancelCommand}"
+                  Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+                  IsCancel="True" />
+        </StackPanel>
+      </Border>
+    </Grid>
+  </Border>
+</Window>

@@ -1,0 +1,1302 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:launcherModels="using:GenLauncherGO.UI.Features.Launcher.Models"
+        xmlns:mods="using:GenLauncherGO.UI.Features.Mods"
+        xmlns:viewModels="using:GenLauncherGO.UI.Features.Launcher.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Launcher.Views.MainWindow"
+        x:ClassModifier="internal"
+        x:DataType="viewModels:MainWindowViewModel"
+        Width="984"
+        Height="730"
+        CanResize="False"
+        CanMinimize="True"
+        CanMaximize="False"
+        WindowDecorations="Full"
+        Background="{DynamicResource GenLauncherBackGroundImage}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}"
+        Title="{Binding WindowTitle}">
+
+    <Window.DataTemplates>
+        <DataTemplate DataType="launcherModels:ExecutableOption"
+                      x:DataType="launcherModels:ExecutableOption">
+            <StackPanel>
+                <Border Classes="executable-group-header"
+                        Classes.group-start="{Binding ShowGroupHeader}"
+                        Margin="0,5,0,2"
+                        Padding="9,4"
+                        Background="{DynamicResource GenLauncherNeutralSurfaceColor}"
+                        BorderBrush="{DynamicResource GenLauncherNeutralBorderColor}"
+                        BorderThickness="0,0,0,1">
+                    <TextBlock FontSize="11"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource GenLauncherAccentTextColor}"
+                               Text="{Binding GroupDisplayName}" />
+                </Border>
+                <Border Classes="executable-option-row"
+                        Margin="3,1"
+                        Padding="9,5">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding DisplayName}" />
+                        <TextBlock Grid.Column="1"
+                                   Classes="missing-executable-indicator"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="#FFFF4E58"
+                                   FontWeight="Bold"
+                                   Text="&#x2715;"
+                                   ToolTip.Tip="{localization:Loc ExecutableUnavailable}"
+                                   IsVisible="{Binding IsUnavailable}" />
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+    </Window.DataTemplates>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="DragAndDropBackground"
+                         Color="{DynamicResource GenLauncherListBoxSelectionColor2}" />
+
+        <ControlTheme x:Key="{x:Type ProgressBar}"
+                      TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel x:Name="LauncherProgressBarRoot"
+                           ClipToBounds="True">
+                        <Border x:Name="LauncherProgressBarBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0" />
+                        <Panel x:Name="DeterminateRoot"
+                               Opacity="1">
+                            <Border x:Name="PART_Indicator"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Stretch"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="0" />
+                        </Panel>
+                        <Panel x:Name="IndeterminateRoot"
+                               Opacity="0">
+                            <Grid x:Name="LegacyIndeterminateIndicator"
+                                  ColumnDefinitions="*,3*">
+                                <Border Grid.Column="0"
+                                        Background="{TemplateBinding Foreground}"
+                                        CornerRadius="0" />
+                            </Grid>
+                        </Panel>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:indeterminate /template/ Panel#DeterminateRoot">
+                <Setter Property="Opacity" Value="0" />
+            </Style>
+            <Style Selector="^:indeterminate /template/ Panel#IndeterminateRoot">
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+            <Style Selector="^:horizontal:indeterminate /template/ Grid#LegacyIndeterminateIndicator">
+                <Style.Animations>
+                    <Animation Duration="0:0:2"
+                               IterationCount="Infinite">
+                        <KeyFrame KeyTime="0:0:0">
+                            <Setter Property="TranslateTransform.X"
+                                    Value="{Binding $parent[ProgressBar].TemplateSettings.ContainerAnimationStartPosition}" />
+                        </KeyFrame>
+                        <KeyFrame KeyTime="0:0:2">
+                            <Setter Property="TranslateTransform.X"
+                                    Value="{Binding $parent[ProgressBar].TemplateSettings.ContainerAnimationEndPosition}" />
+                        </KeyFrame>
+                    </Animation>
+                </Style.Animations>
+            </Style>
+        </ControlTheme>
+
+        <ControlTheme x:Key="LauncherListBoxItemTheme"
+                      TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Margin" Value="2,2,20,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="IsSelected" Value="{ReflectionBinding IsSelected, Mode=TwoWay}" />
+            <Setter Property="Padding" Value="9,0,0,0" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="TileItemBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="{DynamicResource ListBoxSelectedItemBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            </Style>
+        </ControlTheme>
+
+        <ControlTheme x:Key="GameClientComboBoxItemTheme"
+                      TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Padding="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+                <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+                <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+                <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+            </Style>
+        </ControlTheme>
+
+        <ControlTheme x:Key="TileVersionComboBoxItemTheme"
+                      TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="TileVersionItemBorder"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+            </Style>
+            <Style Selector="^:disabled">
+                <Setter Property="Foreground" Value="#888888" />
+            </Style>
+        </ControlTheme>
+
+        <ControlTheme x:Key="TileVersionSelectorTheme"
+                      TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="FocusAdorner" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="ItemContainerTheme"
+                    Value="{StaticResource TileVersionComboBoxItemTheme}" />
+            <Setter Property="MaxDropDownHeight" Value="504" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="MinWidth" Value="120" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid x:Name="TileVersionSelectorRoot"
+                          ColumnDefinitions="*,20">
+                        <Border x:Name="Background"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0" />
+                        <Border x:Name="TileVersionTextBoxBorder"
+                                Grid.Column="0"
+                                Margin="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0,0,1,0"
+                                CornerRadius="0" />
+                        <ContentControl x:Name="ContentPresenter"
+                                        Grid.Column="0"
+                                        Margin="3"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsHitTestVisible="False" />
+                        <Path x:Name="TileVersionDropDownGlyph"
+                              Grid.Column="1"
+                              Width="8"
+                              Height="6"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                              Fill="{TemplateBinding BorderBrush}"
+                              IsHitTestVisible="False"
+                              Stretch="None" />
+                        <Popup x:Name="PART_Popup"
+                               WindowManagerAddShadowHint="False"
+                               IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+                               MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                               MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                               PlacementTarget="Background"
+                               IsLightDismissEnabled="True"
+                               InheritsTransform="True">
+                            <Border x:Name="TileVersionPopupBorder"
+                                    Margin="0,2,0,0"
+                                    Background="{DynamicResource GenLauncherDarkFillColor}"
+                                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                                    BorderThickness="1"
+                                    CornerRadius="0">
+                                <ScrollViewer Margin="4,6"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                    <ItemsPresenter x:Name="PART_ItemsPresenter"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:disabled">
+                <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+                <Setter Property="Foreground" Value="#888888" />
+            </Style>
+            <Style Selector="^:disabled /template/ Path#TileVersionDropDownGlyph">
+                <Setter Property="Fill" Value="#888888" />
+            </Style>
+        </ControlTheme>
+
+        <DataTemplate x:Key="VersionTemplate"
+                      x:DataType="mods:ModificationVersionSelection">
+            <Grid ColumnDefinitions="140,*">
+                <TextBlock Grid.Column="0"
+                           Width="135"
+                           Margin="5,0,0,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding VersionName}"
+                           TextTrimming="CharacterEllipsis" />
+                <Button Grid.Column="1"
+                        Width="60"
+                        HorizontalAlignment="Center"
+                        FontSize="11"
+                        Content="{localization:Loc Delete}"
+                        Click="DeleteVersion_ClickAsync" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ModificationTemplate"
+                      x:DataType="mods:ModificationViewModel">
+            <Grid x:Name="ModificationTileRoot"
+                  Width="550"
+                  RowDefinitions="23,23,50,50,30,33"
+                  ColumnDefinitions="310,*,*,40"
+                  Background="Transparent">
+                <Grid.ContextMenu>
+                    <ContextMenu Classes="tile-context-menu"
+                                 x:DataType="mods:ModificationViewModel"
+                                 Opened="TileContextMenu_Opened">
+                        <MenuItem Header="{localization:Loc SetImage}"
+                                  FontSize="16"
+                                  IsVisible="{Binding CanSetImage}"
+                                  Click="ChangeVersionImage_ClickAsync" />
+                        <Separator IsVisible="{Binding CanSetImage}" />
+                        <MenuItem Header="{localization:Loc ModDb}"
+                                  FontSize="18"
+                                  IsVisible="{Binding CanOpenModDb}"
+                                  Click="OpenModDb_ClickAsync" />
+                        <MenuItem Header="{localization:Loc Discord}"
+                                  FontSize="18"
+                                  IsVisible="{Binding CanOpenDiscord}"
+                                  Click="OpenDiscord_ClickAsync" />
+                    </ContextMenu>
+                </Grid.ContextMenu>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Classes="tile-name"
+                           Classes.selected="{Binding IsSelected}"
+                           Margin="10,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="15"
+                           Text="{Binding NameInfo}"
+                           TextWrapping="Wrap" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Classes="tile-version"
+                           Classes.selected="{Binding IsSelected}"
+                           Margin="10,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="15"
+                           Text="{Binding LatestVersionInfo}"
+                           TextTrimming="CharacterEllipsis" />
+
+                <Grid Grid.Row="0"
+                      Grid.RowSpan="2"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="3"
+                      Height="30"
+                      Margin="0,0,5,0"
+                      VerticalAlignment="Top"
+                      IsVisible="{Binding IsSelected}">
+                    <ComboBox x:Name="ModificationVersionSelector"
+                              Classes="tile-version-selector"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              ItemsSource="{Binding VersionOptions}"
+                              SelectedItem="{Binding SelectedVersionOption, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource VersionTemplate}"
+                              IsEnabled="{Binding IsVersionSelectorEnabled}"
+                              IsVisible="{Binding IsVersionSelectorVisible}"
+                              SelectionChanged="VersionsList_SelectionChangedAsync" />
+                    <Button x:Name="ModificationVersionActionButton"
+                            FontSize="13"
+                            Content="{Binding VersionActionContent}"
+                            IsVisible="{Binding IsVersionActionVisible}"
+                            Click="DeleteModification_ClickAsync" />
+                </Grid>
+
+                <Border x:Name="ModificationImageBorder"
+                        Grid.Row="2"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Classes="tile-image-border"
+                        Classes.selected="{Binding IsSelected}"
+                        Margin="10,-2"
+                        BorderThickness="{Binding ImageBorderThickness}"
+                        IsVisible="{Binding HasImage}" />
+                <Image x:Name="ModificationInactiveImage"
+                       Grid.Row="2"
+                       Grid.RowSpan="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Width="526"
+                       Height="100"
+                       Source="{Binding ImageSource}"
+                       Stretch="Fill" />
+                <Image x:Name="ModificationSelectedImage"
+                       Grid.Row="2"
+                       Grid.RowSpan="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Width="526"
+                       Height="100"
+                       Source="{Binding SelectedImageSource}"
+                       Stretch="Fill"
+                       IsVisible="{Binding IsSelected}" />
+
+                <ProgressBar x:Name="ModificationProgressBar"
+                             Grid.Row="4"
+                             Grid.ColumnSpan="4"
+                             Height="20"
+                             Margin="10,0"
+                             VerticalAlignment="Center"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="{Binding ProgressValue}"
+                             Foreground="{Binding ProgressForeground}"
+                             Background="{Binding ProgressBackground}"
+                             BorderBrush="{Binding ProgressBorderBrush}" />
+                <TextBlock Grid.Row="4"
+                           Grid.ColumnSpan="4"
+                           Margin="25,0,40,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Foreground="{Binding ProgressTextForeground}"
+                           Text="{Binding ProgressMessage}"
+                           TextAlignment="Center"
+                           TextTrimming="CharacterEllipsis" />
+
+                <Grid x:Name="ModificationButtonRow"
+                      Grid.Row="5"
+                      Grid.ColumnSpan="4"
+                      Height="30"
+                      Margin="10,-3,10,0"
+                      VerticalAlignment="Top"
+                      ColumnDefinitions="140,*,100,*,150,*,90">
+                    <controls:UpdateButton x:Name="ModificationUpdateButton"
+                                           Grid.Column="0"
+                                           Width="140"
+                                           Height="30"
+                                           Margin="0"
+                                           Padding="1"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           FontSize="15"
+                                           Content="{Binding UpdateButtonContent}"
+                                           IsEnabled="{Binding UpdateButtonEnabled}"
+                                           IsBlinking="{Binding UpdateButtonBlinking}"
+                                           IsVisible="{Binding IsUpdateButtonVisible}"
+                                           Click="UpdateModification_ClickAsync" />
+                    <Grid x:Name="ModificationSecondaryActions"
+                          Grid.ColumnSpan="7"
+                          ColumnDefinitions="140,*,100,*,150,*,90"
+                          IsVisible="{Binding IsSelectedOrAdvertising}">
+                        <controls:UpdateButton x:Name="ModificationSupportButton"
+                                               Grid.Column="2"
+                                               Width="100"
+                                               Height="30"
+                                               Margin="0"
+                                               Padding="1"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               FontSize="14"
+                                               Content="{Binding SupportButtonContent}"
+                                               IsBlinking="{Binding SupportButtonBlinking}"
+                                               IsVisible="{Binding IsSupportButtonVisible}"
+                                               Click="OpenSupport_ClickAsync" />
+                        <Button x:Name="ModificationNetworkInfoButton"
+                                Grid.Column="4"
+                                Width="150"
+                                Height="30"
+                                Margin="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                FontSize="14"
+                                Content="{Binding NetworkInfoButtonContent}"
+                                IsVisible="{Binding IsNetworkInfoVisible}"
+                                Click="OpenNetworkInfo_ClickAsync" />
+                        <Button x:Name="ModificationChangeLogButton"
+                                Grid.Column="6"
+                                Width="90"
+                                Height="30"
+                                Margin="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                FontSize="14"
+                                Content="{Binding ChangeLogButtonContent}"
+                                IsVisible="{Binding IsChangeLogVisible}"
+                                Click="OpenChangeLog_ClickAsync" />
+                    </Grid>
+                </Grid>
+
+                <Border Grid.RowSpan="6"
+                        Grid.ColumnSpan="4"
+                        Margin="-6,0"
+                        Background="{StaticResource DragAndDropBackground}"
+                        IsHitTestVisible="False"
+                        IsVisible="{Binding IsDragAndDropVisible}" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AddonTemplate"
+                      x:DataType="mods:ModificationViewModel">
+            <Grid x:Name="AddonTileRoot"
+                  Width="550"
+                  RowDefinitions="23,23,30,33"
+                  ColumnDefinitions="310,*,*,40"
+                  Background="Transparent">
+                <Grid.ContextMenu>
+                    <ContextMenu Classes="tile-context-menu"
+                                 x:DataType="mods:ModificationViewModel"
+                                 Opened="TileContextMenu_Opened">
+                        <MenuItem Header="{localization:Loc SetImage}"
+                                  FontSize="16"
+                                  IsVisible="{Binding CanSetImage}"
+                                  Click="ChangeVersionImage_ClickAsync" />
+                        <Separator IsVisible="{Binding CanSetImage}" />
+                        <MenuItem Header="{localization:Loc ModDb}"
+                                  FontSize="18"
+                                  IsVisible="{Binding CanOpenModDb}"
+                                  Click="OpenModDb_ClickAsync" />
+                        <MenuItem Header="{localization:Loc Discord}"
+                                  FontSize="18"
+                                  IsVisible="{Binding CanOpenDiscord}"
+                                  Click="OpenDiscord_ClickAsync" />
+                    </ContextMenu>
+                </Grid.ContextMenu>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Classes="tile-name"
+                           Classes.selected="{Binding IsSelected}"
+                           Margin="10,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="13"
+                           Text="{Binding NameInfo}"
+                           TextWrapping="Wrap" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Classes="tile-version"
+                           Classes.selected="{Binding IsSelected}"
+                           Margin="10,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="15"
+                           Text="{Binding LatestVersionInfo}"
+                           TextTrimming="CharacterEllipsis" />
+
+                <Grid Grid.Row="0"
+                      Grid.RowSpan="2"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="3"
+                      Height="30"
+                      Margin="0,0,5,0"
+                      VerticalAlignment="Top"
+                      IsVisible="{Binding IsSelected}">
+                    <ComboBox x:Name="AddonVersionSelector"
+                              Classes="tile-version-selector"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              ItemsSource="{Binding VersionOptions}"
+                              SelectedItem="{Binding SelectedVersionOption, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource VersionTemplate}"
+                              IsEnabled="{Binding IsVersionSelectorEnabled}"
+                              IsVisible="{Binding IsVersionSelectorVisible}"
+                              SelectionChanged="VersionsList_SelectionChangedAsync" />
+                    <Button x:Name="AddonVersionActionButton"
+                            FontSize="13"
+                            Content="{Binding VersionActionContent}"
+                            IsVisible="{Binding IsVersionActionVisible}"
+                            Click="DeleteModification_ClickAsync" />
+                </Grid>
+
+                <ProgressBar x:Name="AddonProgressBar"
+                             Grid.Row="2"
+                             Grid.ColumnSpan="4"
+                             Height="20"
+                             Margin="10,0"
+                             VerticalAlignment="Center"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="{Binding ProgressValue}"
+                             Foreground="{Binding ProgressForeground}"
+                             Background="{Binding ProgressBackground}"
+                             BorderBrush="{Binding ProgressBorderBrush}" />
+                <TextBlock Grid.Row="2"
+                           Grid.ColumnSpan="4"
+                           Margin="40,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Foreground="{Binding ProgressTextForeground}"
+                           Text="{Binding ProgressMessage}"
+                           TextAlignment="Center"
+                           TextTrimming="CharacterEllipsis" />
+
+                <Grid Grid.Row="3"
+                      Grid.ColumnSpan="4">
+                    <controls:UpdateButton x:Name="CompactUpdateButton"
+                                           Width="140"
+                                           Height="30"
+                                           Margin="10,-5,10,0"
+                                           Padding="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="18"
+                                           Content="{Binding UpdateButtonContent}"
+                                           IsEnabled="{Binding UpdateButtonEnabled}"
+                                           IsBlinking="{Binding UpdateButtonBlinking}"
+                                           IsVisible="{Binding IsUpdateButtonVisible}"
+                                           Click="UpdateModification_ClickAsync" />
+                    <Grid x:Name="CompactSecondaryActions"
+                          Grid.ColumnSpan="4"
+                          IsVisible="{Binding IsSelected}">
+                        <Button x:Name="CompactNetworkInfoButton"
+                                Width="150"
+                                Height="30"
+                                Margin="0,-5,-40,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="14"
+                                Content="{Binding NetworkInfoButtonContent}"
+                                IsVisible="{Binding IsNetworkInfoVisible}"
+                                Click="OpenNetworkInfo_ClickAsync" />
+                        <Button x:Name="CompactChangeLogButton"
+                                Width="140"
+                                Height="30"
+                                Margin="5,-5,5,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="14"
+                                Content="{Binding ChangeLogButtonContent}"
+                                IsVisible="{Binding IsChangeLogVisible}"
+                                Click="OpenChangeLog_ClickAsync" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+            <Setter Property="Padding" Value="1" />
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="Border.executable-group-header">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="Border.executable-option-row">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="ComboBoxItem Border.executable-group-header.group-start">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover Border.executable-option-row">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        </Style>
+        <Style Selector="ComboBoxItem:selected Border.executable-option-row">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherSubtleAccentFillColor}" />
+        </Style>
+        <Style Selector="ComboBoxItem:selected:pointerover Border.executable-option-row">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover Border.executable-option-row TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ListBox.launcher-list">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+        </Style>
+        <Style Selector="ListBox.launcher-list ScrollBar:vertical /template/ RepeatButton#PART_LineUpButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="ListBox.launcher-list ScrollBar:vertical /template/ RepeatButton#PART_LineDownButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="TextBlock.tile-name">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherInactiveBorder}" />
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+        <Style Selector="TextBlock.tile-name.selected">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style Selector="TextBlock.tile-version">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherInactiveBorder}" />
+        </Style>
+        <Style Selector="TextBlock.tile-version.selected">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="Border.tile-image-border">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+        </Style>
+        <Style Selector="Border.tile-image-border.selected">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherActiveColor}" />
+        </Style>
+        <Style Selector="ComboBox.tile-version-selector">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Theme" Value="{StaticResource TileVersionSelectorTheme}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Padding" Value="8,0,28,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pointerover /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pressed /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:dropdownopen /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:disabled /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:focus-visible /template/ Border#HighlightBackground">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector /template/ ContentControl#ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pointerover /template/ ContentControl#ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pointerover TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:disabled /template/ ContentControl#ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector /template/ PathIcon#DropDownGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:pointerover /template/ PathIcon#DropDownGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:disabled /template/ PathIcon#DropDownGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="ComboBox.game-client-selector:dropdownopen /template/ Border#PopupBorder">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+        <Style Selector="ContextMenu.tile-context-menu">
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="ContextMenu.tile-context-menu MenuItem">
+            <Setter Property="MinWidth" Value="300" />
+            <Setter Property="MinHeight" Value="24" />
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="ContextMenu.tile-context-menu MenuItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonPressedBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherActiveColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+        </Style>
+        <Style Selector="ContextMenu.tile-context-menu Separator">
+            <Setter Property="Margin" Value="0,5" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="ProgressBar.tab-download-progress">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource ButtonPressedBackground}" />
+            <Setter Property="Opacity" Value="0.55" />
+        </Style>
+        <Style Selector="ScrollBar:vertical">
+            <Setter Property="Width" Value="18" />
+        </Style>
+        <Style Selector="ScrollBar:horizontal">
+            <Setter Property="Height" Value="18" />
+        </Style>
+        <Style Selector="Button.tab-button">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="Button.tab-button:pointerover TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="Button.tab-button:disabled TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherInactiveBorder}" />
+        </Style>
+        <Style Selector="Button.sidebar-button">
+            <Setter Property="Width" Value="229" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="FontSize" Value="17" />
+        </Style>
+        <Style Selector="Border.launcher-hud-panel">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+        <Style Selector="TextBlock.launcher-wordmark">
+            <Setter Property="FontFamily" Value="Impact" />
+            <Setter Property="FontSize" Value="38" />
+            <Setter Property="FontStretch" Value="Condensed" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+    </Window.Styles>
+
+    <Grid x:Name="MainLayoutGrid"
+          Margin="7,0,7,7"
+          RowDefinitions="50,35,40,*,0.32*,50"
+          ColumnDefinitions="41,70*,66*,206*,273*,13,259*,52">
+        <!-- The HUD chrome follows the fixed 970x723 legacy client viewport and stays behind all controls. -->
+        <Canvas Grid.RowSpan="6"
+                Grid.ColumnSpan="8"
+                IsHitTestVisible="False">
+            <Border x:Name="LauncherPrimaryPanel"
+                    Classes="launcher-hud-panel"
+                    Canvas.Left="23"
+                    Canvas.Top="39"
+                    Width="642"
+                    Height="654"
+                    Background="{DynamicResource GenLauncherLightBackGround}" />
+            <Border x:Name="LauncherContentPanel"
+                    Classes="launcher-hud-panel"
+                    Canvas.Left="35"
+                    Canvas.Top="88"
+                    Width="620"
+                    Height="598" />
+            <Border x:Name="LauncherListPanel"
+                    Classes="launcher-hud-panel"
+                    Canvas.Left="44"
+                    Canvas.Top="129"
+                    Width="595"
+                    Height="518" />
+            <Border x:Name="LauncherActionsPanel"
+                    Classes="launcher-hud-panel"
+                    Canvas.Left="678"
+                    Canvas.Top="94"
+                    Width="255"
+                    Height="308"
+                    Background="{DynamicResource GenLauncherLightBackGround}" />
+            <Border x:Name="LauncherSelectorsPanel"
+                    Classes="launcher-hud-panel"
+                    Canvas.Left="678"
+                    Canvas.Top="537"
+                    Width="255"
+                    Height="140"
+                    Background="{DynamicResource GenLauncherLightBackGround}" />
+            <TextBlock x:Name="LauncherWordmarkShadow"
+                       Classes="launcher-wordmark"
+                       Canvas.Left="672"
+                       Canvas.Top="49"
+                       Width="260"
+                       Foreground="#E6000000"
+                       Text="GENLAUNCHERGO" />
+            <TextBlock x:Name="LauncherWordmark"
+                       Classes="launcher-wordmark"
+                       Canvas.Left="670"
+                       Canvas.Top="47"
+                       Width="260"
+                       Text="GENLAUNCHERGO" />
+        </Canvas>
+
+        <ListBox x:Name="ModsList"
+                 Grid.Row="3"
+                 Grid.RowSpan="2"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="4"
+                 Classes="launcher-list"
+                 Margin="3,4,10,26"
+                 ItemContainerTheme="{StaticResource LauncherListBoxItemTheme}"
+                 ItemsSource="{Binding ModsListSource}"
+                 ItemTemplate="{StaticResource ModificationTemplate}"
+                 SelectionMode="Single"
+                 SelectionChanged="ModsList_SelectionChangedAsync" />
+
+        <ListBox x:Name="PatchesList"
+                 Grid.Row="3"
+                 Grid.RowSpan="2"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="4"
+                 Classes="launcher-list"
+                 Margin="3,4,10,26"
+                 ItemContainerTheme="{StaticResource LauncherListBoxItemTheme}"
+                 ItemsSource="{Binding PatchesListSource}"
+                 ItemTemplate="{StaticResource AddonTemplate}"
+                 SelectionMode="Single"
+                 SelectionChanged="PatchesList_SelectionChangedAsync" />
+
+        <ListBox x:Name="AddonsList"
+                 Grid.Row="3"
+                 Grid.RowSpan="2"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="4"
+                 Classes="launcher-list"
+                 Margin="3,4,10,26"
+                 ItemContainerTheme="{StaticResource LauncherListBoxItemTheme}"
+                 ItemsSource="{Binding AddonsListSource}"
+                 ItemTemplate="{StaticResource AddonTemplate}"
+                 SelectionMode="Multiple"
+                 SelectionChanged="AddonsList_SelectionChangedAsync" />
+
+        <Button x:Name="ButtonStartGame"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,24,0,0"
+                Content="{localization:Loc Launch}"
+                IsEnabled="{Binding StartGameButtonEnabled}"
+                Click="LaunchGame_ClickAsync" />
+        <Button x:Name="ButtonWorldBuilder"
+                Grid.Row="3"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,29,0,0"
+                Content="{localization:Loc WorldBuilder}"
+                IsEnabled="{Binding WorldBuilderButtonEnabled}"
+                Click="LaunchWorldBuilder_ClickAsync" />
+        <Button x:Name="ButtonWindowed"
+                Grid.Row="3"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,74,0,0"
+                Content="{Binding WindowedModeButtonText}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ToggleWindowedMode_ClickAsync" />
+        <Button x:Name="ButtonQuickStart"
+                Grid.Row="3"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,119,0,0"
+                Content="{Binding QuickStartButtonText}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ToggleQuickStart_ClickAsync" />
+        <Button x:Name="ButtonOptions"
+                Grid.Row="3"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,164,0,0"
+                Content="{localization:Loc Options}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="OpenOptions_ClickAsync" />
+        <Button x:Name="ButtonExit"
+                Grid.Row="3"
+                Grid.Column="6"
+                Classes="sidebar-button"
+                Margin="28,221,0,0"
+                Content="{localization:Loc Exit}"
+                Click="Close_Click" />
+
+        <TextBlock x:Name="GameClientSelectorLabel"
+                   Grid.Row="4"
+                   Grid.Column="6"
+                   Width="229"
+                   Height="22"
+                   Margin="28,10,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="14"
+                   Text="{localization:Loc SelectedGameClient}"
+                   TextWrapping="Wrap" />
+        <ComboBox x:Name="GameClientSelector"
+                   Grid.Row="4"
+                   Grid.Column="6"
+                   Width="229"
+                   Height="31"
+                   Margin="28,32,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Classes="game-client-selector"
+                  ItemContainerTheme="{StaticResource GameClientComboBoxItemTheme}"
+                  ItemsSource="{Binding SupportedGameClients}"
+                  SelectedItem="{Binding SelectedGameClientOption, Mode=TwoWay}"
+                  IsEnabled="{Binding GameClientSelectorEnabled}"
+                  ToolTip.ShowOnDisabled="True">
+            <ToolTip.Tip>
+                <TextBlock MaxWidth="420"
+                           Foreground="White"
+                           Text="{Binding SelectedGameClientOption.ExecutableName}"
+                           TextWrapping="Wrap" />
+            </ToolTip.Tip>
+        </ComboBox>
+        <TextBlock x:Name="WorldBuilderSelectorLabel"
+                   Grid.Row="4"
+                   Grid.Column="6"
+                   Width="229"
+                   Height="22"
+                   Margin="28,65,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="14"
+                   Text="{localization:Loc SelectedWorldBuilder}"
+                   TextWrapping="Wrap" />
+        <ComboBox x:Name="WorldBuilderSelector"
+                   Grid.Row="4"
+                   Grid.Column="6"
+                   Width="229"
+                   Height="31"
+                   Margin="28,87,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Classes="game-client-selector"
+                  ItemContainerTheme="{StaticResource GameClientComboBoxItemTheme}"
+                  ItemsSource="{Binding SupportedWorldBuilders}"
+                  SelectedItem="{Binding SelectedWorldBuilderOption, Mode=TwoWay}"
+                  IsEnabled="{Binding WorldBuilderSelectorEnabled}"
+                  ToolTip.ShowOnDisabled="True">
+            <ToolTip.Tip>
+                <TextBlock MaxWidth="420"
+                           Foreground="White"
+                           Text="{Binding SelectedWorldBuilderOption.ExecutableName}"
+                           TextWrapping="Wrap" />
+            </ToolTip.Tip>
+        </ComboBox>
+
+        <controls:LauncherLoadingIndicator x:Name="DownloadingImage"
+                                           Grid.RowSpan="6"
+                                           Grid.Column="4"
+                                           Width="180"
+                                           Margin="1,0,92,0"
+                                           HorizontalAlignment="Center"
+                                           IsVisible="{Binding IsLoadingIndicatorVisible}" />
+
+        <Button x:Name="ModsButton"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="66"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="14"
+                Content="{localization:Loc Mods}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ShowModifications_ClickAsync" />
+        <Button x:Name="PatchesButton"
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="267"
+                Classes="tab-button"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                IsVisible="{Binding IsPatchesButtonVisible}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ShowPatches_ClickAsync">
+            <Grid>
+                <ProgressBar Classes="tab-download-progress"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="{Binding PatchesTabDownloadProgressValue}"
+                             IsVisible="{Binding IsPatchesTabDownloadIndicatorVisible}"
+                             IsHitTestVisible="False" />
+                <TextBlock Margin="20,0,30,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding PatchesTabText}"
+                           TextTrimming="CharacterEllipsis" />
+                <Viewbox Width="13"
+                         Height="13"
+                         Margin="0,0,9,0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         IsVisible="{Binding IsPatchesTabDownloadIndicatorVisible}"
+                         ToolTip.Tip="{localization:Loc Downloading}">
+                    <Path Data="M8,1 L8,10 M4,6 L8,10 L12,6 M3,13 L13,13"
+                          Stretch="Uniform"
+                          Stroke="{DynamicResource GenLauncherBorderColor}"
+                          StrokeThickness="1.8"
+                          StrokeLineCap="Round"
+                          StrokeJoin="Round" />
+                </Viewbox>
+            </Grid>
+        </Button>
+        <Button x:Name="AddonsButton"
+                Grid.Row="1"
+                Grid.Column="4"
+                Width="267"
+                Classes="tab-button"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                IsVisible="{Binding IsAddonsButtonVisible}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ShowAddons_ClickAsync">
+            <Grid>
+                <ProgressBar Classes="tab-download-progress"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="{Binding AddonsTabDownloadProgressValue}"
+                             IsVisible="{Binding IsAddonsTabDownloadIndicatorVisible}"
+                             IsHitTestVisible="False" />
+                <TextBlock Margin="20,0,30,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding AddonsTabText}"
+                           TextTrimming="CharacterEllipsis" />
+                <Viewbox Width="13"
+                         Height="13"
+                         Margin="0,0,9,0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         IsVisible="{Binding IsAddonsTabDownloadIndicatorVisible}"
+                         ToolTip.Tip="{localization:Loc Downloading}">
+                    <Path Data="M8,1 L8,10 M4,6 L8,10 L12,6 M3,13 L13,13"
+                          Stretch="Uniform"
+                          Stroke="{DynamicResource GenLauncherBorderColor}"
+                          StrokeThickness="1.8"
+                          StrokeLineCap="Round"
+                          StrokeJoin="Round" />
+                </Viewbox>
+            </Grid>
+        </Button>
+
+        <TextBlock x:Name="CurrentLauncherVersionText"
+                   Grid.Row="4"
+                   Grid.RowSpan="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="4"
+                   Width="605"
+                   Height="30"
+                   Margin="2,82,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Text="{Binding CurrentLauncherVersionText}"
+                   TextWrapping="Wrap" />
+
+        <controls:UpdateButton x:Name="AddModButton"
+                               Grid.Row="2"
+                               Grid.Column="2"
+                               Grid.ColumnSpan="2"
+                               Width="160"
+                               Height="28"
+                               Margin="10,9,0,0"
+                               Padding="1"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Content="{localization:Loc AddMod}"
+                               IsEnabled="{Binding MainControlsEnabled}"
+                               IsVisible="{Binding IsAddModButtonVisible}"
+                               IsBlinking="{Binding AddModButtonBlinking}"
+                               Click="AddRepositoryModification_ClickAsync" />
+        <Button x:Name="ManualAddMod"
+                Grid.Row="2"
+                Grid.Column="3"
+                 Grid.ColumnSpan="2"
+                 Width="240"
+                 Height="28"
+                 Margin="155,9,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                FontWeight="Bold"
+                Content="{localization:Loc AddModFromFiles}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ImportManualModification_ClickAsync" />
+        <Button x:Name="ManualAddPatch"
+                Grid.Row="2"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="360"
+                Height="28"
+                Margin="1,7,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="13"
+                FontWeight="Bold"
+                Content="{Binding ManualAddPatchText}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ImportManualPatch_ClickAsync" />
+        <Button x:Name="ManualAddAddon"
+                Grid.Row="2"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="360"
+                Height="28"
+                Margin="1,7,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="13"
+                FontWeight="Bold"
+                Content="{Binding ManualAddAddonText}"
+                IsEnabled="{Binding MainControlsEnabled}"
+                Click="ImportManualAddon_ClickAsync" />
+
+        <Grid Grid.RowSpan="6"
+              Grid.ColumnSpan="8"
+              Panel.ZIndex="100"
+              Background="#66000000"
+              Focusable="True"
+              IsHitTestVisible="True"
+              IsVisible="{Binding IsRunningProcessOverlayVisible}">
+            <Border Width="560"
+                    MinHeight="230"
+                    Padding="28"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource GenLauncherDarkBackGround}"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="2">
+                <Grid RowDefinitions="Auto,Auto,34,Auto">
+                    <TextBlock Grid.Row="0"
+                               Margin="0,0,0,16"
+                               HorizontalAlignment="Center"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource GenLauncherActiveColor}"
+                               Text="{localization:Loc RunningProcessOverlayTitle}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1"
+                               Margin="0,0,0,20"
+                               HorizontalAlignment="Stretch"
+                               FontSize="18"
+                               Text="{Binding RunningProcessStatusText}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                    <ProgressBar Grid.Row="2"
+                                 Height="12"
+                                 Margin="30,0,30,22"
+                                 IsIndeterminate="True" />
+                    <Button Grid.Row="3"
+                            MinWidth="260"
+                            MinHeight="46"
+                            Padding="18,4"
+                            HorizontalAlignment="Center"
+                            Click="ForceQuitRunningProcess_ClickAsync">
+                        <TextBlock Text="{localization:Loc ForceQuitRunningProcess}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

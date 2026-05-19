@@ -1,0 +1,301 @@
+<Application
+    x:Class="GenLauncherGO.UI.Features.Startup.LauncherAvaloniaApplication"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:GenLauncherGO.UI.Shared.Controls"
+    RequestedThemeVariant="Dark">
+  <Application.Resources>
+    <ControlTheme x:Key="{x:Type Button}"
+                  TargetType="Button">
+      <Setter Property="Background" Value="{DynamicResource GenLauncherLightBackGround}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="FocusAdorner">
+        <FocusAdornerTemplate>
+          <Rectangle Margin="2"
+                     Stroke="{DynamicResource GenLauncherDefaultTextColor}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,2" />
+        </FocusAdornerTemplate>
+      </Setter>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Padding="{TemplateBinding Padding}"
+                              RecognizesAccessKey="True" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ButtonPointerOverBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+      </Style>
+      <Style Selector="^:pressed">
+        <Setter Property="Background" Value="{DynamicResource ButtonPressedBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      </Style>
+      <Style Selector="^:focus-visible">
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+        <Setter Property="Foreground" Value="{DynamicResource GenLauncherInactiveBorder}" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="GenLauncherDialogListBoxItemTheme"
+                  TargetType="ListBoxItem">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="0,0,20,0" />
+      <Setter Property="Padding" Value="2" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ListBoxMouseOverItemBackground}" />
+      </Style>
+      <Style Selector="^:selected">
+        <Setter Property="Background" Value="{DynamicResource DialogListBoxSelectedItemBackground}" />
+      </Style>
+      <Style Selector="^:focus-visible">
+        <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LauncherScrollBarLineButtonTheme"
+                  TargetType="RepeatButton">
+      <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      <Setter Property="BorderThickness" Value="1.5" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter x:Name="PART_ContentPresenter"
+                            Margin="1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="0"
+                            Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center" />
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherNeutralSurfaceColor}" />
+      </Style>
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GenLauncherNeutralPressedColor}" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LauncherScrollBarPageButtonTheme"
+                  TargetType="RepeatButton">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LauncherScrollBarThumbTheme"
+                  TargetType="Thumb">
+      <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+      <Setter Property="BorderThickness" Value="1.5" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="0" />
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type ScrollBar}"
+                  TargetType="ScrollBar">
+      <Setter Property="AllowAutoHide" Value="False" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+      <Style Selector="^:vertical">
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Grid RowDefinitions="18,*,18">
+              <Border Grid.RowSpan="3"
+                      Background="Transparent" />
+              <RepeatButton x:Name="PART_LineUpButton"
+                            Grid.Row="0"
+                            Height="18"
+                            Theme="{StaticResource LauncherScrollBarLineButtonTheme}">
+                <Path Width="8"
+                      Height="4"
+                      Data="M 0 4 L 8 4 L 4 0 Z"
+                      Fill="{DynamicResource GenLauncherBorderColor}" />
+              </RepeatButton>
+              <Track x:Name="PART_Track"
+                     Grid.Row="1"
+                     Minimum="{TemplateBinding Minimum}"
+                     Maximum="{TemplateBinding Maximum}"
+                     Value="{TemplateBinding Value, Mode=TwoWay}"
+                     ViewportSize="{TemplateBinding ViewportSize}"
+                     Orientation="{TemplateBinding Orientation}"
+                     IsDirectionReversed="True">
+                <Track.DecreaseButton>
+                  <RepeatButton x:Name="PART_PageUpButton"
+                                Theme="{StaticResource LauncherScrollBarPageButtonTheme}" />
+                </Track.DecreaseButton>
+                <Track.Thumb>
+                  <Thumb Margin="1,0"
+                         Background="{DynamicResource GenLauncherNeutralSurfaceColor}"
+                         Theme="{StaticResource LauncherScrollBarThumbTheme}" />
+                </Track.Thumb>
+                <Track.IncreaseButton>
+                  <RepeatButton x:Name="PART_PageDownButton"
+                                Theme="{StaticResource LauncherScrollBarPageButtonTheme}" />
+                </Track.IncreaseButton>
+              </Track>
+              <RepeatButton x:Name="PART_LineDownButton"
+                            Grid.Row="2"
+                            Height="18"
+                            Theme="{StaticResource LauncherScrollBarLineButtonTheme}">
+                <Path Width="8"
+                      Height="4"
+                      Data="M 0 0 L 4 4 L 8 0 Z"
+                      Fill="{DynamicResource GenLauncherBorderColor}" />
+              </RepeatButton>
+            </Grid>
+          </ControlTemplate>
+        </Setter>
+      </Style>
+      <Style Selector="^:horizontal">
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Grid ColumnDefinitions="18,*,18">
+              <Border Grid.ColumnSpan="3"
+                      Background="#F0F0F0" />
+              <RepeatButton x:Name="PART_LineUpButton"
+                            Grid.Column="0"
+                            Width="18"
+                            Theme="{StaticResource LauncherScrollBarLineButtonTheme}">
+                <Path Width="4"
+                      Height="8"
+                      Data="M 4 0 L 4 8 L 0 4 Z"
+                      Fill="{DynamicResource GenLauncherBorderColor}" />
+              </RepeatButton>
+              <Track x:Name="PART_Track"
+                     Grid.Column="1"
+                     Minimum="{TemplateBinding Minimum}"
+                     Maximum="{TemplateBinding Maximum}"
+                     Value="{TemplateBinding Value, Mode=TwoWay}"
+                     ViewportSize="{TemplateBinding ViewportSize}"
+                     Orientation="{TemplateBinding Orientation}"
+                     IsDirectionReversed="False">
+                <Track.DecreaseButton>
+                  <RepeatButton x:Name="PART_PageUpButton"
+                                Theme="{StaticResource LauncherScrollBarPageButtonTheme}" />
+                </Track.DecreaseButton>
+                <Track.Thumb>
+                  <Thumb Margin="0,1"
+                         Background="{DynamicResource GenLauncherNeutralSurfaceColor}"
+                         Theme="{StaticResource LauncherScrollBarThumbTheme}" />
+                </Track.Thumb>
+                <Track.IncreaseButton>
+                  <RepeatButton x:Name="PART_PageDownButton"
+                                Theme="{StaticResource LauncherScrollBarPageButtonTheme}" />
+                </Track.IncreaseButton>
+              </Track>
+              <RepeatButton x:Name="PART_LineDownButton"
+                            Grid.Column="2"
+                            Width="18"
+                            Theme="{StaticResource LauncherScrollBarLineButtonTheme}">
+                <Path Width="4"
+                      Height="8"
+                      Data="M 0 0 L 4 4 L 0 8 Z"
+                      Fill="{DynamicResource GenLauncherBorderColor}" />
+              </RepeatButton>
+            </Grid>
+          </ControlTemplate>
+        </Setter>
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type controls:UpdateButton}"
+                  BasedOn="{StaticResource {x:Type Button}}"
+                  TargetType="controls:UpdateButton">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid>
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+              <ContentPresenter Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Padding="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True" />
+            </Border>
+            <Border x:Name="PART_BlinkOverlay"
+                    Background="{DynamicResource GenLauncherDarkFillColor}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    IsHitTestVisible="False"
+                    Opacity="0" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:blinking /template/ Border#PART_BlinkOverlay">
+        <Style.Animations>
+          <Animation Duration="0:0:0.5"
+                     IterationCount="20"
+                     PlaybackDirection="Alternate"
+                     FillMode="None">
+            <KeyFrame Cue="0%">
+              <Setter Property="Opacity" Value="0" />
+            </KeyFrame>
+            <KeyFrame Cue="100%">
+              <Setter Property="Opacity" Value="0.5" />
+            </KeyFrame>
+          </Animation>
+        </Style.Animations>
+      </Style>
+    </ControlTheme>
+  </Application.Resources>
+  <Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://GenLauncherGO/Shared/Themes/GenLauncherStyles.axaml" />
+  </Application.Styles>
+</Application>

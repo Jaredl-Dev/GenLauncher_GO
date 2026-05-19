@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--
+        Microsoft ResX Schema
+
+        Version 2.0
+
+        The primary goals of this format is to allow a simple XML format
+        that is mostly human readable. The generation and parsing of the
+        various data types are done through the TypeConverter classes
+        associated with the data types.
+
+        Example:
+
+        ... ado.net/XML headers & schema ...
+        <resheader name="resmimetype">text/microsoft-resx</resheader>
+        <resheader name="version">2.0</resheader>
+        <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+        <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+        <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+        <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+        <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+            <value>[base64 mime encoded serialized .NET Framework object]</value>
+        </data>
+        <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+            <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+            <comment>This is a comment</comment>
+        </data>
+
+        There are any number of "resheader" rows that contain simple
+        name/value pairs.
+
+        Each data row contains a name, and value. The row also contains a
+        type or mimetype. Type corresponds to a .NET class that support
+        text/value conversion through the TypeConverter architecture.
+        Classes that don't support this are serialized and stored with the
+        mimetype set.
+
+        The mimetype is used for serialized objects, and tells the
+        ResXResourceReader how to depersist the object. This is currently not
+        extensible. For a given mimetype the value must be set accordingly:
+
+        Note - application/x-microsoft.net.object.binary.base64 is the format
+        that the ResXResourceWriter will generate, however the reader can
+        read any of the formats listed below.
+
+        mimetype: application/x-microsoft.net.object.binary.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.soap.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.bytearray.base64
+        value   : The object must be serialized into a byte array
+                : using a System.ComponentModel.TypeConverter
+                : and then encoded with base64 encoding.
+        -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+    <data name="AddAddonFromFiles" xml:space="preserve">
+    <value>Add-on für {0} aus Dateien hinzufügen</value>
+  </data>
+    <data name="AddMod" xml:space="preserve">
+    <value>Mod hinzufügen</value>
+  </data>
+    <data name="Addons" xml:space="preserve">
+    <value>Add-ons für </value>
+  </data>
+    <data name="AddPatchFromFiles" xml:space="preserve">
+    <value>Patch für {0} aus Dateien hinzufügen</value>
+  </data>
+    <data name="AutoDelete" xml:space="preserve">
+    <value>Alte Mod-Versionen nach Updates löschen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CancelDownloadAction" xml:space="preserve">
+    <value>Download abbrechen</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pausieren</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
+    <data name="Canceled" xml:space="preserve">
+    <value>Download abgebrochen</value>
+  </data>
+    <data name="CancelDownload" xml:space="preserve">
+    <value>Download abbrechen?</value>
+  </data>
+    <data name="CancelDownloadDetails" xml:space="preserve">
+    <value>Der Download von {0} wird abgebrochen und alle heruntergeladenen Dateien dieser Version werden gelöscht.</value>
+  </data>
+    <data name="CannotConnect" xml:space="preserve">
+    <value>Keine Verbindung zu GitHub möglich. Die Installation von Modifikationen aus dem Internet ist nicht verfügbar.</value>
+  </data>
+    <data name="DeploymentRecoveryFailed" xml:space="preserve">
+    <value>GenLauncherGO konnte die vorherige Bereitstellung nicht wiederherstellen. Schließe das Spiel oder jeden laufenden Client und wähle dann Wiederholen. Wähle Abbrechen, um den Launcher zu schließen und zu vermeiden, dass der Spielordner in einem unsicheren Zustand bleibt.</value>
+  </data>
+    <data name="ChangelogOnly" xml:space="preserve">
+    <value>Änderungsprotokoll</value>
+  </data>
+    <data name="ChangeToFullScreen" xml:space="preserve">
+    <value>Zum Vollbild wechseln</value>
+  </data>
+    <data name="ChangeToWindowed" xml:space="preserve">
+    <value>Zum Fenstermodus wechseln</value>
+  </data>
+    <data name="ChangeToNormalStart" xml:space="preserve">
+    <value>Zum normalen Start wechseln</value>
+  </data>
+    <data name="ChangeToQuickStart" xml:space="preserve">
+    <value>Zum Schnellstart wechseln</value>
+  </data>
+    <data name="Compatibility" xml:space="preserve">
+    <value>Kompatibilität mit der Mod kann nicht garantiert werden!</value>
+  </data>
+    <data name="Continue" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+    <data name="CurrentVersion" xml:space="preserve">
+    <value>Aktuelle Version: </value>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+    <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+    <data name="RemoveFromList" xml:space="preserve">
+    <value>Aus Liste entfernen</value>
+  </data>
+    <data name="RemoveFromListConfirmation" xml:space="preserve">
+    <value>Aus Liste entfernen?</value>
+  </data>
+    <data name="RemoveFromListDetails" xml:space="preserve">
+    <value>Möchten Sie {0} wirklich aus der Liste entfernen?</value>
+  </data>
+    <data name="RemoveContent" xml:space="preserve">
+    <value>Inhalt entfernen?</value>
+  </data>
+    <data name="RemoveContentDetails" xml:space="preserve">
+    <value>Möchten Sie {0} wirklich entfernen? Alle für diese Version installierten Dateien werden gelöscht.</value>
+  </data>
+    <data name="Deprecated" xml:space="preserve">
+    <value>{0} ist veraltet</value>
+  </data>
+    <data name="Discord" xml:space="preserve">
+    <value>Discord-Server beitreten</value>
+  </data>
+    <data name="ModDb" xml:space="preserve">
+    <value>ModDB</value>
+  </data>
+    <data name="Donate" xml:space="preserve">
+    <value>Spenden</value>
+  </data>
+    <data name="Download" xml:space="preserve">
+    <value>{0} wird heruntergeladen: {1} MB / {2} MB</value>
+  </data>
+    <data name="DownloadInProgress" xml:space="preserve">
+    <value>Download läuft: {0} / {1}</value>
+  </data>
+    <data name="EstimatedTimeRemaining" xml:space="preserve">
+    <value>Restzeit {0}</value>
+  </data>
+    <data name="EnterModName" xml:space="preserve">
+    <value>Geben Sie den Namen der Modifikation ein</value>
+  </data>
+    <data name="EnterModVersion" xml:space="preserve">
+    <value>Geben Sie die Version der Modifikation ein</value>
+  </data>
+    <data name="Error" xml:space="preserve">
+    <value>Fehler: </value>
+  </data>
+    <data name="ErrorMsg" xml:space="preserve">
+    <value>GenLauncherGO-Version: {2} \r\nGenLauncherGO-Support auf Discord: {3} \r\nFehler: {0} \r\nStacktrace: {1}</value>
+  </data>
+    <data name="Exit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+    <data name="FilesCorrupted" xml:space="preserve">
+    <value>Einige Mod-Dateien fehlen oder sind beschädigt!</value>
+  </data>
+    <data name="GameIsStillRunning" xml:space="preserve">
+    <value>Spiel läuft noch!</value>
+  </data>
+    <data name="GameRunning" xml:space="preserve">
+    <value>Generals-Spiel läuft bereits!</value>
+  </data>
+    <data name="LaunchVerificationRunning" xml:space="preserve">
+    <value>Die Prüfung repariert Inhalte.</value>
+  </data>
+    <data name="PackageActivityInProgress" xml:space="preserve">
+    <value>Inhaltsvorgang läuft</value>
+  </data>
+    <data name="PackageActivityInProgressDetails" xml:space="preserve">
+    <value>Warten Sie, bis der aktuelle Download oder die Reparatur abgeschlossen ist, bevor Sie weitere Inhalte installieren, importieren oder hinzufügen.</value>
+  </data>
+    <data name="HideLauncher" xml:space="preserve">
+    <value>Launcher ausblenden, während das Spiel läuft</value>
+  </data>
+    <data name="Image" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+    <data name="InputModData" xml:space="preserve">
+    <value>Eingabe der Modifikationsdaten</value>
+  </data>
+    <data name="Install" xml:space="preserve">
+    <value>Installieren</value>
+  </data>
+    <data name="InstallInProgress" xml:space="preserve">
+    <value>{0} kann nicht gestartet werden: Installation läuft!</value>
+  </data>
+    <data name="LatestVersion" xml:space="preserve">
+    <value>Neuste Version: </value>
+  </data>
+    <data name="Launch" xml:space="preserve">
+    <value>Spiel starten</value>
+  </data>
+    <data name="LaunchAborted" xml:space="preserve">
+    <value>Start abgebrochen</value>
+  </data>
+    <data name="ModificationName" xml:space="preserve">
+    <value>Name der Modifikation: </value>
+  </data>
+    <data name="ModificationsWithUpdate" xml:space="preserve">
+    <value>Einige Modifikationen können aktualisiert werden:</value>
+  </data>
+    <data name="Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+    <data name="NameAndVersionValidSymbols" xml:space="preserve">
+    <value>Modifikationsname und Version dürfen nur gültige Zeichen enthalten.</value>
+  </data>
+    <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+    <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+    <data name="NotInstalled" xml:space="preserve">
+    <value>{0} wurde ausgewählt, ist aber nicht installiert. Start abgebrochen!</value>
+  </data>
+    <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+    <data name="OperationAborted" xml:space="preserve">
+    <value>Vorgang abgebrochen</value>
+  </data>
+    <data name="Options" xml:space="preserve">
+    <value>Launcher-Einstellungen</value>
+  </data>
+    <data name="Patches" xml:space="preserve">
+    <value>Patches für </value>
+  </data>
+    <data name="PlayOnline" xml:space="preserve">
+    <value>Wie spiele ich online?</value>
+  </data>
+    <data name="Preparing" xml:space="preserve">
+    <value>Vorbereiten, bitte warten...</value>
+  </data>
+    <data name="Reinstall" xml:space="preserve">
+    <value>Es wird empfohlen, die Mod neu zu installieren. \rSie können diese Prüfung in den Launcher-Einstellungen deaktivieren.</value>
+  </data>
+    <data name="SearchMods" xml:space="preserve"><value>Mods durchsuchen...</value></data>
+    <data name="NoModsMatchSearch" xml:space="preserve"><value>Keine Mods entsprechen der Suche.</value></data>
+    <data name="CalculatingPackageSize" xml:space="preserve"><value>Wird berechnet...</value></data>
+    <data name="PackageSizeUnavailable" xml:space="preserve"><value>Nicht verfügbar</value></data>
+    <data name="SelectMod" xml:space="preserve">
+    <value>Mod zum Hinzufügen auswählen</value>
+  </data>
+    <data name="SetImage" xml:space="preserve">
+    <value>Bild festlegen (500x100)</value>
+  </data>
+    <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+    <data name="ThankYou" xml:space="preserve">
+    <value>Vielen Dank!</value>
+  </data>
+    <data name="UninstalledUpdate" xml:space="preserve">
+    <value>Es gibt ein nicht installiertes Update für {0} </value>
+  </data>
+    <data name="UnpackingPreparing" xml:space="preserve">
+    <value>Entpacken/Vorbereiten...</value>
+  </data>
+    <data name="Update" xml:space="preserve">
+    <value>Update!</value>
+  </data>
+    <data name="UpToDate" xml:space="preserve">
+    <value>Aktuell</value>
+  </data>
+    <data name="VersionMustContainNumbers" xml:space="preserve">
+    <value>Die Version muss Zahlen enthalten</value>
+  </data>
+    <data name="WorldBuilder" xml:space="preserve">
+    <value>World Builder</value>
+  </data>
+    <data name="WorldBuilderRunning" xml:space="preserve">
+    <value>World Builder läuft bereits!</value>
+  </data>
+    <data name="AutoDeleteToolTip" xml:space="preserve">
+    <value>Entfernt ältere installierte Mod-Versionen automatisch, nachdem eine neuere Version installiert wurde.</value>
+  </data>
+    <data name="SettingsSaveFailedTitle" xml:space="preserve">
+    <value>Einstellungen nicht gespeichert</value>
+  </data>
+    <data name="SettingsSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO konnte Ihre Einstellungen nicht speichern. Ihre bisherigen Einstellungen bleiben aktiv. Prüfen Sie, ob der Datenordner des Launchers beschreibbar ist, und versuchen Sie es erneut.</value>
+  </data>
+    <data name="CloseAnyway" xml:space="preserve">
+    <value>Trotzdem schließen</value>
+  </data>
+    <data name="ClosePackageActivityDetails" xml:space="preserve">
+    <value>{0} wird noch ausgeführt. Wenn GenLauncherGO geschlossen wird, wird der aktuelle Vorgang beendet.</value>
+  </data>
+    <data name="DonateOriginalAuthor" xml:space="preserve">
+    <value>An GenLauncher-Autor spenden</value>
+  </data>
+    <data name="DonateOriginalAuthorToolTip" xml:space="preserve">
+    <value>Öffnet die Spendenseite des ursprünglichen GenLauncher-Autors.</value>
+  </data>
+    <data name="GameExecutableArguments" xml:space="preserve">
+    <value>Argumente für die Spiel-EXE</value>
+  </data>
+    <data name="GameExecutableArgumentsInputToolTip" xml:space="preserve">
+    <value>Optionale Befehlszeilenargumente für die ausgewählte Spiel-EXE. Leer lassen, um normal zu starten.</value>
+  </data>
+    <data name="GameExecutableArgumentsToolTip" xml:space="preserve">
+    <value>Argumente, die an die ausgewählte Spiel-EXE übergeben werden. Diese werden nicht an GeneralsOnline übergeben.</value>
+  </data>
+    <data name="GeneralsOnlineClient" xml:space="preserve">
+    <value>GeneralsOnline-Client</value>
+  </data>
+    <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+    <data name="LaunchArguments" xml:space="preserve">
+    <value>Startargumente</value>
+  </data>
+    <data name="Links" xml:space="preserve">
+    <value>Links</value>
+  </data>
+    <data name="Maintenance" xml:space="preserve">
+    <value>Wartung</value>
+  </data>
+    <data name="NoSupportedClient" xml:space="preserve">
+    <value>Kein unterstützter Client</value>
+  </data>
+    <data name="SelectedGameClient" xml:space="preserve">
+    <value>Ausgewählter Spielclient</value>
+  </data>
+    <data name="SelectedWorldBuilder" xml:space="preserve">
+    <value>Ausgewählter World Builder</value>
+  </data>
+    <data name="SuperHackersClient" xml:space="preserve">
+    <value>SuperHackers-Client</value>
+  </data>
+    <data name="SuperHackersWorldBuilder" xml:space="preserve">
+    <value>SuperHackers World Builder</value>
+  </data>
+    <data name="UseEnglishLanguage" xml:space="preserve">
+    <value>Englisch verwenden</value>
+  </data>
+    <data name="UseEnglishLanguageToolTip" xml:space="preserve">
+    <value>Erzwingt Englisch für die Launcher-Oberfläche.</value>
+  </data>
+    <data name="UseSystemLanguage" xml:space="preserve">
+    <value>Systemsprache verwenden</value>
+  </data>
+    <data name="UseSystemLanguageToolTip" xml:space="preserve">
+    <value>Verwendet die Windows-Anzeigesprache, wenn eine passende Launcher-Übersetzung verfügbar ist.</value>
+  </data>
+    <data name="VanillaWorldBuilder" xml:space="preserve">
+    <value>Vanilla World Builder</value>
+  </data>
+    <data name="WindowBehavior" xml:space="preserve">
+    <value>Fensterverhalten</value>
+  </data>
+    <data name="WorldBuilderArguments" xml:space="preserve">
+    <value>Argumente für den World Builder</value>
+  </data>
+    <data name="WorldBuilderArgumentsInputToolTip" xml:space="preserve">
+    <value>Optionale Befehlszeilenargumente für die ausgewählte World-Builder-EXE. Leer lassen, um normal zu starten.</value>
+  </data>
+    <data name="WorldBuilderArgumentsToolTip" xml:space="preserve">
+    <value>Argumente, die an die ausgewählte World-Builder-EXE übergeben werden.</value>
+  </data>
+    <data name="HideLauncherToolTip" xml:space="preserve">
+    <value>Blendet das Launcher-Fenster aus, während das Spiel oder der World Builder läuft, und zeigt es danach wieder an.</value>
+  </data>
+    <data name="AddModFromFiles" xml:space="preserve">
+    <value>Mod hinzufügen von Dateien</value>
+  </data>
+    <data name="FinishProcess" xml:space="preserve">
+    <value>Beenden Sie den Spielprozess, bevor Sie die Optionen öffnen.</value>
+  </data>
+    <data name="Info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+    <data name="Retry" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+    <data name="Downloading" xml:space="preserve">
+    <value>Wird heruntergeladen</value>
+  </data>
+    <data name="IntegrityRepeatedFailure" xml:space="preserve">
+    <value>Der Inhalt blieb nach mehreren Reparaturversuchen inkonsistent. Der Start wurde nicht ausgeführt.</value>
+  </data>
+    <data name="IntegrityCacheSuffix" xml:space="preserve"><value>Cache</value></data>
+    <data name="IntegrityBlockedDescription" xml:space="preserve"><value>Der ausgewählte Inhalt hat Überprüfungsprobleme, die nicht automatisch behoben werden können. Entfernen Sie blockierte Einträge oder stellen Sie den Inhalt wieder her, und versuchen Sie den Start erneut.</value></data>
+    <data name="CancelLaunch" xml:space="preserve"><value>Start abbrechen</value></data>
+    <data name="IntegrityMixedDescription" xml:space="preserve"><value>Der Start wurde angehalten, weil ausgewählte Remote- und manuelle Inhalte geändert wurden. Zu reparierende Remote-Inhalte: {0}. Manuelle Inhalte, deren aktuelle Änderungen übernommen werden: {1}. Remote-Änderungen können nicht übernommen und manuelle Änderungen nicht repariert werden.</value></data>
+    <data name="FixAbsorbAndLaunch" xml:space="preserve"><value>Reparieren, übernehmen und starten</value></data>
+    <data name="IntegrityManagedDescription" xml:space="preserve"><value>Ausgewählte remote verwaltete Inhalte unterscheiden sich von ihrer vertrauenswürdigen Quelle: {0}. Reparieren stellt nur die aufgeführten verwalteten Einträge wieder her, lädt sie erneut oder löscht sie und überprüft danach erneut.</value></data>
+    <data name="FixAndLaunch" xml:space="preserve"><value>Reparieren und starten</value></data>
+    <data name="IntegrityManualDescription" xml:space="preserve"><value>Ausgewählte manuell importierte Inhalte wurden geändert: {0}. Übernehmen vertraut den aktuellen Dateien, ohne sie zu reparieren oder zu löschen, und überprüft danach erneut.</value></data>
+    <data name="AbsorbAndLaunch" xml:space="preserve"><value>Änderungen übernehmen und starten</value></data>
+    <data name="IntegrityLegacyDescription" xml:space="preserve"><value>Für {0} ist keine verbindliche Reparaturquelle verfügbar. Vertrauen klassifiziert diese genauen Versionen dauerhaft als manuell und speichert den aktuellen Zustand.</value></data>
+    <data name="TrustAsManual" xml:space="preserve"><value>Als manuell vertrauen</value></data>
+    <data name="IntegrityDialogTitle" xml:space="preserve"><value>Überprüfung des Startinhalts</value></data>
+    <data name="IntegrityBlockGroup" xml:space="preserve"><value>Blockiert</value></data>
+    <data name="IntegrityDeleteGroup" xml:space="preserve"><value>Löschen</value></data>
+    <data name="IntegrityRepairGroup" xml:space="preserve"><value>Reparieren</value></data>
+    <data name="IntegrityRedownloadGroup" xml:space="preserve"><value>Erneut laden</value></data>
+    <data name="IntegrityAbsorbGroup" xml:space="preserve"><value>Übernehmen</value></data>
+    <data name="IntegrityTrustGroup" xml:space="preserve"><value>Vertrauen</value></data>
+    <data name="IntegrityIssueGroupSummarySingle" xml:space="preserve"><value>{0} Änderung</value></data>
+    <data name="IntegrityIssueGroupSummaryMultiple" xml:space="preserve"><value>{0} Änderungen</value></data>
+    <data name="IntegrityIssueUntrackedLabel" xml:space="preserve"><value>Nicht erfasst</value></data>
+    <data name="IntegrityIssueMissingFileLabel" xml:space="preserve"><value>Fehlt</value></data>
+    <data name="IntegrityIssueModifiedFileLabel" xml:space="preserve"><value>Geändert</value></data>
+    <data name="IntegrityIssueUnexpectedFileLabel" xml:space="preserve"><value>Hinzugefügt</value></data>
+    <data name="IntegrityIssueEmptyDirectoryLabel" xml:space="preserve"><value>Leerer Ordner</value></data>
+    <data name="IntegrityIssueUnsafeLinkLabel" xml:space="preserve"><value>Unsicherer Link</value></data>
+    <data name="IntegrityIssueVerificationErrorLabel" xml:space="preserve"><value>Prüffehler</value></data>
+    <data name="GeneralsOnlineDiscord" xml:space="preserve">
+    <value>Generals Online Discord</value>
+  </data>
+    <data name="GeneralsOnlineDiscordToolTip" xml:space="preserve">
+    <value>Öffnet den Generals-Online-Discord-Server.</value>
+  </data>
+    <data name="OpenLogsFolder" xml:space="preserve">
+    <value>Log-Ordner öffnen</value>
+  </data>
+    <data name="OpenLogsFolderToolTip" xml:space="preserve">
+    <value>Öffnet den Ordner mit den GenLauncherGO-Logdateien.</value>
+  </data>
+    <data name="GitHubRepository" xml:space="preserve">
+    <value>GitHub-Repository</value>
+  </data>
+    <data name="GitHubRepositoryToolTip" xml:space="preserve">
+    <value>Öffnet das GenLauncherGO-GitHub-Repository.</value>
+  </data>
+    <data name="AdvertisingDonationAlerts" xml:space="preserve">
+    <value>Donation Alerts</value>
+  </data>
+    <data name="AdvertisingBoostyLink" xml:space="preserve">
+    <value>Boosty.to</value>
+  </data>
+    <data name="AdvertisingYouTubeRuLink" xml:space="preserve">
+    <value>My Youtube (Ru)</value>
+  </data>
+    <data name="RunningProcessOverlayTitle" xml:space="preserve">
+    <value>Laufender Prozess</value>
+  </data>
+    <data name="RunningProcessStatus" xml:space="preserve">
+    <value>Laufender Prozess: {0}</value>
+  </data>
+    <data name="RunningProcessUnknown" xml:space="preserve">
+    <value>Unbekannter Prozess</value>
+  </data>
+    <data name="ForceQuitRunningProcess" xml:space="preserve">
+    <value>Beenden erzwingen</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationTitle" xml:space="preserve">
+    <value>Prozess zwangsweise beenden?</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationDetails" xml:space="preserve">
+    <value>Dadurch werden {0} und alle verfolgten untergeordneten Prozesse sofort geschlossen. Nicht gespeicherter Fortschritt kann verloren gehen.</value>
+  </data>
+    <data name="RunningProcessCloseBlockedTitle" xml:space="preserve">
+    <value>Prozess läuft noch</value>
+  </data>
+    <data name="RunningProcessCloseBlockedDetails" xml:space="preserve">
+    <value>Schließen Sie den laufenden Prozess oder verwenden Sie „Beenden erzwingen“, bevor Sie GenLauncherGO schließen.</value>
+  </data>
+  <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Etwas ist schiefgelaufen</value>
+  </data>
+  <data name="UnexpectedErrorDetails" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten. Versuche es erneut. Wenn das Problem weiterhin besteht, prüfe die Launcher-Protokolle.</value>
+  </data>
+  <data name="LanguageRestartPromptTitle" xml:space="preserve">
+    <value>Neustart erforderlich</value>
+  </data>
+  <data name="LanguageRestartPromptDetails" xml:space="preserve">
+    <value>Die Sprachänderung wurde gespeichert und wird beim nächsten Start von GenLauncherGO angewendet.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Jetzt neu starten</value>
+  </data>
+  <data name="RestartLater" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="RestartBlockedTitle" xml:space="preserve">
+    <value>Neustart nicht verfügbar</value>
+  </data>
+  <data name="RestartBlockedActiveOperation" xml:space="preserve">
+    <value>Beende oder brich „{0}“ ab, bevor du GenLauncherGO neu startest.</value>
+  </data>
+  <data name="GameInstallationSetupTitle" xml:space="preserve">
+    <value>Spielordner auswählen</value>
+  </data>
+  <data name="InstallationNotConfigured" xml:space="preserve">
+    <value>Nicht eingerichtet</value>
+  </data>
+  <data name="ValidGeneralsInstallation" xml:space="preserve">
+    <value>Generals ist bereit</value>
+  </data>
+  <data name="ValidZeroHourInstallation" xml:space="preserve">
+    <value>Zero Hour ist bereit</value>
+  </data>
+  <data name="InstallationDirectoryNotFound" xml:space="preserve">
+    <value>Installationsordner nicht gefunden.</value>
+  </data>
+  <data name="InvalidGeneralsInstallation" xml:space="preserve">
+    <value>Erforderliche Generals-Dateien wurden nicht gefunden.</value>
+  </data>
+  <data name="InvalidZeroHourInstallation" xml:space="preserve">
+    <value>Erforderliche Zero-Hour-Dateien wurden nicht gefunden.</value>
+  </data>
+  <data name="LauncherInsideGameValidation" xml:space="preserve">
+    <value>GenLauncherGO darf sich nicht in einem Spielinstallationsordner befinden.</value>
+  </data>
+  <data name="UnsafeInstallationPath" xml:space="preserve">
+    <value>Dieser Ordner kann nicht verwendet werden, da sein Dateisystempfad unsicher ist.</value>
+  </data>
+  <data name="InstallationPathUnavailable" xml:space="preserve">
+    <value>Dieser Installationsordner kann nicht verwendet werden.</value>
+  </data>
+  <data name="DuplicateGameInstallation" xml:space="preserve">
+    <value>Generals und Zero Hour können nicht denselben Installationsordner verwenden.</value>
+  </data>
+  <data name="GeneralsShortName" xml:space="preserve">
+    <value>Generals</value>
+  </data>
+  <data name="ZeroHourShortName" xml:space="preserve">
+    <value>Zero Hour</value>
+  </data>
+  <data name="GeneralsFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals</value>
+  </data>
+  <data name="ZeroHourFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals – Zero Hour</value>
+  </data>
+  <data name="InstallationFolder" xml:space="preserve">
+    <value>Installationsordner</value>
+  </data>
+  <data name="GeneralsExecutableRequirement" xml:space="preserve">
+    <value>Erforderliche EXE: generalsv.exe (TheSuperHackers)</value>
+  </data>
+  <data name="ZeroHourExecutableRequirement" xml:space="preserve">
+    <value>Erforderliche EXE: generalszh.exe (TheSuperHackers) oder generalsonlinezh.exe (GeneralsOnline)</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Durchsuchen</value>
+  </data>
+  <data name="DetectViaRegistry" xml:space="preserve">
+    <value>In Registrierung suchen</value>
+  </data>
+  <data name="GameFirstRunRegistryNotice" xml:space="preserve">
+    <value>Starte jedes installierte Spiel mindestens einmal, damit sein Installationspfad sicher in die Registrierung geschrieben wird.</value>
+  </data>
+  <data name="RegistryInstallationNotFound" xml:space="preserve">
+    <value>Kein Spielordner in der Registrierung gefunden.</value>
+  </data>
+  <data name="RegistryDetectionFailedTitle" xml:space="preserve">
+    <value>Registrierungssuche fehlgeschlagen</value>
+  </data>
+  <data name="ProgramFilesModToolsWarning" xml:space="preserve">
+    <value>„Programme“ kann Mod-Tools beeinträchtigen.</value>
+  </data>
+  <data name="SameDriveRecommendation" xml:space="preserve">
+    <value>Empfohlen: Lege GenLauncherGO auf demselben Laufwerk wie deine Spiele ab.</value>
+  </data>
+  <data name="AtLeastOneInstallationRequired" xml:space="preserve">
+    <value>Wähle mindestens einen Spielordner aus, um fortzufahren.</value>
+  </data>
+  <data name="ChooseYourGame" xml:space="preserve">
+    <value>Spiel zum Verwalten wählen</value>
+  </data>
+  <data name="NotSelected" xml:space="preserve">
+    <value>Nicht ausgewählt</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Ausgewählt</value>
+  </data>
+  <data name="StandaloneLocationRequired" xml:space="preserve">
+    <value>GenLauncherGO verschieben</value>
+  </data>
+  <data name="StandaloneLocationBlockingDescription" xml:space="preserve">
+    <value>GenLauncherGO kann nicht aus einem Spielinstallationsordner gestartet werden.</value>
+  </data>
+  <data name="CurrentLauncherLocation" xml:space="preserve">
+    <value>Aktueller Launcher-Speicherort</value>
+  </data>
+  <data name="ContainingGameInstallation" xml:space="preserve">
+    <value>Übergeordnete Spielinstallation</value>
+  </data>
+  <data name="MoveLauncherOutsideGames" xml:space="preserve">
+    <value>Verschiebe den GenLauncherGO-Ordner an einen beliebigen Ort außerhalb der Spielinstallationen und starte ihn erneut.</value>
+  </data>
+  <data name="StandaloneLocationExample" xml:space="preserve">
+    <value>Beispiel: C:\Tools\GenLauncherGO</value>
+  </data>
+  <data name="AdministratorPermissionRequired" xml:space="preserve">
+    <value>GenLauncherGO benötigt zum Ausführen Administratorrechte.</value>
+  </data>
+  <data name="ActiveGameLabel" xml:space="preserve">
+    <value>Aktives Spiel</value>
+  </data>
+  <data name="GameManagement" xml:space="preserve">
+    <value>Spielverwaltung</value>
+  </data>
+  <data name="InstallationPaths" xml:space="preserve">
+    <value>Installationspfade</value>
+  </data>
+  <data name="SwitchToGame" xml:space="preserve">
+    <value>Zu {0} wechseln</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="GameSwitchBlockedTitle" xml:space="preserve">
+    <value>Spielwechsel nicht verfügbar</value>
+  </data>
+  <data name="GameSwitchBlockedDetails" xml:space="preserve">
+    <value>Beende oder brich den aktiven Start, das Spiel, den Download oder das Update ab, bevor du das Spiel wechselst.</value>
+  </data>
+  <data name="GameSwitchFailedTitle" xml:space="preserve">
+    <value>Spiel konnte nicht gewechselt werden</value>
+  </data>
+  <data name="GameSwitchFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO konnte das aktive Spiel nicht wechseln. {0}</value>
+  </data>
+  <data name="PreferencesSaveFailedTitle" xml:space="preserve">
+    <value>Einstellungen konnten nicht gespeichert werden</value>
+  </data>
+  <data name="PreferencesSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO konnte deine Einstellungen nicht speichern. Prüfe, ob der Launcher-Ordner beschreibbar ist, und versuche es erneut.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="LaunchCloseBlockedTitle" xml:space="preserve">
+    <value>Startvorgang läuft</value>
+  </data>
+  <data name="LaunchCloseBlockedDetails" xml:space="preserve">
+    <value>Warte, bis der aktive Startvorgang abgeschlossen ist, oder brich ihn ab, bevor du GenLauncherGO schließt.</value>
+  </data>
+  <data name="BuiltIn" xml:space="preserve"><value>Integriert</value></data>
+  <data name="Close" xml:space="preserve"><value>Schließen</value></data>
+  <data name="DisplayName" xml:space="preserve"><value>Anzeigename</value></data>
+  <data name="ExecutableDisplayNameWatermark" xml:space="preserve"><value>Im Launcher angezeigter Name</value></data>
+  <data name="ExecutableFile" xml:space="preserve"><value>Ausführbare Datei</value></data>
+  <data name="NoExecutableSelected" xml:space="preserve"><value>Keine ausführbare Datei ausgewählt</value></data>
+  <data name="CustomExecutables" xml:space="preserve"><value>Benutzerdefinierte Programme</value></data>
+  <data name="ManageGameClients" xml:space="preserve"><value>Spiel-Clients verwalten</value></data>
+  <data name="ManageWorldBuilders" xml:space="preserve"><value>World Builder verwalten</value></data>
+  <data name="ExecutableMustBeInGameRoot" xml:space="preserve"><value>Wähle eine .exe direkt im aktiven Spielordner aus.</value></data>
+  <data name="ExecutableUnavailable" xml:space="preserve"><value>Die ausgewählte Datei fehlt oder kann nicht verwendet werden.</value></data>
+  <data name="ExecutableDetailsRequired" xml:space="preserve"><value>Gib einen Anzeigenamen ein und wähle eine ausführbare Datei.</value></data>
+  <data name="ExecutableNameAlreadyExists" xml:space="preserve"><value>Ein Eintrag mit diesem Anzeigenamen ist bereits vorhanden.</value></data>
+  <data name="ExecutableFileAlreadyExists" xml:space="preserve"><value>Diese ausführbare Datei ist bereits registriert.</value></data>
+  <data name="RemoveCustomExecutable" xml:space="preserve"><value>Benutzerdefiniertes Programm entfernen?</value></data>
+  <data name="RemoveCustomExecutableDetails" xml:space="preserve"><value>Dadurch wird „{0}“ nur aus dem Launcher entfernt. Im Dateisystem wird nichts gelöscht oder verändert.</value></data>
+  <data name="ChooseExecutable" xml:space="preserve"><value>Ausführbare Datei auswählen</value></data>
+  <data name="Executables" xml:space="preserve"><value>Ausführbare Dateien</value></data>
+  <data name="AddExecutable" xml:space="preserve"><value>Programm hinzufügen</value></data>
+  <data name="EditExecutable" xml:space="preserve"><value>Programm bearbeiten</value></data>
+  <data name="SearchExecutables" xml:space="preserve"><value>Nach Name oder Dateiname suchen</value></data>
+  <data name="BuiltInExecutables" xml:space="preserve"><value>Integrierte Programme</value></data>
+</root>

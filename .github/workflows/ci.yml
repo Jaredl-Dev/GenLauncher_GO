@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: windows-2022
+    timeout-minutes: 20
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
+      GENLAUNCHERGO_REQUIRE_SYMBOLIC_LINK_TESTS: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Verify .NET SDK
+        shell: pwsh
+        run: |
+          $sdkVersion = dotnet --version
+          if (-not $sdkVersion.StartsWith("10.")) {
+            throw "Expected a .NET 10 SDK, but dotnet selected $sdkVersion."
+          }
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      - name: Build
+        run: dotnet build .\GenLauncherGO.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test .\GenLauncherGO.sln --configuration Release --no-build --no-restore
+
+  publish-smoke-test:
+    name: Publish smoke test
+    runs-on: windows-2022
+    timeout-minutes: 20
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.3xx
+          dotnet-quality: ga
+
+      - name: Verify .NET SDK
+        shell: pwsh
+        run: |
+          $sdkVersion = dotnet --version
+          if (-not $sdkVersion.StartsWith("10.")) {
+            throw "Expected a .NET 10 SDK, but dotnet selected $sdkVersion."
+          }
+
+      - name: Publish supported single-file executable
+        shell: pwsh
+        run: |
+          $publishDirectory = Join-Path $env:RUNNER_TEMP "GenLauncherGO-publish"
+          dotnet publish .\GenLauncherGO.UI\GenLauncherGO.UI.csproj -p:PublishProfile=WinX64SelfContained --output $publishDirectory
+          $launcherPath = Join-Path $publishDirectory "GenLauncherGO.exe"
+          if (-not (Test-Path -LiteralPath $launcherPath -PathType Leaf)) {
+            throw "Expected the supported launcher executable at $launcherPath."
+          }
+          $looseLibraries = @(Get-ChildItem -LiteralPath $publishDirectory -Filter "*.dll" -File -Recurse)
+          if ($looseLibraries.Count -ne 0) {
+            throw "The supported single-file publish unexpectedly produced loose DLL files."
+          }

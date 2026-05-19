@@ -1,0 +1,292 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Startup.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Startup.Views.LauncherSetupWindow"
+        x:ClassModifier="internal"
+        x:Name="SetupWindowRoot"
+        x:DataType="vm:LauncherSetupViewModel"
+        x:CompileBindings="True"
+        Title="{localization:Loc GameInstallationSetupTitle}"
+        Width="780"
+        Height="596"
+        CanResize="False"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+    <Window.Styles>
+        <Style Selector="Button.setup-action">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="14,5" />
+            <Setter Property="MinWidth" Value="112" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="Button.setup-action.primary">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="TextBox.installation-path">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="9,3" />
+            <Setter Property="FontSize" Value="13.5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="TextBox.installation-path /template/ Border#PART_BorderElement">
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="TextBox.installation-path:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="TextBox.installation-path:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="TextBlock.installation-status">
+            <Setter Property="Foreground" Value="#FFA7B5C8" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Margin" Value="18,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBlock.installation-status.valid">
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="TextBlock.installation-status.invalid">
+            <Setter Property="Foreground" Value="#FFFF5858" />
+        </Style>
+        <Style Selector="TextBlock.installation-folder-label">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#FFC9D2DE" />
+        </Style>
+        <Style Selector="TextBlock.installation-requirement">
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="Foreground" Value="#FFA7B5C8" />
+        </Style>
+        <Style Selector="Border.installation-panel">
+            <Setter Property="Padding" Value="18,16" />
+            <Setter Property="Background" Value="{DynamicResource GenLauncherSubtleAccentFillColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherSubtleAccentBorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="Border.notice">
+            <Setter Property="Margin" Value="0,9,0,0" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource GenLauncherDarkBackGround}"
+            BorderBrush="{DynamicResource GenLauncherBorderColor}"
+            BorderThickness="2">
+        <Grid RowDefinitions="58,*,66">
+            <Border Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,0,0,2">
+                <TextBlock Margin="24,0"
+                           VerticalAlignment="Center"
+                           Text="{localization:Loc GameInstallationSetupTitle}"
+                           FontSize="22"
+                           FontWeight="Bold" />
+            </Border>
+
+            <ScrollViewer Grid.Row="1"
+                          Margin="22,18,10,18"
+                          Padding="0,0,12,0"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="14">
+                    <Border Classes="notice"
+                            Margin="0"
+                            Padding="14,10"
+                            Background="{DynamicResource GenLauncherAccentFillColor}"
+                            BorderBrush="{DynamicResource GenLauncherAccentBorderColor}"
+                            BorderThickness="2">
+                        <TextBlock Text="{localization:Loc GameFirstRunRegistryNotice}"
+                                   Foreground="{DynamicResource GenLauncherAccentTextColor}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap" />
+                    </Border>
+
+                    <Border Classes="installation-panel">
+                        <StackPanel>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{localization:Loc GeneralsFullName}"
+                                           FontSize="17"
+                                           FontWeight="Bold" />
+                                <TextBlock Grid.Column="1"
+                                           Classes="installation-status"
+                                           Classes.valid="{Binding Installations.IsGeneralsValid}"
+                                           Classes.invalid="{Binding Installations.HasGeneralsValidationError}"
+                                           Text="{Binding Installations.GeneralsStatusText}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Margin="0,13,0,5"
+                                  ColumnDefinitions="Auto,*">
+                                <TextBlock Classes="installation-folder-label"
+                                           Text="{localization:Loc InstallationFolder}" />
+                                <TextBlock x:Name="GeneralsExecutableRequirementText"
+                                           Grid.Column="1"
+                                           Margin="16,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           Classes="installation-requirement"
+                                           Text="{localization:Loc GeneralsExecutableRequirement}"
+                                           TextAlignment="Right"
+                                           TextWrapping="Wrap" />
+                            </Grid>
+                            <TextBox x:Name="GeneralsPathTextBox"
+                                     Classes="installation-path"
+                                     Text="{Binding Installations.GeneralsPath, Mode=TwoWay}"
+                                     TextChanged="PathTextBox_TextChanged"
+                                     ToolTip.ToolTipOpening="PathTextBox_ToolTipOpening">
+                                <ToolTip.Tip>
+                                    <TextBlock MaxWidth="700"
+                                               Text="{Binding Installations.GeneralsPath}"
+                                               TextWrapping="Wrap" />
+                                </ToolTip.Tip>
+                            </TextBox>
+                            <StackPanel Margin="0,10,0,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10">
+                                <Button Classes="setup-action"
+                                        Width="112"
+                                        Content="{localization:Loc Browse}"
+                                        Command="{Binding Installations.BrowseGeneralsCommand}"
+                                        CommandParameter="{Binding #SetupWindowRoot}" />
+                                <Button Classes="setup-action"
+                                        Width="176"
+                                        Content="{localization:Loc DetectViaRegistry}"
+                                        Command="{Binding Installations.DetectGeneralsCommand}" />
+                            </StackPanel>
+                            <Border Classes="notice"
+                                    Background="#FF38290B"
+                                    BorderBrush="#FFEAA400"
+                                    IsVisible="{Binding Installations.ShowGeneralsProgramFilesWarning}">
+                                <TextBlock Text="{localization:Loc ProgramFilesModToolsWarning}"
+                                           Foreground="#FFFFC241"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                            <Border Classes="notice"
+                                    Background="#FF122339"
+                                    BorderBrush="#FF2C8BE6"
+                                    IsVisible="{Binding Installations.ShowGeneralsDifferentDriveRecommendation}">
+                                <TextBlock Text="{localization:Loc SameDriveRecommendation}"
+                                           Foreground="#FF8CC7FF"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="installation-panel">
+                        <StackPanel>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{localization:Loc ZeroHourFullName}"
+                                           FontSize="17"
+                                           FontWeight="Bold" />
+                                <TextBlock Grid.Column="1"
+                                           Classes="installation-status"
+                                           Classes.valid="{Binding Installations.IsZeroHourValid}"
+                                           Classes.invalid="{Binding Installations.HasZeroHourValidationError}"
+                                           Text="{Binding Installations.ZeroHourStatusText}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Margin="0,13,0,5"
+                                  ColumnDefinitions="Auto,*">
+                                <TextBlock Classes="installation-folder-label"
+                                           Text="{localization:Loc InstallationFolder}" />
+                                <TextBlock x:Name="ZeroHourExecutableRequirementText"
+                                           Grid.Column="1"
+                                           Margin="16,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           Classes="installation-requirement"
+                                           Text="{localization:Loc ZeroHourExecutableRequirement}"
+                                           TextAlignment="Right"
+                                           TextWrapping="Wrap" />
+                            </Grid>
+                            <TextBox x:Name="ZeroHourPathTextBox"
+                                     Classes="installation-path"
+                                     Text="{Binding Installations.ZeroHourPath, Mode=TwoWay}"
+                                     TextChanged="PathTextBox_TextChanged"
+                                     ToolTip.ToolTipOpening="PathTextBox_ToolTipOpening">
+                                <ToolTip.Tip>
+                                    <TextBlock MaxWidth="700"
+                                               Text="{Binding Installations.ZeroHourPath}"
+                                               TextWrapping="Wrap" />
+                                </ToolTip.Tip>
+                            </TextBox>
+                            <StackPanel Margin="0,10,0,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10">
+                                <Button Classes="setup-action"
+                                        Width="112"
+                                        Content="{localization:Loc Browse}"
+                                        Command="{Binding Installations.BrowseZeroHourCommand}"
+                                        CommandParameter="{Binding #SetupWindowRoot}" />
+                                <Button Classes="setup-action"
+                                        Width="176"
+                                        Content="{localization:Loc DetectViaRegistry}"
+                                        Command="{Binding Installations.DetectZeroHourCommand}" />
+                            </StackPanel>
+                            <Border Classes="notice"
+                                    Background="#FF38290B"
+                                    BorderBrush="#FFEAA400"
+                                    IsVisible="{Binding Installations.ShowZeroHourProgramFilesWarning}">
+                                <TextBlock Text="{localization:Loc ProgramFilesModToolsWarning}"
+                                           Foreground="#FFFFC241"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                            <Border Classes="notice"
+                                    Background="#FF122339"
+                                    BorderBrush="#FF2C8BE6"
+                                    IsVisible="{Binding Installations.ShowZeroHourDifferentDriveRecommendation}">
+                                <TextBlock Text="{localization:Loc SameDriveRecommendation}"
+                                           Foreground="#FF8CC7FF"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Row="2"
+                    Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,2,0,0">
+                <Grid Margin="22,0"
+                      ColumnDefinitions="*,Auto,12,Auto">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Border Width="5"
+                                Height="5"
+                                Margin="0,1,9,0"
+                                Background="{DynamicResource GenLauncherBorderColor}" />
+                        <TextBlock Text="{localization:Loc AtLeastOneInstallationRequired}"
+                                   VerticalAlignment="Center"
+                                   Foreground="#FFC5D0DD"
+                                   FontSize="13" />
+                    </StackPanel>
+                    <Button x:Name="CancelActionButton"
+                            Grid.Column="1"
+                            Classes="setup-action"
+                            Width="112"
+                            VerticalAlignment="Center"
+                            Content="{localization:Loc Exit}"
+                            Command="{Binding CancelCommand}"
+                            IsCancel="True" />
+                    <Button x:Name="PrimaryActionButton"
+                            Grid.Column="3"
+                            Classes="setup-action primary"
+                            Width="124"
+                            VerticalAlignment="Center"
+                            Content="{localization:Loc Continue}"
+                            Command="{Binding ContinueCommand}"
+                            IsEnabled="{Binding Installations.CanContinue}"
+                            IsDefault="True" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

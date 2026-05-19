@@ -1,0 +1,210 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localization="using:GenLauncherGO.UI.Shared.Localization"
+        xmlns:startup="using:GenLauncherGO.Core.Startup"
+        xmlns:vm="using:GenLauncherGO.UI.Features.Startup.ViewModels"
+        x:Class="GenLauncherGO.UI.Features.Startup.Views.LauncherGameSelectionWindow"
+        x:ClassModifier="internal"
+        x:DataType="vm:LauncherGameSelectionViewModel"
+        x:CompileBindings="True"
+        Title="{localization:Loc ChooseYourGame}"
+        Width="780"
+        Height="532"
+        CanResize="False"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource GenLauncherDarkBackGround}"
+        Foreground="{DynamicResource GenLauncherDefaultTextColor}">
+    <Window.Styles>
+        <Style Selector="Button.game-card">
+            <Setter Property="Padding" Value="17,15" />
+            <Setter Property="Background" Value="#F2070B0F" />
+            <Setter Property="BorderBrush" Value="#FF36505E" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="Button.game-card:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="Background" Value="#F20A1218" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+        </Style>
+        <Style Selector="Button.game-card:pressed">
+            <Setter Property="Background" Value="#F20C1820" />
+        </Style>
+        <Style Selector="Button.game-card:focus-visible">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+        <Style Selector="Button.game-card.selected">
+            <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Background" Value="#F20A151C" />
+        </Style>
+        <Style Selector="Button.dialog-action">
+            <Setter Property="MinWidth" Value="112" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="14,5" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="Button.dialog-action.primary">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource GenLauncherDarkBackGround}"
+            BorderBrush="{DynamicResource GenLauncherBorderColor}"
+            BorderThickness="2">
+        <Grid RowDefinitions="58,*,66">
+            <Border Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,0,0,2">
+                <TextBlock Margin="24,0"
+                           VerticalAlignment="Center"
+                           Text="{localization:Loc ChooseYourGame}"
+                           FontSize="22"
+                           FontWeight="Bold" />
+            </Border>
+
+            <Grid Grid.Row="1"
+                  Margin="22,18"
+                  ColumnDefinitions="*,14,*">
+                <Button Grid.Column="0"
+                        Classes="game-card"
+                        Classes.selected="{Binding IsGeneralsSelected}"
+                        Command="{Binding SelectGameCommand}"
+                        CommandParameter="{x:Static startup:SupportedGame.Generals}">
+                    <Grid RowDefinitions="36,*,Auto">
+                        <TextBlock Text="{localization:Loc GeneralsFullName}"
+                                   FontSize="14.5"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                        <Border Grid.Row="1"
+                                Width="188"
+                                Height="250"
+                                Margin="0,12,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="#F205080A"
+                                BorderBrush="#FF36505E"
+                                BorderThickness="1">
+                            <Image Source="avares://GenLauncherGO/Shared/Resources/Images/OfficialCoverGenerals.png"
+                                   Stretch="Uniform" />
+                        </Border>
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,13,0,0"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Border Width="16"
+                                    Height="16"
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    BorderBrush="#FF71808F"
+                                    BorderThickness="1">
+                                <Border Margin="3"
+                                        Background="{DynamicResource GenLauncherBorderColor}"
+                                        IsVisible="{Binding IsGeneralsSelected}" />
+                            </Border>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{localization:Loc NotSelected}"
+                                           Foreground="#FFA7B5C8"
+                                           FontSize="13"
+                                           IsVisible="{Binding !IsGeneralsSelected}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{localization:Loc Selected}"
+                                           Foreground="{DynamicResource GenLauncherBorderColor}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           IsVisible="{Binding IsGeneralsSelected}" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+
+                <Button Grid.Column="2"
+                        Classes="game-card"
+                        Classes.selected="{Binding IsZeroHourSelected}"
+                        Command="{Binding SelectGameCommand}"
+                        CommandParameter="{x:Static startup:SupportedGame.ZeroHour}">
+                    <Grid RowDefinitions="36,*,Auto">
+                        <TextBlock Text="{localization:Loc ZeroHourFullName}"
+                                   FontSize="14.5"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                        <Border Grid.Row="1"
+                                Width="188"
+                                Height="250"
+                                Margin="0,12,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="#F205080A"
+                                BorderBrush="#FF36505E"
+                                BorderThickness="1">
+                            <Image Source="avares://GenLauncherGO/Shared/Resources/Images/OfficialCoverZeroHour.jpg"
+                                   Stretch="Uniform" />
+                        </Border>
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,13,0,0"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Border Width="16"
+                                    Height="16"
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    BorderBrush="#FF71808F"
+                                    BorderThickness="1">
+                                <Border Margin="3"
+                                        Background="{DynamicResource GenLauncherBorderColor}"
+                                        IsVisible="{Binding IsZeroHourSelected}" />
+                            </Border>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{localization:Loc NotSelected}"
+                                           Foreground="#FFA7B5C8"
+                                           FontSize="13"
+                                           IsVisible="{Binding !IsZeroHourSelected}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{localization:Loc Selected}"
+                                           Foreground="{DynamicResource GenLauncherBorderColor}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           IsVisible="{Binding IsZeroHourSelected}" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Background="#FF000000"
+                    BorderBrush="{DynamicResource GenLauncherBorderColor}"
+                    BorderThickness="0,2,0,0">
+                <StackPanel Margin="22,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="12">
+                    <Button Classes="dialog-action"
+                            Width="112"
+                            Content="{localization:Loc Exit}"
+                            Command="{Binding CancelCommand}"
+                            IsCancel="True" />
+                    <Button Classes="dialog-action primary"
+                            Width="124"
+                            Content="{localization:Loc Continue}"
+                            Command="{Binding ContinueCommand}"
+                            IsDefault="True" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

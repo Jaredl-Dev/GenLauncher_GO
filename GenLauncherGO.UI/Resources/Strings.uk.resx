@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--
+        Microsoft ResX Schema
+
+        Version 2.0
+
+        The primary goals of this format is to allow a simple XML format
+        that is mostly human readable. The generation and parsing of the
+        various data types are done through the TypeConverter classes
+        associated with the data types.
+
+        Example:
+
+        ... ado.net/XML headers & schema ...
+        <resheader name="resmimetype">text/microsoft-resx</resheader>
+        <resheader name="version">2.0</resheader>
+        <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+        <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+        <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+        <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+        <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+            <value>[base64 mime encoded serialized .NET Framework object]</value>
+        </data>
+        <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+            <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+            <comment>This is a comment</comment>
+        </data>
+
+        There are any number of "resheader" rows that contain simple
+        name/value pairs.
+
+        Each data row contains a name, and value. The row also contains a
+        type or mimetype. Type corresponds to a .NET class that support
+        text/value conversion through the TypeConverter architecture.
+        Classes that don't support this are serialized and stored with the
+        mimetype set.
+
+        The mimetype is used for serialized objects, and tells the
+        ResXResourceReader how to depersist the object. This is currently not
+        extensible. For a given mimetype the value must be set accordingly:
+
+        Note - application/x-microsoft.net.object.binary.base64 is the format
+        that the ResXResourceWriter will generate, however the reader can
+        read any of the formats listed below.
+
+        mimetype: application/x-microsoft.net.object.binary.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.soap.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.bytearray.base64
+        value   : The object must be serialized into a byte array
+                : using a System.ComponentModel.TypeConverter
+                : and then encoded with base64 encoding.
+        -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Add" xml:space="preserve">
+    <value>Додати!</value>
+  </data>
+    <data name="AddAddonFromFiles" xml:space="preserve">
+    <value>Додати аддон для {0} з файлів</value>
+  </data>
+    <data name="AddMod" xml:space="preserve">
+    <value>Додати мод!</value>
+  </data>
+    <data name="Addons" xml:space="preserve">
+    <value>Аддони для </value>
+  </data>
+    <data name="AddPatchFromFiles" xml:space="preserve">
+    <value>Додати патч для {0} з файлів</value>
+  </data>
+    <data name="AutoDelete" xml:space="preserve">
+    <value>Автоматичне видалення застарілих версій модифікацій</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Відмінити</value>
+  </data>
+  <data name="CancelDownloadAction" xml:space="preserve">
+    <value>Скасувати завантаження</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Призупинити</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Продовжити</value>
+  </data>
+    <data name="Canceled" xml:space="preserve">
+    <value>Завантаження скасовано</value>
+  </data>
+    <data name="CancelDownload" xml:space="preserve">
+    <value>Скасувати завантаження?</value>
+  </data>
+    <data name="CancelDownloadDetails" xml:space="preserve">
+    <value>Завантаження {0} буде зупинено, а завантажені файли цієї версії буде видалено.</value>
+  </data>
+    <data name="CannotConnect" xml:space="preserve">
+    <value>Не вдається підключитися до GitHub. Встановлення модифікацій з Інтернету недоступне.</value>
+  </data>
+    <data name="DeploymentRecoveryFailed" xml:space="preserve">
+    <value>GenLauncherGO не вдалося відновити попереднє розгортання. Закрийте гру або будь-який запущений клієнт, а потім виберіть Повторити. Виберіть Скасувати, щоб закрити лаунчер і не залишити папку гри в небезпечному стані.</value>
+  </data>
+    <data name="ChangelogOnly" xml:space="preserve">
+    <value>Журнал Змін</value>
+  </data>
+    <data name="ChangeToFullScreen" xml:space="preserve">
+    <value>Перемкнутися у повноекранний режим</value>
+  </data>
+    <data name="ChangeToWindowed" xml:space="preserve">
+    <value>Перемкнутися у віконний режим</value>
+  </data>
+    <data name="ChangeToNormalStart" xml:space="preserve">
+    <value>Перемкнутися на звичайний запуск</value>
+  </data>
+    <data name="ChangeToQuickStart" xml:space="preserve">
+    <value>Перемкнутися на швидкий запуск</value>
+  </data>
+    <data name="Compatibility" xml:space="preserve">
+    <value>Сумісність із модом не гарантується!</value>
+  </data>
+    <data name="Continue" xml:space="preserve">
+    <value>Продовжити</value>
+  </data>
+    <data name="CurrentVersion" xml:space="preserve">
+    <value>Версія: </value>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+    <data name="Remove" xml:space="preserve">
+    <value>Прибрати</value>
+  </data>
+    <data name="RemoveFromList" xml:space="preserve">
+    <value>Прибрати зі списку</value>
+  </data>
+    <data name="RemoveFromListConfirmation" xml:space="preserve">
+    <value>Прибрати зі списку?</value>
+  </data>
+    <data name="RemoveFromListDetails" xml:space="preserve">
+    <value>Ви справді хочете прибрати {0} зі списку?</value>
+  </data>
+    <data name="RemoveContent" xml:space="preserve">
+    <value>Прибрати вміст?</value>
+  </data>
+    <data name="RemoveContentDetails" xml:space="preserve">
+    <value>Ви справді хочете прибрати {0}? Усі файли, встановлені для цієї версії, буде видалено.</value>
+  </data>
+    <data name="Deprecated" xml:space="preserve">
+    <value>{0} не підтримується</value>
+  </data>
+    <data name="Discord" xml:space="preserve">
+    <value>Приєднатися до Discord серверу</value>
+  </data>
+    <data name="ModDb" xml:space="preserve">
+    <value>ModDB</value>
+  </data>
+    <data name="Donate" xml:space="preserve">
+    <value>Донат</value>
+  </data>
+    <data name="Download" xml:space="preserve">
+    <value>Завантаження {0}: {1}МБ / {2}МБ</value>
+  </data>
+    <data name="DownloadInProgress" xml:space="preserve">
+    <value>Завантаження триває: {0} / {1}</value>
+  </data>
+    <data name="EstimatedTimeRemaining" xml:space="preserve">
+    <value>Залишилося {0}</value>
+  </data>
+    <data name="EnterModName" xml:space="preserve">
+    <value>Введіть назву модифікації</value>
+  </data>
+    <data name="EnterModVersion" xml:space="preserve">
+    <value>Введіть версію модифікації</value>
+  </data>
+    <data name="Error" xml:space="preserve">
+    <value>Помилка: </value>
+  </data>
+    <data name="ErrorMsg" xml:space="preserve">
+    <value>Версія GenLauncherGO: {2} \r\nТехпідтримка GenLauncherGO в Discord: {3} \r\nПомилка: {0} \r\nТрасування стека: {1}</value>
+  </data>
+    <data name="Exit" xml:space="preserve">
+    <value>ВИЙТИ</value>
+  </data>
+    <data name="FilesCorrupted" xml:space="preserve">
+    <value>Деякі файли моду відсутні або пошкоджені!</value>
+  </data>
+    <data name="GameIsStillRunning" xml:space="preserve">
+    <value>Гра все ще працює!</value>
+  </data>
+    <data name="GameRunning" xml:space="preserve">
+    <value>Гра Generals вже працює!</value>
+  </data>
+    <data name="LaunchVerificationRunning" xml:space="preserve">
+    <value>Перевірка виправляє вміст.</value>
+  </data>
+    <data name="PackageActivityInProgress" xml:space="preserve">
+    <value>Триває операція з вмістом</value>
+  </data>
+    <data name="PackageActivityInProgressDetails" xml:space="preserve">
+    <value>Дочекайтеся завершення поточного завантаження або відновлення, перш ніж встановлювати, імпортувати чи додавати інший вміст.</value>
+  </data>
+    <data name="HideLauncher" xml:space="preserve">
+    <value>Сховати GenLauncherGO, коли гра працює</value>
+  </data>
+    <data name="Image" xml:space="preserve">
+    <value>Картинка</value>
+  </data>
+    <data name="InputModData" xml:space="preserve">
+    <value>Введіть дані модифікації</value>
+  </data>
+    <data name="Install" xml:space="preserve">
+    <value>ВСТАНОВИТИ!</value>
+  </data>
+    <data name="InstallInProgress" xml:space="preserve">
+    <value>Не можна запустити {0}: встановлення триває!</value>
+  </data>
+    <data name="LatestVersion" xml:space="preserve">
+    <value>Остання версія: </value>
+  </data>
+    <data name="Launch" xml:space="preserve">
+    <value>ЗАПУСТИТИ ГРУ</value>
+  </data>
+    <data name="LaunchAborted" xml:space="preserve">
+    <value>Запуск перервано</value>
+  </data>
+    <data name="ModificationName" xml:space="preserve">
+    <value>Назва модифікації: </value>
+  </data>
+    <data name="ModificationsWithUpdate" xml:space="preserve">
+    <value>Є модифікації, які можна оновити:</value>
+  </data>
+    <data name="Mods" xml:space="preserve">
+    <value>Моди</value>
+  </data>
+    <data name="NameAndVersionValidSymbols" xml:space="preserve">
+    <value>Назва модифікації та версія мають містити дійсні символи</value>
+  </data>
+    <data name="No" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+    <data name="Yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
+    <data name="NotInstalled" xml:space="preserve">
+    <value>{0} було вибрано, але не встановлено - запуск перервано!</value>
+  </data>
+    <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+    <data name="OperationAborted" xml:space="preserve">
+    <value>Операцію перервано</value>
+  </data>
+    <data name="Options" xml:space="preserve">
+    <value>НАЛАШТУВАННЯ</value>
+  </data>
+    <data name="Patches" xml:space="preserve">
+    <value>Патчі для </value>
+  </data>
+    <data name="PlayOnline" xml:space="preserve">
+    <value>Як грати онлайн?</value>
+  </data>
+    <data name="Preparing" xml:space="preserve">
+    <value>Підготовка, будь ласка, зачекайте...</value>
+  </data>
+    <data name="Reinstall" xml:space="preserve">
+    <value>Рекомендується перевстановити мод. \rВи можете вимкнути цю перевірку в налаштуваннях лаунчера.</value>
+  </data>
+    <data name="SearchMods" xml:space="preserve"><value>Пошук модифікацій...</value></data>
+    <data name="NoModsMatchSearch" xml:space="preserve"><value>Немає модифікацій, що відповідають пошуку.</value></data>
+    <data name="CalculatingPackageSize" xml:space="preserve"><value>Обчислення...</value></data>
+    <data name="PackageSizeUnavailable" xml:space="preserve"><value>Недоступно</value></data>
+    <data name="SelectMod" xml:space="preserve">
+    <value>Виберіть мод, який потрібно додати</value>
+  </data>
+    <data name="SetImage" xml:space="preserve">
+    <value>Встановити картинку (500x100)</value>
+  </data>
+    <data name="Stop" xml:space="preserve">
+    <value>СТОП</value>
+  </data>
+    <data name="ThankYou" xml:space="preserve">
+    <value>Дякую!</value>
+  </data>
+    <data name="UninstalledUpdate" xml:space="preserve">
+    <value>Є невстановлене оновлення для {0} </value>
+  </data>
+    <data name="UnpackingPreparing" xml:space="preserve">
+    <value>Розпакування/Підготовка...</value>
+  </data>
+    <data name="Update" xml:space="preserve">
+    <value>Оновити!</value>
+  </data>
+    <data name="UpToDate" xml:space="preserve">
+    <value>Актуально</value>
+  </data>
+    <data name="VersionMustContainNumbers" xml:space="preserve">
+    <value>Версія має містити цифри</value>
+  </data>
+    <data name="WorldBuilder" xml:space="preserve">
+    <value>World Builder</value>
+  </data>
+    <data name="WorldBuilderRunning" xml:space="preserve">
+    <value>World Builder вже працює!</value>
+  </data>
+    <data name="AutoDeleteToolTip" xml:space="preserve">
+    <value>Автоматично видаляє старі встановлені версії моду після встановлення новішої версії.</value>
+  </data>
+    <data name="SettingsSaveFailedTitle" xml:space="preserve">
+    <value>Налаштування не збережено</value>
+  </data>
+    <data name="SettingsSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO не вдалося зберегти ваші налаштування. Попередні налаштування залишаються активними. Переконайтеся, що папка даних лаунчера доступна для запису, і повторіть спробу.</value>
+  </data>
+    <data name="CloseAnyway" xml:space="preserve">
+    <value>Усе одно закрити</value>
+  </data>
+    <data name="ClosePackageActivityDetails" xml:space="preserve">
+    <value>{0} все ще виконується. Закриття GenLauncherGO зупинить поточну операцію.</value>
+  </data>
+    <data name="DonateOriginalAuthor" xml:space="preserve">
+    <value>Пожертвувати автору GenLauncher</value>
+  </data>
+    <data name="DonateOriginalAuthorToolTip" xml:space="preserve">
+    <value>Відкриває сторінку пожертв оригінального автора GenLauncher.</value>
+  </data>
+    <data name="GameExecutableArguments" xml:space="preserve">
+    <value>Аргументи виконуваного файлу гри</value>
+  </data>
+    <data name="GameExecutableArgumentsInputToolTip" xml:space="preserve">
+    <value>Необов'язкові аргументи командного рядка для вибраного виконуваного файлу гри. Залиште порожнім для звичайного запуску.</value>
+  </data>
+    <data name="GameExecutableArgumentsToolTip" xml:space="preserve">
+    <value>Аргументи, що передаються вибраному виконуваному файлу гри. Вони не передаються до GeneralsOnline.</value>
+  </data>
+    <data name="GeneralsOnlineClient" xml:space="preserve">
+    <value>Клієнт GeneralsOnline</value>
+  </data>
+    <data name="Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+    <data name="LaunchArguments" xml:space="preserve">
+    <value>Аргументи запуску</value>
+  </data>
+    <data name="Links" xml:space="preserve">
+    <value>Посилання</value>
+  </data>
+    <data name="Maintenance" xml:space="preserve">
+    <value>Обслуговування</value>
+  </data>
+    <data name="NoSupportedClient" xml:space="preserve">
+    <value>Немає підтримуваного клієнта</value>
+  </data>
+    <data name="SelectedGameClient" xml:space="preserve">
+    <value>Вибраний ігровий клієнт</value>
+  </data>
+    <data name="SelectedWorldBuilder" xml:space="preserve">
+    <value>Вибраний World Builder</value>
+  </data>
+    <data name="SuperHackersClient" xml:space="preserve">
+    <value>Клієнт SuperHackers</value>
+  </data>
+    <data name="SuperHackersWorldBuilder" xml:space="preserve">
+    <value>World Builder SuperHackers</value>
+  </data>
+    <data name="UseEnglishLanguage" xml:space="preserve">
+    <value>Використовувати англійську</value>
+  </data>
+    <data name="UseEnglishLanguageToolTip" xml:space="preserve">
+    <value>Примусово використовує англійську мову інтерфейсу лаунчера.</value>
+  </data>
+    <data name="UseSystemLanguage" xml:space="preserve">
+    <value>Використовувати мову системи</value>
+  </data>
+    <data name="UseSystemLanguageToolTip" xml:space="preserve">
+    <value>Використовує мову інтерфейсу Windows, якщо доступний відповідний переклад лаунчера.</value>
+  </data>
+    <data name="VanillaWorldBuilder" xml:space="preserve">
+    <value>Звичайний World Builder</value>
+  </data>
+    <data name="WindowBehavior" xml:space="preserve">
+    <value>Поведінка вікна</value>
+  </data>
+    <data name="WorldBuilderArguments" xml:space="preserve">
+    <value>Аргументи World Builder</value>
+  </data>
+    <data name="WorldBuilderArgumentsInputToolTip" xml:space="preserve">
+    <value>Необов'язкові аргументи командного рядка для вибраного виконуваного файлу World Builder. Залиште порожнім для звичайного запуску.</value>
+  </data>
+    <data name="WorldBuilderArgumentsToolTip" xml:space="preserve">
+    <value>Аргументи, що передаються вибраному виконуваному файлу World Builder.</value>
+  </data>
+    <data name="HideLauncherToolTip" xml:space="preserve">
+    <value>Приховує вікно лаунчера, поки запущено гру або World Builder, і знову показує його після завершення процесу.</value>
+  </data>
+    <data name="AddModFromFiles" xml:space="preserve">
+    <value>Додати мод з файлів</value>
+  </data>
+    <data name="FinishProcess" xml:space="preserve">
+    <value>Закрийте гру перед відкриттям налаштувань.</value>
+  </data>
+    <data name="Info" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+    <data name="Retry" xml:space="preserve">
+    <value>Повторити</value>
+  </data>
+    <data name="Downloading" xml:space="preserve">
+    <value>Завантаження</value>
+  </data>
+    <data name="IntegrityRepeatedFailure" xml:space="preserve"><value>Після кількох спроб виправлення вміст залишився неузгодженим. Запуск не виконано.</value></data>
+    <data name="IntegrityCacheSuffix" xml:space="preserve"><value>кеш</value></data>
+    <data name="IntegrityBlockedDescription" xml:space="preserve"><value>Вибраний вміст має проблеми перевірки, які не можна усунути автоматично. Видаліть заблоковані елементи або відновіть вміст, а потім спробуйте запустити знову.</value></data>
+    <data name="CancelLaunch" xml:space="preserve"><value>Скасувати запуск</value></data>
+    <data name="IntegrityMixedDescription" xml:space="preserve"><value>Запуск призупинено через зміни вибраного віддаленого й ручного вмісту. Віддалений вміст для виправлення: {0}. Ручний вміст, поточні зміни якого буде прийнято: {1}. Віддалені зміни не можна прийняти, а ручні зміни не буде виправлено.</value></data>
+    <data name="FixAbsorbAndLaunch" xml:space="preserve"><value>Виправити, прийняти й запустити</value></data>
+    <data name="IntegrityManagedDescription" xml:space="preserve"><value>Вибраний віддалено керований вміст відрізняється від довіреного джерела: {0}. Виправлення відновить, повторно завантажить або видалить лише перелічені керовані елементи та повторить перевірку.</value></data>
+    <data name="FixAndLaunch" xml:space="preserve"><value>Виправити й запустити</value></data>
+    <data name="IntegrityManualDescription" xml:space="preserve"><value>Вибраний вручну імпортований вміст змінився: {0}. Прийняття довірятиме поточним файлам без виправлення чи видалення та повторить перевірку.</value></data>
+    <data name="AbsorbAndLaunch" xml:space="preserve"><value>Прийняти зміни й запустити</value></data>
+    <data name="IntegrityLegacyDescription" xml:space="preserve"><value>Для {0} немає авторитетного джерела відновлення. Довіра назавжди класифікує ці точні версії як ручні та збереже їхній поточний стан.</value></data>
+    <data name="TrustAsManual" xml:space="preserve"><value>Довіряти як ручному</value></data>
+    <data name="IntegrityDialogTitle" xml:space="preserve"><value>Перевірка вмісту запуску</value></data>
+    <data name="IntegrityBlockGroup" xml:space="preserve"><value>Заблоковано</value></data>
+    <data name="IntegrityDeleteGroup" xml:space="preserve"><value>Видалити</value></data>
+    <data name="IntegrityRepairGroup" xml:space="preserve"><value>Виправити</value></data>
+    <data name="IntegrityRedownloadGroup" xml:space="preserve"><value>Завантажити знову</value></data>
+    <data name="IntegrityAbsorbGroup" xml:space="preserve"><value>Прийняти</value></data>
+    <data name="IntegrityTrustGroup" xml:space="preserve"><value>Довіряти</value></data>
+    <data name="IntegrityIssueGroupSummarySingle" xml:space="preserve"><value>{0} зміна</value></data>
+    <data name="IntegrityIssueGroupSummaryMultiple" xml:space="preserve"><value>{0} змін</value></data>
+    <data name="IntegrityIssueUntrackedLabel" xml:space="preserve"><value>Не відстежується</value></data>
+    <data name="IntegrityIssueMissingFileLabel" xml:space="preserve"><value>Відсутній</value></data>
+    <data name="IntegrityIssueModifiedFileLabel" xml:space="preserve"><value>Змінено</value></data>
+    <data name="IntegrityIssueUnexpectedFileLabel" xml:space="preserve"><value>Додано</value></data>
+    <data name="IntegrityIssueEmptyDirectoryLabel" xml:space="preserve"><value>Порожня папка</value></data>
+    <data name="IntegrityIssueUnsafeLinkLabel" xml:space="preserve"><value>Небезпечне посилання</value></data>
+    <data name="IntegrityIssueVerificationErrorLabel" xml:space="preserve"><value>Помилка перевірки</value></data>
+    <data name="GeneralsOnlineDiscord" xml:space="preserve">
+    <value>Discord Generals Online</value>
+  </data>
+    <data name="GeneralsOnlineDiscordToolTip" xml:space="preserve">
+    <value>Відкриває Discord-сервер Generals Online.</value>
+  </data>
+    <data name="OpenLogsFolder" xml:space="preserve">
+    <value>Відкрити папку журналів</value>
+  </data>
+    <data name="OpenLogsFolderToolTip" xml:space="preserve">
+    <value>Відкриває папку з файлами журналів GenLauncherGO.</value>
+  </data>
+    <data name="GitHubRepository" xml:space="preserve">
+    <value>Репозиторій GitHub</value>
+  </data>
+    <data name="GitHubRepositoryToolTip" xml:space="preserve">
+    <value>Відкриває репозиторій GenLauncherGO на GitHub.</value>
+  </data>
+    <data name="AdvertisingDonationAlerts" xml:space="preserve">
+    <value>Donation Alerts</value>
+  </data>
+    <data name="AdvertisingBoostyLink" xml:space="preserve">
+    <value>Boosty.to</value>
+  </data>
+    <data name="AdvertisingYouTubeRuLink" xml:space="preserve">
+    <value>My Youtube (Ru)</value>
+  </data>
+    <data name="RunningProcessOverlayTitle" xml:space="preserve">
+    <value>Запущений процес</value>
+  </data>
+    <data name="RunningProcessStatus" xml:space="preserve">
+    <value>Запущений процес: {0}</value>
+  </data>
+    <data name="RunningProcessUnknown" xml:space="preserve">
+    <value>Невідомий процес</value>
+  </data>
+    <data name="ForceQuitRunningProcess" xml:space="preserve">
+    <value>Завершити примусово</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationTitle" xml:space="preserve">
+    <value>Примусово завершити процес?</value>
+  </data>
+    <data name="ForceQuitRunningProcessConfirmationDetails" xml:space="preserve">
+    <value>Це негайно закриє {0} і всі відстежувані дочірні процеси. Незбережений прогрес може бути втрачено.</value>
+  </data>
+    <data name="RunningProcessCloseBlockedTitle" xml:space="preserve">
+    <value>Процес усе ще запущено</value>
+  </data>
+    <data name="RunningProcessCloseBlockedDetails" xml:space="preserve">
+    <value>Закрийте запущений процес або скористайтеся «Завершити примусово», перш ніж закривати GenLauncherGO.</value>
+  </data>
+  <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Щось пішло не так</value>
+  </data>
+  <data name="UnexpectedErrorDetails" xml:space="preserve">
+    <value>Сталася неочікувана помилка. Спробуйте ще раз. Якщо помилка повторюється, перевірте журнали лаунчера.</value>
+  </data>
+  <data name="LanguageRestartPromptTitle" xml:space="preserve">
+    <value>Потрібен перезапуск</value>
+  </data>
+  <data name="LanguageRestartPromptDetails" xml:space="preserve">
+    <value>Зміну мови збережено, і її буде застосовано під час наступного запуску GenLauncherGO.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Перезапустити зараз</value>
+  </data>
+  <data name="RestartLater" xml:space="preserve">
+    <value>Пізніше</value>
+  </data>
+  <data name="RestartBlockedTitle" xml:space="preserve">
+    <value>Перезапуск недоступний</value>
+  </data>
+  <data name="RestartBlockedActiveOperation" xml:space="preserve">
+    <value>Завершіть або скасуйте «{0}» перед перезапуском GenLauncherGO.</value>
+  </data>
+  <data name="GameInstallationSetupTitle" xml:space="preserve">
+    <value>Виберіть папки ігор</value>
+  </data>
+  <data name="InstallationNotConfigured" xml:space="preserve">
+    <value>Не налаштовано</value>
+  </data>
+  <data name="ValidGeneralsInstallation" xml:space="preserve">
+    <value>Generals готова до запуску</value>
+  </data>
+  <data name="ValidZeroHourInstallation" xml:space="preserve">
+    <value>Zero Hour готова до запуску</value>
+  </data>
+  <data name="InstallationDirectoryNotFound" xml:space="preserve">
+    <value>Папку встановлення не знайдено.</value>
+  </data>
+  <data name="InvalidGeneralsInstallation" xml:space="preserve">
+    <value>Не знайдено потрібні файли Generals.</value>
+  </data>
+  <data name="InvalidZeroHourInstallation" xml:space="preserve">
+    <value>Не знайдено потрібні файли Zero Hour.</value>
+  </data>
+  <data name="LauncherInsideGameValidation" xml:space="preserve">
+    <value>GenLauncherGO не може бути всередині папки встановлення гри.</value>
+  </data>
+  <data name="UnsafeInstallationPath" xml:space="preserve">
+    <value>Цю папку не можна використовувати, оскільки шлях файлової системи небезпечний.</value>
+  </data>
+  <data name="InstallationPathUnavailable" xml:space="preserve">
+    <value>Цю папку встановлення не можна використовувати.</value>
+  </data>
+  <data name="DuplicateGameInstallation" xml:space="preserve">
+    <value>Generals і Zero Hour не можуть використовувати одну папку встановлення.</value>
+  </data>
+  <data name="GeneralsShortName" xml:space="preserve">
+    <value>Generals</value>
+  </data>
+  <data name="ZeroHourShortName" xml:space="preserve">
+    <value>Zero Hour</value>
+  </data>
+  <data name="GeneralsFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals</value>
+  </data>
+  <data name="ZeroHourFullName" xml:space="preserve">
+    <value>Command &amp; Conquer: Generals – Zero Hour</value>
+  </data>
+  <data name="InstallationFolder" xml:space="preserve">
+    <value>Папка встановлення</value>
+  </data>
+  <data name="GeneralsExecutableRequirement" xml:space="preserve">
+    <value>Необхідний EXE: generalsv.exe (TheSuperHackers)</value>
+  </data>
+  <data name="ZeroHourExecutableRequirement" xml:space="preserve">
+    <value>Необхідний EXE: generalszh.exe (TheSuperHackers) або generalsonlinezh.exe (GeneralsOnline)</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Огляд</value>
+  </data>
+  <data name="DetectViaRegistry" xml:space="preserve">
+    <value>Знайти через реєстр</value>
+  </data>
+  <data name="GameFirstRunRegistryNotice" xml:space="preserve">
+    <value>Запустіть кожну встановлену гру принаймні один раз, щоб гарантовано записати шлях її встановлення до реєстру.</value>
+  </data>
+  <data name="RegistryInstallationNotFound" xml:space="preserve">
+    <value>Папку гри не знайдено в реєстрі.</value>
+  </data>
+  <data name="RegistryDetectionFailedTitle" xml:space="preserve">
+    <value>Не вдалося виконати пошук у реєстрі</value>
+  </data>
+  <data name="ProgramFilesModToolsWarning" xml:space="preserve">
+    <value>Program Files може заважати роботі інструментів для модів.</value>
+  </data>
+  <data name="SameDriveRecommendation" xml:space="preserve">
+    <value>Рекомендовано: зберігайте GenLauncherGO на одному диску з іграми.</value>
+  </data>
+  <data name="AtLeastOneInstallationRequired" xml:space="preserve">
+    <value>Щоб продовжити, виберіть принаймні одну папку з грою.</value>
+  </data>
+  <data name="ChooseYourGame" xml:space="preserve">
+    <value>Виберіть гру для керування</value>
+  </data>
+  <data name="NotSelected" xml:space="preserve">
+    <value>Не вибрано</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Вибрано</value>
+  </data>
+  <data name="StandaloneLocationRequired" xml:space="preserve">
+    <value>Перемістіть GenLauncherGO</value>
+  </data>
+  <data name="StandaloneLocationBlockingDescription" xml:space="preserve">
+    <value>GenLauncherGO не можна запускати з папки встановлення гри.</value>
+  </data>
+  <data name="CurrentLauncherLocation" xml:space="preserve">
+    <value>Поточне розташування лаунчера</value>
+  </data>
+  <data name="ContainingGameInstallation" xml:space="preserve">
+    <value>Встановлення гри, що містить лаунчер</value>
+  </data>
+  <data name="MoveLauncherOutsideGames" xml:space="preserve">
+    <value>Перемістіть папку GenLauncherGO будь-куди за межі встановлень ігор і запустіть його знову.</value>
+  </data>
+  <data name="StandaloneLocationExample" xml:space="preserve">
+    <value>Приклад: C:\Tools\GenLauncherGO</value>
+  </data>
+  <data name="AdministratorPermissionRequired" xml:space="preserve">
+    <value>Для запуску GenLauncherGO потрібні права адміністратора.</value>
+  </data>
+  <data name="ActiveGameLabel" xml:space="preserve">
+    <value>Активна гра</value>
+  </data>
+  <data name="GameManagement" xml:space="preserve">
+    <value>Керування іграми</value>
+  </data>
+  <data name="InstallationPaths" xml:space="preserve">
+    <value>Шляхи встановлення</value>
+  </data>
+  <data name="SwitchToGame" xml:space="preserve">
+    <value>Перемкнутися на {0}</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="GameSwitchBlockedTitle" xml:space="preserve">
+    <value>Зміна гри недоступна</value>
+  </data>
+  <data name="GameSwitchBlockedDetails" xml:space="preserve">
+    <value>Перед зміною гри завершіть або скасуйте активний запуск, гру, завантаження чи оновлення.</value>
+  </data>
+  <data name="GameSwitchFailedTitle" xml:space="preserve">
+    <value>Не вдалося змінити гру</value>
+  </data>
+  <data name="GameSwitchFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO не вдалося змінити активну гру. {0}</value>
+  </data>
+  <data name="PreferencesSaveFailedTitle" xml:space="preserve">
+    <value>Не вдалося зберегти налаштування</value>
+  </data>
+  <data name="PreferencesSaveFailedDetails" xml:space="preserve">
+    <value>GenLauncherGO не вдалося зберегти налаштування. Переконайтеся, що в папку лаунчера дозволено запис, і повторіть спробу.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="LaunchCloseBlockedTitle" xml:space="preserve">
+    <value>Триває запуск</value>
+  </data>
+  <data name="LaunchCloseBlockedDetails" xml:space="preserve">
+    <value>Дочекайтеся завершення активного запуску або скасуйте його, перш ніж закривати GenLauncherGO.</value>
+  </data>
+  <data name="BuiltIn" xml:space="preserve"><value>Вбудований</value></data>
+  <data name="Close" xml:space="preserve"><value>Закрити</value></data>
+  <data name="DisplayName" xml:space="preserve"><value>Відображуване ім’я</value></data>
+  <data name="ExecutableDisplayNameWatermark" xml:space="preserve"><value>Ім’я у лаунчері</value></data>
+  <data name="ExecutableFile" xml:space="preserve"><value>Виконуваний файл</value></data>
+  <data name="NoExecutableSelected" xml:space="preserve"><value>Виконуваний файл не вибрано</value></data>
+  <data name="CustomExecutables" xml:space="preserve"><value>Користувацькі виконувані файли</value></data>
+  <data name="ManageGameClients" xml:space="preserve"><value>Керування клієнтами гри</value></data>
+  <data name="ManageWorldBuilders" xml:space="preserve"><value>Керування World Builder</value></data>
+  <data name="ExecutableMustBeInGameRoot" xml:space="preserve"><value>Виберіть .exe безпосередньо в папці активної гри.</value></data>
+  <data name="ExecutableUnavailable" xml:space="preserve"><value>Вибраний файл відсутній або недоступний.</value></data>
+  <data name="ExecutableDetailsRequired" xml:space="preserve"><value>Введіть ім’я та виберіть виконуваний файл.</value></data>
+  <data name="ExecutableNameAlreadyExists" xml:space="preserve"><value>Запис із таким ім’ям уже існує.</value></data>
+  <data name="ExecutableFileAlreadyExists" xml:space="preserve"><value>Цей виконуваний файл уже зареєстровано.</value></data>
+  <data name="RemoveCustomExecutable" xml:space="preserve"><value>Вилучити користувацький запис?</value></data>
+  <data name="RemoveCustomExecutableDetails" xml:space="preserve"><value>Це лише прибере «{0}» з лаунчера. У файловій системі нічого не буде видалено або змінено.</value></data>
+  <data name="ChooseExecutable" xml:space="preserve"><value>Вибрати виконуваний файл</value></data>
+  <data name="Executables" xml:space="preserve"><value>Виконувані файли</value></data>
+  <data name="AddExecutable" xml:space="preserve"><value>Додати виконуваний файл</value></data>
+  <data name="EditExecutable" xml:space="preserve"><value>Змінити виконуваний файл</value></data>
+  <data name="SearchExecutables" xml:space="preserve"><value>Пошук за ім’ям або файлом</value></data>
+  <data name="BuiltInExecutables" xml:space="preserve"><value>Вбудовані виконувані файли</value></data>
+</root>

@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "GenLauncherGO",
+    "Projects": [
+      {
+        "Path": "GenLauncherGO.UI\\GenLauncherGO.UI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

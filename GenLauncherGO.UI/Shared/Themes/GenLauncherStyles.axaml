@@ -1,0 +1,185 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="TextBox">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    <Setter Property="CaretBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource GenLauncherDarkBackGround}" />
+  </Style>
+  <Style Selector="TextBox:pointerover">
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="TextBox:focus">
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="TextBox:disabled">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    <Setter Property="Opacity" Value="0.56" />
+  </Style>
+  <!-- Fluent paints TextBox states on its inner border, so keep that part on the launcher palette too. -->
+  <Style Selector="TextBox /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+
+  <Style Selector="ComboBox">
+    <Setter Property="MinWidth" Value="120" />
+    <Setter Property="MinHeight" Value="20" />
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBox:pointerover">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="ComboBox:pressed">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen /template/ Border#PopupBorder">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <Style Selector="ComboBox:focus-visible">
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="ComboBox:disabled">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+    <Setter Property="Foreground" Value="#FF888888" />
+  </Style>
+  <Style Selector="ComboBox /template/ Border#Background">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <Style Selector="ComboBox:pointerover /template/ Border#Background">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="ComboBox:pressed /template/ Border#Background">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen /template/ Border#Background">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkFillColor}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="ComboBox:disabled /template/ Border#Background">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder2}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="ComboBox:focus-visible /template/ Border#HighlightBackground">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="ComboBox /template/ ContentControl#ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBox:disabled /template/ ContentControl#ContentPresenter">
+    <Setter Property="Foreground" Value="#FF888888" />
+  </Style>
+  <Style Selector="ComboBox /template/ PathIcon#DropDownGlyph">
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherBorderColor}" />
+  </Style>
+  <Style Selector="ComboBox:disabled /template/ PathIcon#DropDownGlyph">
+    <Setter Property="Foreground" Value="#FF888888" />
+  </Style>
+  <Style Selector="ComboBoxItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Padding" Value="2" />
+  </Style>
+  <Style Selector="ComboBoxItem:pointerover">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected:pointerover">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:disabled">
+    <Setter Property="Foreground" Value="#FF888888" />
+  </Style>
+  <Style Selector="ComboBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    <Setter Property="Padding" Value="2" />
+  </Style>
+  <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+  </Style>
+  <Style Selector="ComboBoxItem:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="#FF888888" />
+  </Style>
+
+  <Style Selector="ToolTip">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherBorderColor}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherDefaultTextColor}" />
+    <Setter Property="Padding" Value="8,5" />
+    <Setter Property="FontSize" Value="14" />
+  </Style>
+
+  <Style Selector="ProgressBar">
+    <Setter Property="Background" Value="{DynamicResource GenLauncherDarkBackGround}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource GenLauncherInactiveBorder}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource GenLauncherActiveColor}" />
+  </Style>
+
+  <Style Selector="ScrollViewer">
+    <Setter Property="AllowAutoHide" Value="False" />
+  </Style>
+</Styles>
