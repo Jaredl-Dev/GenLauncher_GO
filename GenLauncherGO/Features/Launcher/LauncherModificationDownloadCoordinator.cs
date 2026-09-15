@@ -1,0 +1,473 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Avalonia.Controls;
+using GenLauncherGO.Features.Integrity;
+using GenLauncherGO.Features.Mods;
+using GenLauncherGO.Features.Settings;
+using GenLauncherGO.Features.Updating;
+using GenLauncherGO.Shared.Dialogs;
+using GenLauncherGO.Shared.Formatting;
+using GenLauncherGO.Shared.Localization;
+using Microsoft.Extensions.Logging;
+
+namespace GenLauncherGO.Features.Launcher;
+
+/// <summary>
+///     Sequences package download, installation, and post-install processing for launcher modification tiles.
+/// </summary>
+internal sealed class LauncherModificationDownloadCoordinator
+{
+    private readonly LauncherPackageActivityAdmissionService _activityAdmissionService;
+    private readonly ILauncherContentCatalog _catalog;
+    private readonly ILauncherDialogService _dialogService;
+    private readonly LaunchContentIntegrityCoordinator _launchContentIntegrityCoordinator;
+    private readonly ILauncherPreferencesService _launcherPreferencesService;
+    private readonly ILogger<LauncherModificationDownloadCoordinator> _logger;
+    private readonly LauncherPackageActivityService _packageActivityService;
+    private readonly IPackageDownloadService _packageDownloadService;
+    private readonly ILauncherStringLocalizer _stringLocalizer;
+
+    /// <summary>
+    ///     Initializes the package download sequencing workflow.
+    /// </summary>
+    public LauncherModificationDownloadCoordinator(
+        ILauncherPreferencesService launcherPreferencesService,
+        ILauncherContentCatalog catalog,
+        IPackageDownloadService packageDownloadService,
+        LaunchContentIntegrityCoordinator launchContentIntegrityCoordinator,
+        LauncherPackageActivityService packageActivityService,
+        LauncherPackageActivityAdmissionService activityAdmissionService,
+        ILauncherDialogService dialogService,
+        ILauncherStringLocalizer stringLocalizer,
+        ILogger<LauncherModificationDownloadCoordinator> logger)
+    {
+        _launcherPreferencesService = launcherPreferencesService ??
+                                      throw new ArgumentNullException(nameof(launcherPreferencesService));
+        _catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
+        _packageDownloadService = packageDownloadService ??
+                                  throw new ArgumentNullException(nameof(packageDownloadService));
+        _launchContentIntegrityCoordinator = launchContentIntegrityCoordinator ??
+                                             throw new ArgumentNullException(
+                                                 nameof(launchContentIntegrityCoordinator));
+        _packageActivityService = packageActivityService ??
+                                  throw new ArgumentNullException(nameof(packageActivityService));
+        _activityAdmissionService = activityAdmissionService ??
+                                    throw new ArgumentNullException(nameof(activityAdmissionService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+        _stringLocalizer = stringLocalizer ?? throw new ArgumentNullException(nameof(stringLocalizer));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    /// <summary>
+    ///     Starts a modification download, or toggles pause when that modification is already downloading.
+    /// </summary>
+    public async Task StartOrToggleAsync(
+        LauncherWindowContext context,
+        ModificationViewModel modification)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(modification);
+
+        if (_packageActivityService.GetActiveDownloadTask(modification) is { IsCompleted: false })
+        {
+            if (_packageActivityService.TryToggleDownloadPause(modification, out bool isPaused))
+            {
+                modification.SetPackageDownloadPaused(isPaused);
+                _logger.LogInformation(
+                    "{DownloadAction} active download for {ModificationName}.",
+                    isPaused ? "Paused" : "Resumed",
+                    modification.ContainerModification.Name);
+            }
+
+            return;
+        }
+
+        if (!await _activityAdmissionService.EnsureCanStartAsync(context.Owner))
+        {
+            _logger.LogInformation(
+                "Download workflow for {ModificationName} was blocked by active package activity.",
+                modification.ContainerModification.Name);
+            return;
+        }
+
+        if (modification.ContainerModification.LatestVersion.Deprecated &&
+            !await ConfirmDeprecatedModificationAsync(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    _stringLocalizer["Deprecated"],
+                    modification.ContainerModification.Name),
+                context.Owner))
+        {
+            _logger.LogDebug(
+                "Download workflow for deprecated modification {ModificationName} was canceled.",
+                modification.ContainerModification.Name);
+            return;
+        }
+
+        _logger.LogDebug(
+            "Starting download workflow for {ModificationName} {ContentVersion}.",
+            modification.ContainerModification.Name,
+            modification.LatestVersion.Version);
+        context.ViewModel.SelectContent(modification);
+        modification.SetUpdateButtonEnabled(false);
+        await StartDownloadAsync(
+            modification,
+            context.Owner,
+            () => CleanupCanceledDownload(context, modification));
+    }
+
+    /// <summary>
+    ///     Cancels an active or suspended download after confirmation and reports whether removal handling was consumed.
+    /// </summary>
+    public async Task<bool> TryCancelActiveDownloadAsync(
+        LauncherWindowContext context,
+        ModificationViewModel modification)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(modification);
+
+        Task<PackageDownloadResult>? downloadTask = _packageActivityService.GetActiveDownloadTask(modification);
+        if (downloadTask is not { IsCompleted: false } && !modification.HasSuspendedDownload)
+        {
+            return false;
+        }
+
+        if (!await ConfirmDownloadCancellationAsync(modification, context.Owner))
+        {
+            _logger.LogDebug(
+                "Download cancellation for {ModificationName} was declined.",
+                modification.ContainerModification.Name);
+            return true;
+        }
+
+        if (downloadTask is not null)
+        {
+            Task<PackageDownloadResult>? currentTask = _packageActivityService.GetActiveDownloadTask(modification);
+            if (currentTask is not null && !ReferenceEquals(currentTask, downloadTask))
+            {
+                _logger.LogDebug(
+                    "Download cancellation for {ModificationName} was skipped because the active task changed.",
+                    modification.ContainerModification.Name);
+                return true;
+            }
+
+            modification.SetUpdateButtonEnabled(false);
+            _packageActivityService.RequestDownloadCancellation(modification);
+
+            PackageDownloadResult result = await downloadTask;
+            if (result.Status != PackageDownloadStatus.Canceled)
+            {
+                _logger.LogInformation(
+                    "Download cancellation for {ModificationName} lost the completion race with status {DownloadStatus}; committed content was preserved.",
+                    modification.ContainerModification.Name,
+                    result.Status);
+                return true;
+            }
+
+            _logger.LogInformation(
+                "Canceled download and cleaned partial content for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+        else
+        {
+            if (_packageActivityService.GetActiveDownloadTask(modification) is { IsCompleted: false })
+            {
+                _logger.LogDebug(
+                    "Download cancellation for {ModificationName} was skipped because an active task started.",
+                    modification.ContainerModification.Name);
+                return true;
+            }
+
+            if (!modification.HasSuspendedDownload)
+            {
+                return true;
+            }
+
+            CleanupSuspendedDownload(context, modification);
+            PublishTerminalState(modification, PackageDownloadResult.Canceled());
+            _logger.LogInformation(
+                "Canceled suspended download and cleaned partial content for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+
+        context.Content.RestoreFocuses();
+        return true;
+    }
+
+    /// <summary>
+    ///     Attempts to start the selected package and waits for its lifecycle-owned terminal publication and cleanup.
+    /// </summary>
+    /// <param name="modification">The tile that projects package state.</param>
+    /// <param name="owner">The owner window for package workflow dialogs.</param>
+    /// <param name="canceledCleanup">Removes canceled partial content from the launcher UI and catalog.</param>
+    public async Task StartDownloadAsync(
+        ModificationViewModel modification,
+        Window owner,
+        Action canceledCleanup)
+    {
+        ArgumentNullException.ThrowIfNull(modification);
+        ArgumentNullException.ThrowIfNull(owner);
+        ArgumentNullException.ThrowIfNull(canceledCleanup);
+
+        if (!_packageActivityService.TryStartDownload(
+                modification,
+                modification.ContainerModification.Name,
+                (progress, pauseController, cancellationToken) => DownloadAndFinalizeAsync(
+                    modification,
+                    owner,
+                    progress,
+                    pauseController,
+                    cancellationToken),
+                () =>
+                {
+                    modification.BeginPackageActivityPresentation();
+                    modification.SetStatusMessage(_stringLocalizer["Preparing"]);
+                    modification.SetUpdateButtonEnabled(true);
+                },
+                progress => DownloadProgressChanged(progress, modification),
+                () => CleanupCanceledDownload(modification, canceledCleanup),
+                result => PublishTerminalState(modification, result),
+                out Task<PackageDownloadResult>? lifecycleTask))
+        {
+            _logger.LogInformation(
+                "Download workflow for {ModificationName} lost the package-activity admission race.",
+                modification.ContainerModification.Name);
+            await _activityAdmissionService.ShowInProgressAsync(owner);
+            modification.SetUpdateButtonEnabled(true);
+            return;
+        }
+
+        await (lifecycleTask ??
+               throw new InvalidOperationException("Package download lifecycle task was not created."));
+    }
+
+    private async Task<PackageDownloadResult> DownloadAndFinalizeAsync(
+        ModificationViewModel modification,
+        Window owner,
+        IProgress<PackageUpdateProgress> progress,
+        PackageDownloadPauseController pauseController,
+        CancellationToken cancellationToken)
+    {
+        PackageDownloadResult result;
+        try
+        {
+            result = await _packageDownloadService.DownloadAsync(
+                modification.ContainerModification,
+                modification.LatestVersion,
+                progress,
+                cancellationToken,
+                pauseController);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            result = PackageDownloadResult.Canceled();
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Could not complete package download workflow for {ModificationName}.",
+                modification.ContainerModification.Name);
+            result = PackageDownloadResult.UnexpectedFailure(
+                "An unexpected package download error occurred.");
+        }
+
+        if (result.Status != PackageDownloadStatus.Succeeded)
+        {
+            return result;
+        }
+
+        try
+        {
+            await FinalizeSuccessfulInstallAsync(modification);
+        }
+        catch (Exception exception)
+        {
+            // Installation already committed atomically. Post-install failures must never turn success into
+            // cancellation because canceled cleanup would delete valid installed content.
+            _logger.LogError(
+                exception,
+                "Package installation committed for {ModificationName}, but post-install processing failed.",
+                modification.ContainerModification.Name);
+            ReconcileCommittedInstall(modification);
+            await ShowPostInstallWarningAsync(modification, owner);
+        }
+
+        return result;
+    }
+
+    private void DownloadProgressChanged(
+        PackageUpdateProgress progress,
+        ModificationViewModel modification)
+    {
+        if (PackageProgressTextFormatter.TryFormat(
+                progress,
+                _stringLocalizer,
+                out string message,
+                out int percentage))
+        {
+            modification.ReportPackageProgress(message, percentage);
+        }
+    }
+
+    private async Task FinalizeSuccessfulInstallAsync(ModificationViewModel modification)
+    {
+        if (_launcherPreferencesService.Current.Shared.AutoDeleteOldVersions)
+        {
+            DeleteOutdatedModifications(modification);
+        }
+
+        _catalog.UpdateLocalModificationsData();
+        modification.LatestVersion.Installation.Installed = true;
+        await _launchContentIntegrityCoordinator.CaptureManagedInstallSnapshotAsync(modification.LatestVersion);
+    }
+
+    private void ReconcileCommittedInstall(ModificationViewModel modification)
+    {
+        modification.LatestVersion.Installation.Installed = true;
+
+        try
+        {
+            _catalog.UpdateLocalModificationsData();
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Could not reconcile committed package state for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+    }
+
+    private async Task ShowPostInstallWarningAsync(
+        ModificationViewModel modification,
+        Window owner)
+    {
+        try
+        {
+            await _dialogService.ShowErrorAsync(
+                new LauncherInfoDialogRequest(
+                    _stringLocalizer["UnexpectedErrorTitle"],
+                    _stringLocalizer["UnexpectedErrorDetails"]),
+                owner);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Could not show the post-install warning for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+    }
+
+    private void CleanupCanceledDownload(
+        ModificationViewModel modification,
+        Action canceledCleanup)
+    {
+        try
+        {
+            canceledCleanup();
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Could not clean canceled package content for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+    }
+
+    private void CleanupCanceledDownload(
+        LauncherWindowContext context,
+        ModificationViewModel modification)
+    {
+        CleanupInstalledVersions(context, [modification.LatestVersion]);
+    }
+
+    private void CleanupSuspendedDownload(
+        LauncherWindowContext context,
+        ModificationViewModel modification)
+    {
+        CleanupInstalledVersions(
+            context,
+            modification.ContainerModification.Versions
+                .Where(version => version.Installation.DownloadSuspended)
+                .ToList());
+    }
+
+    private void CleanupInstalledVersions(
+        LauncherWindowContext context,
+        IEnumerable<LauncherContentVersion> versions)
+    {
+        foreach (LauncherContentVersion version in versions)
+        {
+            _catalog.UninstallVersion(version.ContentKey);
+            version.Installation.Installed = false;
+            version.Installation.DownloadSuspended = false;
+            version.Installation.SuspendedProgressPercentage = 0;
+        }
+
+        context.ViewModel.SaveLauncherData();
+        context.ViewModel.UpdateAddonAndPatchTabLabels();
+    }
+
+    private void PublishTerminalState(
+        ModificationViewModel modification,
+        PackageDownloadResult result)
+    {
+        try
+        {
+            modification.CompletePackageActivityPresentation(result);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Could not publish terminal package state for {ModificationName}.",
+                modification.ContainerModification.Name);
+        }
+    }
+
+    /// <remarks>
+    ///     Uninstalling reconciles the catalog against disk, and that rescan merges the freshly installed version back
+    ///     into this same version list. The identities are taken up front so the merge cannot invalidate an in-flight
+    ///     enumerator and abandon the remaining outdated versions.
+    /// </remarks>
+    private void DeleteOutdatedModifications(ModificationViewModel modification)
+    {
+        LauncherContentKey latestContentKey = modification.LatestVersion.ContentKey;
+        var outdatedContentKeys = modification.ContainerModification.Versions
+            .Select(version => version.ContentKey)
+            .Where(contentKey => contentKey != latestContentKey)
+            .ToList();
+
+        foreach (LauncherContentKey contentKey in outdatedContentKeys)
+        {
+            _catalog.UninstallVersion(contentKey);
+        }
+    }
+
+    private Task<bool> ConfirmDownloadCancellationAsync(ModificationViewModel modification, Window owner)
+    {
+        return _dialogService.ShowWarningConfirmationAsync(
+            new LauncherInfoDialogRequest(
+                _stringLocalizer["CancelDownload"],
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    _stringLocalizer["CancelDownloadDetails"],
+                    modification.ContainerModification.Name)),
+            _stringLocalizer["Yes"],
+            owner);
+    }
+
+    private Task<bool> ConfirmDeprecatedModificationAsync(string details, Window owner)
+    {
+        return _dialogService.ShowWarningConfirmationAsync(
+            new LauncherInfoDialogRequest(_stringLocalizer["Compatibility"], details),
+            owner: owner);
+    }
+}
