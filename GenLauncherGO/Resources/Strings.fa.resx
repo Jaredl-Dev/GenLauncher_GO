@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--
+        Microsoft ResX Schema
+
+        Version 2.0
+
+        The primary goals of this format is to allow a simple XML format
+        that is mostly human readable. The generation and parsing of the
+        various data types are done through the TypeConverter classes
+        associated with the data types.
+
+        Example:
+
+        ... ado.net/XML headers & schema ...
+        <resheader name="resmimetype">text/microsoft-resx</resheader>
+        <resheader name="version">2.0</resheader>
+        <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+        <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+        <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+        <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+        <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+            <value>[base64 mime encoded serialized .NET Framework object]</value>
+        </data>
+        <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+            <value>[base64 mime encoded string representing a byte array form of an object]</value>
+            <comment>This is a comment</comment>
+        </data>
+
+        There are any number of "resheader" rows that contain simple
+        name/value pairs.
+
+        Each data row contains a name, and value. The row also contains a
+        type or mimetype. Type corresponds to a .NET class that support
+        text/value conversion through the TypeConverter architecture.
+        Classes that don't support this are serialized and stored with the
+        mimetype set.
+
+        The mimetype is used for serialized objects, and tells the
+        ResXResourceReader how to depersist the object. This is currently not
+        extensible. For a given mimetype the value must be set accordingly:
+
+        Note - application/x-microsoft.net.object.binary.base64 is the format
+        that the ResXResourceWriter will generate, however the reader can
+        read any of the formats listed below.
+
+        mimetype: application/x-microsoft.net.object.binary.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.soap.base64
+        value   : The object must be serialized with
+                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                : and then encoded with base64 encoding.
+
+        mimetype: application/x-microsoft.net.object.bytearray.base64
+        value   : The object must be serialized into a byte array
+                : using a System.ComponentModel.TypeConverter
+                : and then encoded with base64 encoding.
+        -->
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
+                xmlns="">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Add" xml:space="preserve"><value>افزودن</value></data>
+    <data name="AddAddonFromFiles" xml:space="preserve"><value>افزودن افزونه برای &#x2068;{0}&#x2069; از فایل‌ها</value></data>
+    <data name="AddMod" xml:space="preserve"><value>افزودن ماد</value></data>
+    <data name="Addons" xml:space="preserve"><value>افزونه‌های </value></data>
+    <data name="AddPatchFromFiles" xml:space="preserve"><value>افزودن پچ برای &#x2068;{0}&#x2069; از فایل‌ها</value></data>
+    <data name="AutoDelete" xml:space="preserve"><value>حذف نسخه‌های قدیمی ماد پس از به‌روزرسانی</value></data>
+    <data name="EnableDiagnosticLogging" xml:space="preserve"><value>فعال‌کردن گزارش‌گیری تشخیصی پس از راه‌اندازی مجدد</value></data>
+    <data name="Cancel" xml:space="preserve"><value>لغو</value></data>
+    <data name="CancelDownloadAction" xml:space="preserve"><value>لغو دانلود</value></data>
+    <data name="Pause" xml:space="preserve"><value>مکث</value></data>
+    <data name="Paused" xml:space="preserve"><value>متوقف شده — برای ادامه از سر بگیرید</value></data>
+    <data name="Resume" xml:space="preserve"><value>از سرگیری</value></data>
+    <data name="Canceled" xml:space="preserve"><value>دانلود لغو شد</value></data>
+    <data name="CancelDownload" xml:space="preserve"><value>دانلود لغو شود؟</value></data>
+    <data name="CancelDownloadDetails" xml:space="preserve"><value>با این کار دانلود &#x2068;{0}&#x2069; متوقف و محتوای دانلودشده تا این لحظه حذف می‌شود.</value></data>
+    <data name="CannotConnect" xml:space="preserve"><value>اتصال به GitHub ممکن نیست. نصب مادها از اینترنت در دسترس نیست.</value></data>
+    <data name="DeploymentRecoveryFailed" xml:space="preserve"><value>GenLauncherGO نتوانست استقرار قبلی را بازیابی کند. بازی یا هر کلاینت در حال اجرا را ببندید و سپس «تلاش مجدد» را انتخاب کنید. برای بستن لانچر و جلوگیری از باقی‌ماندن پوشه بازی در وضعیت ناامن، «لغو» را انتخاب کنید.</value></data>
+    <data name="ChangelogOnly" xml:space="preserve"><value>فهرست تغییرات</value></data>
+    <data name="ChangeToFullScreen" xml:space="preserve"><value>تغییر به حالت تمام‌صفحه</value></data>
+    <data name="ChangeToWindowed" xml:space="preserve"><value>تغییر به حالت پنجره‌ای</value></data>
+    <data name="ChangeToNormalStart" xml:space="preserve"><value>تغییر به اجرای عادی</value></data>
+    <data name="ChangeToQuickStart" xml:space="preserve"><value>تغییر به اجرای سریع</value></data>
+    <data name="Compatibility" xml:space="preserve"><value>سازگاری با ماد تضمین نمی‌شود!</value></data>
+    <data name="Continue" xml:space="preserve"><value>ادامه</value></data>
+    <data name="CurrentVersion" xml:space="preserve"><value>نسخه فعلی: </value></data>
+    <data name="Delete" xml:space="preserve"><value>حذف</value></data>
+    <data name="Remove" xml:space="preserve"><value>برداشتن</value></data>
+    <data name="RemoveFromList" xml:space="preserve"><value>حذف از فهرست</value></data>
+    <data name="RemoveFromListConfirmation" xml:space="preserve"><value>از فهرست حذف شود؟</value></data>
+    <data name="RemoveFromListDetails" xml:space="preserve"><value>آیا مطمئن هستید که می‌خواهید &#x2068;{0}&#x2069; را از فهرست حذف کنید؟</value></data>
+    <data name="RemoveContent" xml:space="preserve"><value>محتوا حذف شود؟</value></data>
+    <data name="RemoveContentDetails" xml:space="preserve"><value>آیا مطمئن هستید که می‌خواهید &#x2068;{0}&#x2069; را حذف کنید؟ همه فایل‌های نصب‌شده برای این نسخه حذف خواهند شد.</value></data>
+    <data name="Deprecated" xml:space="preserve"><value>&#x2068;{0}&#x2069; منسوخ شده است</value></data>
+    <data name="Discord" xml:space="preserve"><value>پیوستن به سرور Discord</value></data>
+    <data name="ModDb" xml:space="preserve"><value>ModDB</value></data>
+    <data name="Donate" xml:space="preserve"><value>کمک مالی</value></data>
+    <data name="Download" xml:space="preserve"><value>در حال دانلود &#x2068;{0}&#x2069;: &#x2068;{1}&#x2069; مگابایت از &#x2068;{2}&#x2069; مگابایت</value></data>
+    <data name="DownloadInProgress" xml:space="preserve"><value>دانلود در حال انجام: &#x2068;{0}&#x2069; از &#x2068;{1}&#x2069;</value></data>
+    <data name="EstimatedTimeRemaining" xml:space="preserve"><value>زمان باقی‌مانده تقریبی: &#x2068;{0}&#x2069;</value></data>
+    <data name="EnterModName" xml:space="preserve"><value>نام ماد را وارد کنید</value></data>
+    <data name="EnterModVersion" xml:space="preserve"><value>نسخه ماد را وارد کنید</value></data>
+    <data name="Error" xml:space="preserve"><value>خطا: </value></data>
+    <data name="ErrorMsg" xml:space="preserve"><value>نسخه GenLauncherGO: &#x2068;{2}&#x2069; \r\nپشتیبانی فنی GenLauncherGO در Discord: &#x2068;{3}&#x2069; \r\nخطا: &#x2068;{0}&#x2069; \r\nردیابی پشته: &#x2068;{1}&#x2069;</value></data>
+    <data name="Exit" xml:space="preserve"><value>خروج</value></data>
+    <data name="FilesCorrupted" xml:space="preserve"><value>برخی فایل‌های ماد وجود ندارند یا خراب شده‌اند!</value></data>
+    <data name="GameIsStillRunning" xml:space="preserve"><value>بازی هنوز در حال اجراست!</value></data>
+    <data name="GameRunning" xml:space="preserve"><value>بازی Generals از قبل در حال اجراست!</value></data>
+    <data name="LaunchVerificationRunning" xml:space="preserve"><value>فرایند تأیید در حال تعمیر محتواست.</value></data>
+    <data name="PackageActivityInProgress" xml:space="preserve"><value>عملیات محتوا در حال انجام است</value></data>
+    <data name="PackageActivityInProgressDetails" xml:space="preserve"><value>پیش از نصب، واردکردن یا افزودن محتوای بیشتر، منتظر بمانید تا دانلود یا تعمیر فعلی تمام شود.</value></data>
+    <data name="HideLauncher" xml:space="preserve"><value>پنهان‌کردن لانچر هنگام اجرای بازی</value></data>
+    <data name="Image" xml:space="preserve"><value>تصویر</value></data>
+    <data name="InputModData" xml:space="preserve"><value>اطلاعات ماد را وارد کنید</value></data>
+    <data name="Install" xml:space="preserve"><value>نصب</value></data>
+    <data name="InstallInProgress" xml:space="preserve"><value>&#x2068;{0}&#x2069; اجرا نمی‌شود: نصب در حال انجام است!</value></data>
+    <data name="LatestVersion" xml:space="preserve"><value>جدیدترین نسخه: </value></data>
+    <data name="Launch" xml:space="preserve"><value>اجرای بازی</value></data>
+    <data name="LaunchAborted" xml:space="preserve"><value>اجرا لغو شد</value></data>
+    <data name="AdvertisingCannotLaunch" xml:space="preserve"><value>پیوند تبلیغاتی قابل اجرا نیست.</value></data>
+    <data name="ModificationName" xml:space="preserve"><value>نام ماد: </value></data>
+    <data name="ModificationsWithUpdate" xml:space="preserve"><value>برخی مادها قابل به‌روزرسانی هستند:</value></data>
+    <data name="Mods" xml:space="preserve"><value>مادها</value></data>
+    <data name="NameAndVersionValidSymbols" xml:space="preserve"><value>نام و نسخه ماد باید فقط شامل نویسه‌های معتبر باشند.</value></data>
+    <data name="No" xml:space="preserve"><value>خیر</value></data>
+    <data name="Yes" xml:space="preserve"><value>بله</value></data>
+    <data name="NotInstalled" xml:space="preserve"><value>&#x2068;{0}&#x2069; انتخاب شده، اما نصب نیست. اجرا لغو شد!</value></data>
+    <data name="Ok" xml:space="preserve"><value>تأیید</value></data>
+    <data name="OperationAborted" xml:space="preserve"><value>عملیات لغو شد</value></data>
+    <data name="Options" xml:space="preserve"><value>تنظیمات لانچر</value></data>
+    <data name="Patches" xml:space="preserve"><value>پچ‌های </value></data>
+    <data name="PlayOnline" xml:space="preserve"><value>چگونه آنلاین بازی کنیم؟</value></data>
+    <data name="Preparing" xml:space="preserve"><value>در حال آماده‌سازی، لطفاً صبر کنید...</value></data>
+    <data name="Reinstall" xml:space="preserve"><value>نصب مجدد ماد توصیه می‌شود.
+می‌توانید این بررسی را در تنظیمات لانچر غیرفعال کنید.</value></data>
+    <data name="SearchMods" xml:space="preserve"><value>جست‌وجوی مادها...</value></data>
+    <data name="NoModsMatchSearch" xml:space="preserve"><value>هیچ مادی با جست‌وجوی شما مطابقت ندارد.</value></data>
+    <data name="CalculatingPackageSize" xml:space="preserve"><value>در حال محاسبه...</value></data>
+    <data name="PackageSizeUnavailable" xml:space="preserve"><value>در دسترس نیست</value></data>
+    <data name="SelectMod" xml:space="preserve"><value>ماد موردنظر برای افزودن را انتخاب کنید</value></data>
+    <data name="SetImage" xml:space="preserve"><value>تنظیم تصویر (500×100)</value></data>
+    <data name="Stop" xml:space="preserve"><value>توقف</value></data>
+    <data name="ThankYou" xml:space="preserve"><value>متشکریم!</value></data>
+    <data name="UninstalledUpdate" xml:space="preserve"><value>یک به‌روزرسانی نصب‌نشده برای &#x2068;{0}&#x2069; وجود دارد </value></data>
+    <data name="UnpackingPreparing" xml:space="preserve"><value>در حال استخراج/آماده‌سازی...</value></data>
+    <data name="Update" xml:space="preserve"><value>به‌روزرسانی!</value></data>
+    <data name="UpToDate" xml:space="preserve"><value>به‌روز</value></data>
+    <data name="VersionMustContainNumbers" xml:space="preserve"><value>نسخه باید شامل عدد باشد.</value></data>
+    <data name="WorldBuilder" xml:space="preserve"><value>World Builder</value></data>
+    <data name="WorldBuilderRunning" xml:space="preserve"><value>World Builder از قبل در حال اجراست!</value></data>
+    <data name="AutoDeleteToolTip" xml:space="preserve"><value>پس از نصب نسخه‌ای جدیدتر، نسخه‌های قدیمی نصب‌شده ماد را به‌طور خودکار حذف کنید.</value></data>
+    <data name="EnableDiagnosticLoggingToolTip" xml:space="preserve"><value>پس از راه‌اندازی مجدد لانچر، رویدادهای اشکال‌زدایی را با جزئیات در فایل‌های گزارش ثبت کنید. پس از بازتولید مشکل، این گزینه را غیرفعال کنید.</value></data>
+    <data name="SettingsSaveFailedTitle" xml:space="preserve"><value>تنظیمات ذخیره نشد</value></data>
+    <data name="SettingsSaveFailedDetails" xml:space="preserve"><value>GenLauncherGO نتوانست تنظیمات شما را ذخیره کند. تنظیمات قبلی شما همچنان فعال است. بررسی کنید پوشه داده‌های لانچر قابل نوشتن باشد و سپس دوباره تلاش کنید.</value></data>
+    <data name="CloseAnyway" xml:space="preserve"><value>بستن در هر صورت</value></data>
+    <data name="ClosePackageActivityDetails" xml:space="preserve"><value>&#x2068;{0}&#x2069; همچنان در حال اجراست. بستن GenLauncherGO عملیات فعلی را متوقف می‌کند.</value></data>
+    <data name="DonateOriginalAuthor" xml:space="preserve"><value>کمک مالی به سازنده اصلی GenLauncher</value></data>
+    <data name="DonateOriginalAuthorToolTip" xml:space="preserve"><value>صفحه کمک مالی سازنده اصلی GenLauncher را باز کنید.</value></data>
+    <data name="GameExecutableArguments" xml:space="preserve"><value>آرگومان‌های فایل اجرایی بازی</value></data>
+    <data name="GameExecutableArgumentsInputToolTip" xml:space="preserve"><value>آرگومان‌های اختیاری خط فرمان برای فایل اجرایی بازی انتخاب‌شده. برای اجرای عادی خالی بگذارید.</value></data>
+    <data name="GameExecutableArgumentsToolTip" xml:space="preserve"><value>آرگومان‌هایی که به فایل اجرایی بازی انتخاب‌شده ارسال می‌شوند.</value></data>
+    <data name="GeneralsOnlineGameClientDisplayName" xml:space="preserve"><value>GeneralsOnline</value></data>
+    <data name="Language" xml:space="preserve"><value>زبان</value></data>
+    <data name="LaunchArguments" xml:space="preserve"><value>آرگومان‌های اجرا</value></data>
+    <data name="Links" xml:space="preserve"><value>پیوندها</value></data>
+    <data name="Maintenance" xml:space="preserve"><value>نگه‌داری</value></data>
+    <data name="SelectedGameClient" xml:space="preserve"><value>کلاینت بازی انتخاب‌شده</value></data>
+    <data name="SelectedWorldBuilder" xml:space="preserve"><value>World Builder انتخاب‌شده</value></data>
+    <data name="CommunityGameClientDisplayName" xml:space="preserve"><value>TheSuperHackers</value></data>
+    <data name="SuperHackersWorldBuilder" xml:space="preserve"><value>TheSuperHackers</value></data>
+    <data name="UseEnglishLanguage" xml:space="preserve"><value>استفاده از انگلیسی</value></data>
+    <data name="UseEnglishLanguageToolTip" xml:space="preserve"><value>رابط کاربری لانچر را مجبور به استفاده از انگلیسی کنید.</value></data>
+    <data name="UseSystemLanguage" xml:space="preserve"><value>استفاده از زبان سیستم</value></data>
+    <data name="UseSystemLanguageToolTip" xml:space="preserve"><value>هرگاه ترجمه متناظر در لانچر موجود باشد، از زبان نمایش Windows استفاده کنید.</value></data>
+    <data name="RetailWorldBuilder" xml:space="preserve"><value>نسخه اصلی</value></data>
+    <data name="RetailGameClientDisplayName" xml:space="preserve"><value>نسخه اصلی</value></data>
+    <data name="GenPatcherRecommendationTitle" xml:space="preserve"><value>پیشنهاد GenPatcher</value></data>
+    <data name="GenPatcherRecommendationMessage" xml:space="preserve"><value>برای اجرای نسخه اصلی بازی، استفاده از GenPatcher قویاً توصیه می‌شود.</value></data>
+    <data name="VisitGenPatcherDownloadPage" xml:space="preserve"><value>رفتن به صفحه دانلود GenPatcher</value></data>
+    <data name="WindowBehavior" xml:space="preserve"><value>رفتار پنجره</value></data>
+    <data name="WorldBuilderArguments" xml:space="preserve"><value>آرگومان‌های World Builder</value></data>
+    <data name="WorldBuilderArgumentsInputToolTip" xml:space="preserve"><value>آرگومان‌های اختیاری خط فرمان برای فایل اجرایی World Builder انتخاب‌شده. برای اجرای عادی خالی بگذارید.</value></data>
+    <data name="WorldBuilderArgumentsToolTip" xml:space="preserve"><value>آرگومان‌هایی که به فایل اجرایی World Builder انتخاب‌شده ارسال می‌شوند.</value></data>
+    <data name="HideLauncherToolTip" xml:space="preserve"><value>هنگام اجرای بازی یا World Builder، پنجره لانچر را پنهان و پس از پایان فرایند دوباره نمایش دهید.</value></data>
+    <data name="AddModFromFiles" xml:space="preserve"><value>افزودن ماد از فایل‌ها</value></data>
+    <data name="ManualImportSourceTitle" xml:space="preserve">
+    <value>وارد کردن محتوا</value>
+  </data>
+    <data name="ManualImportSourceDetails" xml:space="preserve">
+    <value>یک مود را از فایل های جداگانه یا از پوشه ای شامل فایل های آن وارد کنید.</value>
+  </data>
+    <data name="ManualImportSourceFiles" xml:space="preserve">
+    <value>انتخاب فایل ها</value>
+  </data>
+    <data name="ManualImportSourceFolder" xml:space="preserve">
+    <value>انتخاب پوشه</value>
+  </data>
+    <data name="LauncherPackagesFilter" xml:space="preserve">
+    <value>بسته های لانچر</value>
+  </data>
+    <data name="AllFilesFilter" xml:space="preserve">
+    <value>همه فایل ها</value>
+  </data>
+    <data name="ManualImportFolderTitle" xml:space="preserve">
+    <value>پوشه حاوی محتوا را انتخاب کنید</value>
+  </data>
+    <data name="FinishProcess" xml:space="preserve"><value>پیش از بازکردن تنظیمات لانچر، بازی را ببندید.</value></data>
+    <data name="Info" xml:space="preserve"><value>اطلاعات</value></data>
+    <data name="Retry" xml:space="preserve"><value>تلاش مجدد</value></data>
+    <data name="Downloading" xml:space="preserve"><value>در حال دانلود</value></data>
+    <data name="IntegrityRepeatedFailure" xml:space="preserve"><value>پس از چندین تلاش برای رفع مشکل، محتوا همچنان ناسازگار بود. هیچ اجرایی آغاز نشد.</value></data>
+    <data name="IntegrityCacheSuffix" xml:space="preserve"><value>کش</value></data>
+    <data name="IntegrityBlockedDescription" xml:space="preserve"><value>محتوای انتخاب‌شده مشکلاتی در تأیید دارد که به‌طور خودکار قابل رفع نیستند. موارد مسدودشده را حذف یا محتوا را بازیابی کنید و سپس دوباره اجرا کنید.</value></data>
+    <data name="CancelLaunch" xml:space="preserve"><value>لغو اجرا</value></data>
+    <data name="IntegrityManagedDescription" xml:space="preserve"><value>محتوای انتخاب‌شده که از راه دور مدیریت می‌شود با منبع مورد اعتمادش متفاوت است: &#x2068;{0}&#x2069;. گزینه «تعمیر» فقط موارد مدیریت‌شده فهرست‌شده را تعمیر، دوباره دانلود یا حذف می‌کند و سپس پیش از اجرا دوباره آن‌ها را تأیید می‌کند.</value></data>
+    <data name="FixAndLaunch" xml:space="preserve"><value>تعمیر و اجرا</value></data>
+    <data name="IntegrityDialogTitle" xml:space="preserve"><value>تأیید محتوای اجرا</value></data>
+    <data name="IntegrityBlockGroup" xml:space="preserve"><value>مسدودشده</value></data>
+    <data name="IntegrityDeleteGroup" xml:space="preserve"><value>حذف</value></data>
+    <data name="IntegrityRepairGroup" xml:space="preserve"><value>تعمیر</value></data>
+    <data name="IntegrityRedownloadGroup" xml:space="preserve"><value>دانلود دوباره</value></data>
+    <data name="IntegrityIssueGroupSummarySingle" xml:space="preserve"><value>&#x2068;{0}&#x2069; تغییر</value></data>
+    <data name="IntegrityIssueGroupSummaryMultiple" xml:space="preserve"><value>&#x2068;{0}&#x2069; تغییر</value></data>
+    <data name="IntegrityIssueUntrackedLabel" xml:space="preserve"><value>ردیابی‌نشده</value></data>
+    <data name="IntegrityIssueMissingFileLabel" xml:space="preserve"><value>مفقود</value></data>
+    <data name="IntegrityIssueModifiedFileLabel" xml:space="preserve"><value>تغییریافته</value></data>
+    <data name="IntegrityIssueUnexpectedFileLabel" xml:space="preserve"><value>افزوده‌شده</value></data>
+    <data name="IntegrityIssueEmptyDirectoryLabel" xml:space="preserve"><value>پوشه خالی</value></data>
+    <data name="IntegrityIssueUnsafeLinkLabel" xml:space="preserve"><value>پیوند ناامن</value></data>
+    <data name="IntegrityIssueVerificationErrorLabel" xml:space="preserve"><value>خطای تأیید</value></data>
+    <data name="GeneralsOnlineDiscord" xml:space="preserve"><value>Discord رسمی Generals Online</value></data>
+    <data name="GeneralsOnlineDiscordToolTip" xml:space="preserve"><value>سرور Discord رسمی Generals Online را باز کنید.</value></data>
+    <data name="OpenLogsFolder" xml:space="preserve"><value>بازکردن پوشه گزارش‌ها</value></data>
+    <data name="OpenLogsFolderToolTip" xml:space="preserve"><value>پوشه حاوی فایل‌های گزارش GenLauncherGO را باز کنید.</value></data>
+    <data name="GitHubRepository" xml:space="preserve"><value>مخزن GitHub</value></data>
+    <data name="GitHubRepositoryToolTip" xml:space="preserve"><value>مخزن GitHub مربوط به GenLauncherGO را باز کنید.</value></data>
+    <data name="AdvertisingDonationAlerts" xml:space="preserve"><value>Donation Alerts</value></data>
+    <data name="AdvertisingBoostyLink" xml:space="preserve"><value>Boosty.to</value></data>
+    <data name="AdvertisingYouTubeRuLink" xml:space="preserve"><value>یوتیوب من (روسی)</value></data>
+    <data name="RunningProcessOverlayTitle" xml:space="preserve"><value>فرایند در حال اجرا</value></data>
+    <data name="RunningProcessStatus" xml:space="preserve"><value>فرایند در حال اجرا: &#x2068;{0}&#x2069;</value></data>
+    <data name="RunningProcessUnknown" xml:space="preserve"><value>فرایند ناشناخته</value></data>
+    <data name="ForceQuitRunningProcess" xml:space="preserve"><value>بستن اجباری</value></data>
+    <data name="ForceQuitRunningProcessConfirmationTitle" xml:space="preserve"><value>فرایند به‌اجبار بسته شود؟</value></data>
+    <data name="ForceQuitRunningProcessConfirmationDetails" xml:space="preserve"><value>با این کار &#x2068;{0}&#x2069; و همه فرایندهای فرزند ردیابی‌شده فوراً بسته می‌شوند. ممکن است پیشرفت ذخیره‌نشده از بین برود.</value></data>
+    <data name="RunningProcessCloseBlockedTitle" xml:space="preserve"><value>فرایند همچنان در حال اجراست</value></data>
+    <data name="RunningProcessCloseBlockedDetails" xml:space="preserve"><value>پیش از بستن GenLauncherGO، فرایند در حال اجرا را ببندید یا از «بستن اجباری» استفاده کنید.</value></data>
+    <data name="UnexpectedErrorTitle" xml:space="preserve"><value>مشکلی پیش آمد</value></data>
+    <data name="UnexpectedErrorDetails" xml:space="preserve"><value>خطای پیش‌بینی‌نشده‌ای رخ داد. دوباره تلاش کنید. اگر ادامه داشت، گزارش‌های لانچر را بررسی کنید.</value></data>
+    <data name="LanguageRestartPromptTitle" xml:space="preserve"><value>راه‌اندازی مجدد لازم است</value></data>
+    <data name="LanguageRestartPromptDetails" xml:space="preserve"><value>تغییر زبان شما ذخیره شد و دفعه بعد که GenLauncherGO راه‌اندازی شود اعمال خواهد شد.</value></data>
+    <data name="ApplicationUpdateReadyTitle" xml:space="preserve"><value>به‌روزرسانی GenLauncherGO آماده است</value></data>
+    <data name="ApplicationUpdateReadyDetails" xml:space="preserve"><value>نسخهٔ {0} دانلود شد. برای تکمیل به‌روزرسانی، GenLauncherGO را دوباره راه‌اندازی کنید.</value></data>
+    <data name="RestartNow" xml:space="preserve"><value>اکنون راه‌اندازی مجدد شود</value></data>
+    <data name="RestartLater" xml:space="preserve"><value>بعداً</value></data>
+    <data name="RestartBlockedTitle" xml:space="preserve"><value>راه‌اندازی مجدد در دسترس نیست</value></data>
+    <data name="RestartBlockedActiveOperation" xml:space="preserve"><value>پیش از راه‌اندازی مجدد GenLauncherGO، «&#x2068;{0}&#x2069;» را تمام یا لغو کنید.</value></data>
+    <data name="GameInstallationSetupTitle" xml:space="preserve"><value>پوشه‌های بازی را انتخاب کنید</value></data>
+    <data name="ValidGeneralsInstallation" xml:space="preserve"><value>پوشه Generals انتخاب شد</value></data>
+    <data name="ValidZeroHourInstallation" xml:space="preserve"><value>پوشه Zero Hour انتخاب شد</value></data>
+    <data name="ChooseDeploymentFolder" xml:space="preserve"><value>یک پوشهٔ موجود برای استقرار مادها انتخاب کنید.</value></data>
+    <data name="InstallationPathUnavailable" xml:space="preserve"><value>این پوشه نصب قابل استفاده نیست.</value></data>
+    <data name="OverlappingGameFolders" xml:space="preserve"><value>پوشه‌های بازی‌ها نباید یکسان باشند یا یکی داخل دیگری باشد.</value></data>
+    <data name="GeneralsShortName" xml:space="preserve"><value>Generals</value></data>
+    <data name="ZeroHourShortName" xml:space="preserve"><value>Zero Hour</value></data>
+    <data name="GeneralsFullName" xml:space="preserve"><value>Command &amp; Conquer: Generals</value></data>
+    <data name="ZeroHourFullName" xml:space="preserve"><value>Command &amp; Conquer: Generals – Zero Hour</value></data>
+    <data name="InstallationFolder" xml:space="preserve"><value>پوشه نصب</value></data>
+    <data name="Browse" xml:space="preserve"><value>مرور</value></data>
+    <data name="DetectViaRegistry" xml:space="preserve"><value>شناسایی از رجیستری</value></data>
+    <data name="GameFirstRunRegistryNotice" xml:space="preserve"><value>هر بازی نصب‌شده را دست‌کم یک‌بار اجرا کنید تا مسیر نصب آن در رجیستری ثبت شود.</value></data>
+    <data name="RegistryInstallationNotFound" xml:space="preserve"><value>از طریق رجیستری هیچ پوشه بازی موجودی پیدا نشد. بازی را یک‌بار اجرا کنید تا مسیر آن ثبت شود یا پوشه‌ای را دستی انتخاب کنید.</value></data>
+    <data name="RegistryDetectionFailedTitle" xml:space="preserve"><value>نصب شناسایی نشد</value></data>
+    <data name="ProgramFilesModToolsWarning" xml:space="preserve"><value>مجوزهای Windows در Program Files ممکن است در کار ابزارهای ماد اختلال ایجاد کنند. توصیه می‌شود پوشه بازی خارج از Program Files باشد.</value></data>
+    <data name="SameDriveRecommendation" xml:space="preserve"><value>پیشنهاد: GenLauncherGO را در همان درایوی نگه دارید که بازی‌ها قرار دارند.</value></data>
+    <data name="AtLeastOneInstallationRequired" xml:space="preserve"><value>برای ادامه، دست‌کم یک پوشه بازی انتخاب کنید.</value></data>
+    <data name="ChooseYourGame" xml:space="preserve"><value>بازی موردنظر برای مدیریت را انتخاب کنید</value></data>
+    <data name="NotSelected" xml:space="preserve"><value>انتخاب نشده</value></data>
+    <data name="Selected" xml:space="preserve"><value>انتخاب شده</value></data>
+    <data name="StandaloneLocationRequired" xml:space="preserve"><value>GenLauncherGO را جابه‌جا کنید</value></data>
+    <data name="StandaloneLocationBlockingDescription" xml:space="preserve"><value>GenLauncherGO نمی‌تواند از داخل پوشه نصب بازی اجرا شود.</value></data>
+    <data name="CurrentLauncherLocation" xml:space="preserve"><value>محل فعلی لانچر</value></data>
+    <data name="ContainingGameInstallation" xml:space="preserve"><value>پوشه نصب بازی دربرگیرنده</value></data>
+    <data name="MoveLauncherOutsideGames" xml:space="preserve"><value>پوشه GenLauncherGO را به هر محلی بیرون از پوشه‌های نصب بازی منتقل و سپس دوباره اجرا کنید.</value></data>
+    <data name="StandaloneLocationExample" xml:space="preserve"><value>مثال: C:\Tools\GenLauncherGO</value></data>
+    <data name="AdministratorPermissionRequired" xml:space="preserve"><value>GenLauncherGO برای اجرا به دسترسی مدیر سیستم نیاز دارد.</value></data>
+    <data name="ActiveGameLabel" xml:space="preserve"><value>بازی فعال</value></data>
+    <data name="GameManagement" xml:space="preserve"><value>مدیریت بازی</value></data>
+    <data name="InstallationPaths" xml:space="preserve"><value>مسیرهای نصب</value></data>
+    <data name="SwitchToGame" xml:space="preserve"><value>تغییر به &#x2068;{0}&#x2069;</value></data>
+    <data name="Save" xml:space="preserve"><value>ذخیره</value></data>
+    <data name="GameSwitchBlockedTitle" xml:space="preserve"><value>تغییر بازی در دسترس نیست</value></data>
+    <data name="GameSwitchBlockedDetails" xml:space="preserve"><value>پیش از تغییر بازی، اجرای فعال، بازی، دانلود یا به‌روزرسانی را تمام یا لغو کنید.</value></data>
+    <data name="GameSwitchFailedTitle" xml:space="preserve"><value>تغییر بازی ممکن نشد</value></data>
+    <data name="GameSwitchFailedDetails" xml:space="preserve"><value>GenLauncherGO نتوانست بازی فعال را تغییر دهد. &#x2068;{0}&#x2069;</value></data>
+    <data name="Back" xml:space="preserve"><value>بازگشت</value></data>
+    <data name="LaunchCloseBlockedTitle" xml:space="preserve"><value>اجرا در حال انجام است</value></data>
+    <data name="LaunchCloseBlockedDetails" xml:space="preserve"><value>پیش از بستن GenLauncherGO، صبر کنید اجرای فعال تمام شود یا آن را لغو کنید.</value></data>
+    <data name="BuiltIn" xml:space="preserve"><value>داخلی</value></data>
+    <data name="Close" xml:space="preserve"><value>بستن</value></data>
+    <data name="DisplayName" xml:space="preserve"><value>نام نمایشی</value></data>
+    <data name="ExecutableDisplayNameWatermark" xml:space="preserve"><value>نام نمایش‌داده‌شده در لانچر</value></data>
+    <data name="ExecutableFile" xml:space="preserve"><value>فایل اجرایی</value></data>
+    <data name="NoExecutableSelected" xml:space="preserve"><value>هیچ فایل اجرایی انتخاب نشده است</value></data>
+    <data name="CustomExecutables" xml:space="preserve"><value>فایل‌های اجرایی سفارشی</value></data>
+    <data name="ManageGameClients" xml:space="preserve"><value>مدیریت کلاینت‌های بازی</value></data>
+    <data name="ManageWorldBuilders" xml:space="preserve"><value>مدیریت World Builderها</value></data>
+    <data name="ExecutableUnavailable" xml:space="preserve"><value>فایل اجرایی انتخاب‌شده وجود ندارد یا قابل استفاده نیست.</value></data>
+    <data name="ExecutableDetailsRequired" xml:space="preserve"><value>یک نام نمایشی وارد و یک فایل اجرایی انتخاب کنید.</value></data>
+    <data name="ExecutableNameAlreadyExists" xml:space="preserve"><value>ورودی‌ای با این نام نمایشی از قبل وجود دارد.</value></data>
+    <data name="ExecutableFileAlreadyExists" xml:space="preserve"><value>این فایل اجرایی از قبل ثبت شده است.</value></data>
+    <data name="RemoveCustomExecutable" xml:space="preserve"><value>فایل اجرایی سفارشی حذف شود؟</value></data>
+    <data name="RemoveCustomExecutableDetails" xml:space="preserve"><value>با این کار فقط «&#x2068;{0}&#x2069;» از لانچر حذف می‌شود. هیچ چیزی در سیستم فایل حذف یا تغییر نخواهد کرد.</value></data>
+    <data name="ChooseExecutable" xml:space="preserve"><value>انتخاب فایل اجرایی</value></data>
+    <data name="Executables" xml:space="preserve"><value>فایل‌های اجرایی</value></data>
+    <data name="AddExecutable" xml:space="preserve"><value>افزودن فایل اجرایی</value></data>
+    <data name="EditExecutable" xml:space="preserve"><value>ویرایش فایل اجرایی</value></data>
+    <data name="SearchExecutables" xml:space="preserve"><value>جستجو بر اساس نام یا مسیر</value></data>
+    <data name="BuiltInExecutables" xml:space="preserve"><value>فایل‌های اجرایی داخلی</value></data>
+</root>
