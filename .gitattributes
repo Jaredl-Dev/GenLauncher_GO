@@ -1,0 +1,13 @@
+# Line endings are declared in .editorconfig (end_of_line = crlf) and enforced
+# on C# by `dotnet format whitespace`. Without this file the working-tree result
+# depends on each contributor's core.autocrlf setting, so the same checkout can
+# pass locally and fail the format gate in CI.
+#
+# Everything text-like is stored as LF and checked out as CRLF, which matches
+# what the index already contains, so this changes no stored content.
+* text=auto eol=crlf
+
+# Binary assets must never be normalized or diffed as text.
+*.png binary
+*.jpg binary
+*.ico binary
