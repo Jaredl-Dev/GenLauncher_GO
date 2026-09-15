@@ -1,0 +1,19 @@
+<Project>
+  <Target Name="ValidateGenLauncherGOProjectReferences"
+          BeforeTargets="ResolveProjectReferences">
+    <ItemGroup>
+      <_DisallowedProjectReference Include="@(ProjectReference)"
+                                   Condition="
+                                     '$(MSBuildProjectName)' == 'GenLauncherGO'
+                                     Or '$(MSBuildProjectName)' == 'GenLauncherGO.TestAnalyzers'
+                                     Or ('$(MSBuildProjectName)' == 'GenLauncherGO.Tests'
+                                         And '%(ProjectReference.Filename)' != 'GenLauncherGO'
+                                         And ('%(ProjectReference.Filename)' != 'GenLauncherGO.TestAnalyzers'
+                                              Or '%(ProjectReference.OutputItemType)' != 'Analyzer'
+                                              Or '%(ProjectReference.ReferenceOutputAssembly)' != 'false'))"/>
+    </ItemGroup>
+
+    <Error Condition="'@(_DisallowedProjectReference)' != ''"
+           Text="$(MSBuildProjectName) has disallowed project reference(s): @(_DisallowedProjectReference->'%(Filename)', ', '). Allowed graph: GenLauncherGO -> none; Tests -> GenLauncherGO and analyzer-only TestAnalyzers; TestAnalyzers -> none."/>
+  </Target>
+</Project>
