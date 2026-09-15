@@ -1,0 +1,31 @@
+<Project>
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <RepoRoot>$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '..'))))</RepoRoot>
+    <SolutionPath>$([System.IO.Path]::Combine('$(RepoRoot)', 'GenLauncherGO.sln'))</SolutionPath>
+    <CoverageSettingsPath>$([System.IO.Path]::Combine('$(RepoRoot)', 'coverage.runsettings'))</CoverageSettingsPath>
+    <CoverageResultsDirectory Condition="'$(CoverageResultsDirectory)' == ''">$([System.IO.Path]::Combine('$(RepoRoot)', 'TestResults', 'Coverage'))</CoverageResultsDirectory>
+    <CoverageReportDirectory Condition="'$(CoverageReportDirectory)' == ''">$([System.IO.Path]::Combine('$(RepoRoot)', 'artifacts', 'coverage'))</CoverageReportDirectory>
+    <CoverageReportsPattern>$(CoverageResultsDirectory)/**/coverage.cobertura.xml</CoverageReportsPattern>
+    <CoverageReportPath>$([System.IO.Path]::Combine('$(CoverageReportDirectory)', 'Cobertura.xml'))</CoverageReportPath>
+    <CoverageTestArguments Condition="'$(SkipCoverageBuild)' == 'true'">--no-build --no-restore</CoverageTestArguments>
+  </PropertyGroup>
+
+  <Target Name="Coverage">
+    <RemoveDir Directories="$(CoverageResultsDirectory)" />
+    <RemoveDir Directories="$(CoverageReportDirectory)" />
+
+    <Exec Command="dotnet tool restore" WorkingDirectory="$(RepoRoot)" />
+    <Exec
+      Command="dotnet test &quot;$(SolutionPath)&quot; --configuration &quot;$(Configuration)&quot; --settings &quot;$(CoverageSettingsPath)&quot; --collect:&quot;XPlat Code Coverage&quot; --results-directory &quot;$(CoverageResultsDirectory)&quot; $(CoverageTestArguments)"
+      WorkingDirectory="$(RepoRoot)" />
+    <Exec
+      Command="dotnet tool run reportgenerator -reports:&quot;$(CoverageReportsPattern)&quot; -targetdir:&quot;$(CoverageReportDirectory)&quot; -reporttypes:&quot;Html;Cobertura;TextSummary&quot; -assemblyfilters:&quot;+GenLauncherGO&quot;"
+      WorkingDirectory="$(RepoRoot)" />
+
+    <Error Condition="!Exists('$(CoverageReportPath)')"
+           Text="Coverage report was not generated at $(CoverageReportPath)." />
+    <Message Importance="High"
+             Text="Informational coverage report generated at $(CoverageReportDirectory)." />
+  </Target>
+</Project>
