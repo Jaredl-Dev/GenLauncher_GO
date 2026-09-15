@@ -1,0 +1,50 @@
+# Package versions are centralized in Directory.Packages.props, which Dependabot
+# updates in place. Two things here are deliberately not covered and stay manual:
+# the SDK pin in global.json, and the tool pin in .config/dotnet-tools.json.
+#
+# Updates are grouped so a framework arrives as one reviewable pull request
+# rather than one per package. Every pull request still has to clear the full
+# build, which treats style, naming, and code quality violations as errors, so a
+# bump that introduces a new diagnostic will fail until it is dealt with.
+version: 2
+
+updates:
+  - package-ecosystem: nuget
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      avalonia:
+        patterns:
+          - "Avalonia*"
+      serilog:
+        patterns:
+          - "Serilog*"
+      microsoft-extensions:
+        patterns:
+          - "Microsoft.Extensions.*"
+      test-tooling:
+        patterns:
+          - "coverlet.*"
+          - "FluentAssertions"
+          - "Microsoft.NET.Test.Sdk"
+          - "NSubstitute*"
+          - "xunit*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: ci
+      include: scope
+    groups:
+      actions:
+        patterns:
+          - "*"
