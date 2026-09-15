@@ -1,0 +1,58 @@
+name: Dependency audit
+
+on:
+  schedule:
+    # Weekly, so advisory checks run without waiting for a code change.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+
+jobs:
+  dependency-audit:
+    name: Dependency audit
+    runs-on: windows-2025
+    timeout-minutes: 15
+
+    # NU1901-NU1904 are downgraded to warnings in Directory.Build.props so that a
+    # newly published advisory cannot fail an unrelated pull request. This job is
+    # the other half of that decision: it fails loudly, on a schedule, so the
+    # findings are acted on rather than merely visible.
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      - name: Fail on vulnerable packages
+        shell: pwsh
+        run: |
+          $report = dotnet list .\GenLauncherGO.sln package --vulnerable --include-transitive | Out-String
+          Write-Host $report
+          if ($report -match "has the following vulnerable packages") {
+            throw "Vulnerable packages detected. See the report above."
+          }
+
+      - name: Report deprecated packages
+        shell: pwsh
+        run: |
+          $report = dotnet list .\GenLauncherGO.sln package --deprecated | Out-String
+          Write-Host $report
+          if ($report -match "has the following deprecated packages") {
+            throw "Deprecated packages detected. See the report above."
+          }

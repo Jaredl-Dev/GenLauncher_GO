@@ -1,0 +1,129 @@
+name: Publish release
+
+run-name: Draft release from ${{ github.ref_name }} by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  ContinuousIntegrationBuild: true
+  GENLAUNCHERGO_REQUIRE_SYMBOLIC_LINK_TESTS: true
+
+jobs:
+  package-and-draft:
+    name: Verify, package, and create draft
+    runs-on: windows-2025
+    timeout-minutes: 30
+
+    steps:
+      - name: Require the default branch
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF -cne "refs/heads/master") {
+              throw "Releases must be created from the master branch, not $env:GITHUB_REF."
+          }
+
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Read and validate release version
+        id: release_metadata
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $projectPath = ".\GenLauncherGO\GenLauncherGO.csproj"
+          $metadataJson = & dotnet msbuild $projectPath `
+              "-p:PublishProfile=WinX64SelfContained" `
+              "-getProperty:Version" `
+              "-getProperty:AssemblyName"
+          if ($LASTEXITCODE -ne 0) {
+              throw "MSBuild project version evaluation failed with exit code $LASTEXITCODE."
+          }
+
+          $metadata = $metadataJson | ConvertFrom-Json
+          $version = [string]$metadata.Properties.Version
+          if ([string]::IsNullOrWhiteSpace($version)) {
+              throw "The application project must define a release version."
+          }
+
+          $tag = "v$version"
+          & gh release view $tag --json tagName *> $null
+          if ($LASTEXITCODE -eq 0) {
+              throw "GitHub release $tag already exists. Increment VersionPrefix before publishing again."
+          }
+
+          $existingTags = @(& git tag --list $tag)
+          if ($LASTEXITCODE -ne 0) {
+              throw "Git tag lookup failed with exit code $LASTEXITCODE."
+          }
+
+          if ($existingTags.Count -ne 0) {
+              throw "Git tag $tag already exists. Increment VersionPrefix or remove the unintended tag before publishing."
+          }
+
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Restore
+        run: dotnet restore .\GenLauncherGO.sln
+
+      - name: Build
+        run: dotnet build .\GenLauncherGO.sln --configuration Release --no-restore
+
+      - name: Verify formatting
+        run: dotnet format .\GenLauncherGO.sln --verify-no-changes --no-restore
+
+      - name: Test
+        run: dotnet test .\GenLauncherGO.sln --configuration Release --no-build --no-restore
+
+      - name: Package release
+        shell: pwsh
+        env:
+          VPK_TOKEN: ${{ github.token }}
+        run: dotnet run --file .\eng\package-release.cs --no-cache
+
+      - name: Create draft GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.release_metadata.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.release_metadata.outputs.version }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath ".\artifacts\release" -File |
+                  Sort-Object Name |
+                  Select-Object -ExpandProperty FullName)
+          if ($assets.Count -eq 0) {
+              throw "The packaging step did not produce any release assets."
+          }
+
+          $releaseUrl = & gh release create $env:RELEASE_TAG @assets `
+              --target $env:GITHUB_SHA `
+              --title $env:RELEASE_VERSION `
+              --generate-notes `
+              --draft
+          if ($LASTEXITCODE -ne 0) {
+              throw "Draft GitHub release creation failed with exit code $LASTEXITCODE."
+          }
+
+          $releaseUrl = ([string]$releaseUrl).Trim()
+          Write-Host "Created draft release $env:RELEASE_TAG at $releaseUrl"
+          "## Draft release ready" >> $env:GITHUB_STEP_SUMMARY
+          "Review and publish [$env:RELEASE_TAG]($releaseUrl)." >> $env:GITHUB_STEP_SUMMARY
